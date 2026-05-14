@@ -8,5 +8,6 @@ export default function useCabins() {
     data: cabins,
     error,
   } = useQuery({ queryKey: ["cabins"], queryFn: getCabins });
-  return <div></div>;
+
+  return { isLoading, cabins, error };
 }
