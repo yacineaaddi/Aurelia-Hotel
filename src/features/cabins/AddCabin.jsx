@@ -4,7 +4,7 @@ import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
 import CreateCabinForm from "./CreateCabinForm";
 
-export default function AddCabin() {
+function AddCabin() {
   return (
     <Modal>
       <Modal.Open opens="cabin-form">
@@ -22,3 +22,4 @@ export default function AddCabin() {
     </Modal>
   );
 }
+export default AddCabin;
