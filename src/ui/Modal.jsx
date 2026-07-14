@@ -79,6 +79,7 @@ function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
 
   const ref = useRef();
+
   useEffect(function () {
     function handleClick(e) {
       if (ref.current && !ref.current.contains(e.target)) {
