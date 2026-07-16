@@ -1,28 +1,19 @@
-import styled from "styled-components";
-import { getCabins } from "../../services/apiCabins";
 import React from "react";
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
-import { useQuery } from "@tanstack/react-query";
 import useCabins from "./useCabins";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
-
-/* Replaced by compound component
-const Table = styled.div`
-  border: 1px solid var(--color-grey-200);
-  font-size: 1.4rem;
-  background-color: var(--color-grey-0);
-  border-radius: 7px;
-  overflow: hidden;
-`;*/
+import Empty from "../../ui/Empty";
 
 function CabinTable() {
   const { isLoading, cabins } = useCabins();
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
+
+  if (!cabins.length) return <Empty resourceName="cabins" />;
 
   const filterValue = searchParams.get("discount") || "all";
 
