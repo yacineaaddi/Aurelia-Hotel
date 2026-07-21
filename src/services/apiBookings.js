@@ -43,7 +43,7 @@ export async function getBooking(id) {
     .single();
 
   if (error) {
-    console.error(error);
+    console.error(error.message);
     throw new Error("Booking not found");
   }
 
@@ -113,9 +113,9 @@ export async function updateBooking(id, obj) {
     .single();
 
   if (error) {
-    console.error(error);
     throw new Error("Booking could not be updated");
   }
+
   return data;
 }
 
