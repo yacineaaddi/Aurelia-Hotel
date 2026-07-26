@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
-import Logout from "../features/authentication/Logout";
 import HeaderMenu from "./HeaderMenu";
+import UserAvatar from "../features/authentication/UserAvatar";
 
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
@@ -11,12 +11,12 @@ const StyledHeader = styled.header`
   gap: 2.4rem;
   align-items: center;
   justify-content: flex-end;
-  border: 2px solid red;
 `;
 
 function Header() {
   return (
     <StyledHeader>
+      <UserAvatar />
       <HeaderMenu />
     </StyledHeader>
   );
