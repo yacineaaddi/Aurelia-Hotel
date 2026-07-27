@@ -23,9 +23,9 @@ const Avatar = styled.img`
 `;
 
 export default function UserAvatar() {
-  const { user } = useUser();
+  /*const { user } = useUser();
   const { fullName, avatar } = user.user_metadata;
-
+  
   return (
     <StyledUserAvatar>
       <Avatar
@@ -33,5 +33,6 @@ export default function UserAvatar() {
         alt={`Avatar of ${fullName}`}
       />
     </StyledUserAvatar>
-  );
+  );*/
+  return null;
 }
