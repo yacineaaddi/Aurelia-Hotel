@@ -1,10 +1,14 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
-import { createContext, useState, useContext, cloneElement } from "react";
-import { useRef } from "react";
-import useOutsideClick from "../hooks/useOutsideClick";
+import styled from "styled-components";
+import React, {
+  useEffect,
+  createContext,
+  useState,
+  useContext,
+  cloneElement,
+  useRef,
+} from "react";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -80,17 +84,20 @@ function Window({ children, name }) {
 
   const ref = useRef();
 
-  useEffect(function () {
-    function handleClick(e) {
-      if (ref.current && !ref.current.contains(e.target)) {
-        close();
+  useEffect(
+    function () {
+      function handleClick(e) {
+        if (ref.current && !ref.current.contains(e.target)) {
+          close();
+        }
       }
-    }
 
-    document.addEventListener("click", handleClick, true);
+      document.addEventListener("click", handleClick, true);
 
-    return () => document.removeEventListener("click", handleClick, true);
-  }, []);
+      return () => document.removeEventListener("click", handleClick, true);
+    },
+    [close],
+  );
 
   if (name !== openName) return null;
 

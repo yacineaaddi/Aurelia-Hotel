@@ -1,29 +1,32 @@
-import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
-import Input from "../../ui/Input";
-import useSettings from "./useSettings";
 import Spinner from "../../ui/Spinner";
+import Input from "../../ui/Input";
+import Form from "../../ui/Form";
+
 import useUpdateSetting from "../settings/useUpdateSetting";
+import useSettings from "./useSettings";
 
 function UpdateSettingsForm() {
-  const {
-    isLoading,
-    settings: {
-      minBookingLength,
-      maxBookingLength,
-      maxGuestsPerBooking,
-      breakfastPrice,
-    } = {},
-  } = useSettings();
+  const { isLoading, settings = {} } = useSettings();
 
-  const { isUpdating, updateSettings } = useUpdateSetting();
+  const { isUpdating, updateSetting } = useUpdateSetting();
 
   if (isLoading) return <Spinner />;
 
+  const {
+    minBookingLength,
+    maxBookingLength,
+    maxGuestPerBooking,
+    breakfastPrice,
+  } = settings;
+
   function handleUpdate(e, field) {
-    const { value } = e.target;
-    if (!value) return;
-    updateSettings({ [field]: value });
+    const value = Number(e.target.value);
+    const currentValue = Number(settings[field]);
+
+    if (!e.target.value || value === currentValue) return;
+
+    updateSetting({ [field]: value });
   }
   return (
     <Form>
@@ -33,7 +36,9 @@ function UpdateSettingsForm() {
           id="min-nights"
           disabled={isUpdating}
           defaultValue={minBookingLength}
-          onBlur={(e) => handleUpdate(e, "minBookingLength")}
+          onBlur={(e) => {
+            handleUpdate(e, "minBookingLength");
+          }}
         />
       </FormRow>
       <FormRow label="Maximum nights/booking">
@@ -50,8 +55,8 @@ function UpdateSettingsForm() {
           type="number"
           id="max-guests"
           disabled={isUpdating}
-          defaultValue={maxGuestsPerBooking}
-          onBlur={(e) => handleUpdate(e, "maxGuestsPerBooking")}
+          defaultValue={maxGuestPerBooking}
+          onBlur={(e) => handleUpdate(e, "maxGuestPerBooking")}
         />
       </FormRow>
       <FormRow label="Breakfast price">

@@ -1,10 +1,12 @@
-import styled from "styled-components";
 import React from "react";
-import Tag from "../../ui/Tag";
-import { Flag } from "../../ui/Flag";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 import CheckoutButton from "./CheckoutButton";
+
+import { Flag } from "../../ui/Flag";
 import Button from "../../ui/Button";
+import Tag from "../../ui/Tag";
 
 const StyledTodayItem = styled.li`
   display: grid;
@@ -41,7 +43,9 @@ export default function TodayItem({ activity }) {
           variation="primary"
           as={Link}
           to={`/checkin/${id}`}
-        ></Button>
+        >
+          Check in
+        </Button>
       )}
       {status === "checked-in" && <CheckoutButton bookingId={id} />}
     </StyledTodayItem>

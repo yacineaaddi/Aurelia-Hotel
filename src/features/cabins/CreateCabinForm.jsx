@@ -1,10 +1,12 @@
-import Input from "../../ui/Input";
-import Form from "../../ui/Form";
-import Button from "../../ui/Button";
+import { useForm } from "react-hook-form";
+
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
-import { useForm } from "react-hook-form";
 import FormRow from "../../ui/FormRow";
+import Button from "../../ui/Button";
+import Input from "../../ui/Input";
+import Form from "../../ui/Form";
+
 import useCreateCabin from "./useCreateCabin";
 import useEditCabin from "./useEditCabin";
 
@@ -57,7 +59,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
       onSubmit={handleSubmit(onSubmit, onError)}
       type={onCloseModal ? "modal" : "regular"}
     >
-      <FormRow label="cabin name" error={errors?.name?.message}>
+      <FormRow label="Room name" error={errors?.name?.message}>
         <Input
           type="text"
           id="name"
@@ -66,7 +68,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="max capacity" error={errors?.maxCapacity?.message}>
+      <FormRow label="Max capacity" error={errors?.maxCapacity?.message}>
         <Input
           type="number"
           id="maxCapacity"
@@ -101,10 +103,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow
-        label="Description for website"
-        error={errors?.description?.message}
-      >
+      <FormRow label="Description" error={errors?.description?.message}>
         <Textarea
           type="number"
           id="description"
@@ -114,7 +113,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Cabin photo">
+      <FormRow label="Room image">
         <FileInput
           id="image"
           accept="image/*"
@@ -133,7 +132,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           Cancel
         </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edit cabin" : "Create new cabin"}
+          {isEditSession ? "Edit room" : "Create new room"}
         </Button>
       </FormRow>
     </Form>

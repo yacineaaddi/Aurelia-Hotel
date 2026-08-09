@@ -1,8 +1,9 @@
-import { useQueryClient } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { updateBooking } from "../../services/apiBookings";
+
 import toast from "react-hot-toast";
-import { useMutation } from "@tanstack/react-query";
+
+import { updateBooking } from "../../services/apiBookings";
 
 export default function useChecking() {
   const queryClient = useQueryClient();

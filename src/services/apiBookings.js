@@ -1,6 +1,6 @@
+import { PAGE_SIZE } from "../utils/constants";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
-import { PAGE_SIZE } from "../utils/constants";
 
 export async function getBookings({ filter, sortBy, page }) {
   let query = supabase
@@ -25,8 +25,6 @@ export async function getBookings({ filter, sortBy, page }) {
 
   const { data, error, count } = await query;
 
-  console.log(data);
-
   if (error) {
     console.error(error);
     throw new Error("Bookings could not be loaded");
@@ -50,7 +48,7 @@ export async function getBooking(id) {
   return data;
 }
 
-// Returns all BOOKINGS that are were created after the given date. Useful to get bookings created in the last 30 days, for example.
+// Returns all BOOKINGS that were created after the given date. Useful to get bookings created in the last 30 days, for example.
 export async function getBookingsAfterDate(date) {
   const { data, error } = await supabase
     .from("bookings")
@@ -84,6 +82,10 @@ export async function getStaysAfterDate(date) {
 }
 
 // Activity means that there is a check in or a check out today
+// Equivalent to this. But by querying this, we only download the data we actually need, otherwise we would need ALL bookings ever created
+// (stay.status === 'unconfirmed' && isToday(new Date(stay.startDate))) ||
+// (stay.status === 'checked-in' && isToday(new Date(stay.endDate)))
+
 export async function getStaysTodayActivity() {
   const { data, error } = await supabase
     .from("bookings")
@@ -93,14 +95,11 @@ export async function getStaysTodayActivity() {
     )
     .order("created_at");
 
-  // Equivalent to this. But by querying this, we only download the data we actually need, otherwise we would need ALL bookings ever created
-  // (stay.status === 'unconfirmed' && isToday(new Date(stay.startDate))) ||
-  // (stay.status === 'checked-in' && isToday(new Date(stay.endDate)))
-
   if (error) {
     console.error(error);
     throw new Error("Bookings could not get loaded");
   }
+
   return data;
 }
 
@@ -120,12 +119,57 @@ export async function updateBooking(id, obj) {
 }
 
 export async function deleteBooking(id) {
-  // REMEMBER RLS POLICIES
   const { data, error } = await supabase.from("bookings").delete().eq("id", id);
 
   if (error) {
     console.error(error);
     throw new Error("Booking could not be deleted");
+  }
+  return data;
+}
+
+export async function createEditBooking(newBooking, id) {
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+
+  const hasImagePath = newBooking.image?.startsWith?.(supabaseUrl);
+
+  const imageName = hasImagePath
+    ? newBooking.image
+    : `${Math.random()}-${newBooking.image.name}`.replaceAll("/", "");
+
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
+
+  //1 - Create/edit cabin
+
+  let query = supabase.from("cabins");
+
+  // A - Create
+  if (!id) query = query.insert([{ ...newBooking, image: imagePath }]);
+
+  // B - Edit
+  if (id)
+    query = query.update({ ...newBooking, image: imagePath }).eq("id", id);
+
+  const { data, error } = await query.select().single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Cabins could not be created");
+  }
+
+  if (hasImagePath) return data;
+
+  const { error: storageError } = await supabase.storage
+    .from("cabin-images")
+    .upload(imageName, newBooking.image);
+
+  if (storageError) {
+    await supabase
+      .from("cabins")
+      .delete()
+      .eq("id", data.id); /*BUG: data is not defined*/
+
+    console.log("Cabins could not be uploaded and the cabin was not created");
   }
   return data;
 }

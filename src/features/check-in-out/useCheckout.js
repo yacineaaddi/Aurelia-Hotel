@@ -1,7 +1,7 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { updateBooking } from "../../services/apiBookings";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useMutation } from "@tanstack/react-query";
+
+import { updateBooking } from "../../services/apiBookings";
 
 export default function useCheckout() {
   const queryClient = useQueryClient();

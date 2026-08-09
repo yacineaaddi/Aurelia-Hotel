@@ -1,11 +1,12 @@
-import styled from "styled-components";
 import React from "react";
-import Heading from "../../ui/Heading";
+import styled from "styled-components";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
+
 import { useDarkMode } from "../../context/DarkModeContext";
 
+import Heading from "../../ui/Heading";
+
 const ChartBox = styled.div`
-  /* Box */
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);

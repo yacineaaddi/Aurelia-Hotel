@@ -1,7 +1,8 @@
 import { useSearchParams } from "react-router-dom";
-import { getStaysAfterDate } from "../../services/apiBookings";
-import { subDays } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
+import { subDays } from "date-fns";
+
+import { getStaysAfterDate } from "../../services/apiBookings";
 
 export default function useRecentStays() {
   const [searchParams] = useSearchParams();
@@ -19,8 +20,6 @@ export default function useRecentStays() {
   const confirmedStays = stays?.filter(
     (stay) => stay.status === "checked-in" || stay.status === "cheked-out",
   );
-
-  console.log(confirmedStays);
 
   return { stays, isLoadingRecentStays, confirmedStays, numDays };
 }

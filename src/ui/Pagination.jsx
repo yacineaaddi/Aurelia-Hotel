@@ -1,8 +1,7 @@
-import { HiChevronLeft } from "react-icons/hi2";
-import styled from "styled-components";
-import { HiChevronRight } from "react-icons/hi2";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { useSearchParams } from "react-router-dom";
 import { PAGE_SIZE } from "../utils/constants";
+import styled from "styled-components";
 
 const StyledPagination = styled.div`
   width: 100%;
@@ -33,7 +32,6 @@ const PaginationButton = styled.button`
   border-radius: var(--border-radius-sm);
   font-weight: 500;
   font-size: 1.4rem;
-
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,12 +1,12 @@
 import { useState } from "react";
-
-import Button from "../../ui/Button";
+import useUpdateUser from "./useUpdateUser";
 import FileInput from "../../ui/FileInput";
+import useUser from "./useUser";
+import Button from "../../ui/Button";
+
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-import useUser from "./useUser";
-import useUpdateUser from "./useUpdateUser";
 
 function UpdateUserDataForm() {
   const {
