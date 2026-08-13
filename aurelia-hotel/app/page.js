@@ -7,8 +7,8 @@ export default function Page() {
       <Image
         src={bg}
         fill
-        placholder={blur}
-        quality={90}
+        quality={100}
+        placeholder="blur"
         className="object-cover"
         alt="Mountains and forests with two cabins"
       />
