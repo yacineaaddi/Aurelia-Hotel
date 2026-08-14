@@ -9,7 +9,7 @@ import Header from "./_components/Header";
 const josefin = Josefin_Sans({ subsets: ["latin"], display: "swap" });
 
 export const metadata = {
-  title: { template: "Aurelia Hotel %s", default: "Welcome Aurelia Hotel" },
+  title: { template: "%s", default: "Aurelia Hotel" },
   description:
     "Luxurious cabin hotel, located in the heart of the Italian Dolomites, surrounded by beautiful contains and dark forests",
 };

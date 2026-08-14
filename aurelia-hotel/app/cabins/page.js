@@ -1,10 +1,14 @@
 import Spinner from "../_components/Spinner";
+import { Suspense } from "react";
+import CabinList from "../_components/CabinList";
+
+export const metadata = { title: "Rooms" };
 
 export default function Page() {
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
-        Our Luxury Cabins
+        Our Luxury Rooms
       </h1>
       <p className="text-primary-200 text-lg mb-10">
         Cozy yet luxurious cabins, located right in the heart of the Italian

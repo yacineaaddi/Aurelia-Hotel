@@ -4,7 +4,7 @@ export default function Navigation() {
       <ul className="flex gap-16 items-center">
         <li>
           <a href="/cabins" className="hover:text-accent-400 transition-colors">
-            Cabins
+            Rooms
           </a>
         </li>
         <li>
