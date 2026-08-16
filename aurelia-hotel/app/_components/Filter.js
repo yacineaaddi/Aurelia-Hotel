@@ -2,8 +2,11 @@ import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Filter() {
+  //useSearchParams gives query parameters in the url : searchParams.get("capacity");
   const searchParams = useSearchParams();
+  //useRouter gives methods to cntrol the navigation like : push - replace - back
   const router = useRouter();
+  //usePathname gives the current location of where we are in the website
   const pathname = usePathname();
   const activeFilter = searchParams.get("capacity") ?? "all";
 
