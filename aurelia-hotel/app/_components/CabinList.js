@@ -1,9 +1,10 @@
 import React from "react";
 import CabinCard from "@/app/_components/CabinCard";
 import { getCabins } from "../_lib/data-service";
+import { unstable_noStore } from "next/cache";
 
 export default async function CabinList({ filter }) {
-  noStore();
+  unstable_noStore();
 
   const cabins = await getCabins();
 

@@ -1,3 +1,4 @@
+import SelectCountry from "@/app/_components/SelectCountry";
 import updateProfileForm from "@/app/_components/updateProfileForm";
 
 export const metadata = { title: "Update profile" };
@@ -18,7 +19,7 @@ export default function Page() {
           name="nationality"
           id="nationality"
           className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
-          defaultCountry={nationality}
+          defaultCountry="tempdata"
         />
       </updateProfileForm>
     </div>
