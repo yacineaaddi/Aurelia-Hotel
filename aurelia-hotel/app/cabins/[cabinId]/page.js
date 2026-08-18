@@ -5,6 +5,7 @@ import Spinner from "@/app/_components/Spinner";
 import { getCabin } from "@/app/_lib/data-service";
 import { getCabins } from "@/app/_lib/data-service";
 import Reservation from "@/app/_components/Reservation";
+import ReservationReminder from "@/app/_components/ReservationReminder";
 
 export async function generateMetadata({ params }) {
   const { name } = await getCabin(params.cabinId);
