@@ -4,11 +4,11 @@ import React from "react";
 import { useState } from "react";
 import { updateProfile } from "../_lib/action";
 import { useFormStatus } from "react-dom";
+import { updateGuest } from "../_lib/action";
+import Image from "next/image";
 
-export default function updateProfileForm({ guest, children }) {
-  const [count, setCout] = useState();
-
-  const { fullName, email, nationality, nationalId, countryFlag } = guest;
+export default function UpdateProfileForm({ guest, children }) {
+  const { fullName, email, nationality, nationalID } = guest;
 
   return (
     <form
@@ -38,11 +38,7 @@ export default function updateProfileForm({ guest, children }) {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label htmlFor="nationality">Where are you from?</label>
-          <img
-            src={countryFlag}
-            alt="Country flag"
-            className="h-5 rounded-sm"
-          />
+          <p>{nationality}</p>
         </div>
         {children}
       </div>
@@ -50,7 +46,7 @@ export default function updateProfileForm({ guest, children }) {
       <div className="space-y-2">
         <label htmlFor="nationalID">National ID number</label>
         <input
-          defaultValue={nationalId}
+          defaultValue={nationalID}
           name="nationalID"
           className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
         />
@@ -70,7 +66,6 @@ function Button() {
       disabled={pending}
     >
       {pending ? "Updating..." : "Update profile"}
-      Update profile
     </button>
   );
 }
