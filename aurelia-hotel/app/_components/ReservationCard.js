@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
-import DeleteReservation from "../../starter/components/DeleteReservation";
+import DeleteReservation from "./DeleteReservation";
 import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
 
 export const formatDistanceFromNow = (dateStr) =>

@@ -3,10 +3,9 @@
 import supabase from "./supabase";
 import { signIn, signOut, auth } from "./auth";
 import { revalidatePath } from "next/cache";
+import { getBookings } from "./data-service";
 
 export async function updateGuest(formData) {
-  console.log("server action");
-
   const session = await auth();
 
   if (!session) throw new Error("You must be signed in");
@@ -39,4 +38,26 @@ export async function signInAction() {
 }
 export async function signOutAction() {
   await signOut({ redirectTo: "/" });
+}
+
+export async function deleteReservation(bookingId) {
+  const session = await auth();
+
+  if (!session) throw new Error("You must be signed in");
+
+  const guestBookings = await getBookings(session.user.guestId);
+  const guestBookingIds = guestBookings.map((booking) => bookingId);
+
+  if (!guestBookingIds.includes(bookingId))
+    throw new ErrorEvent("You are not allowed to delete this booking");
+
+  const { error } = await supabase
+    .from("bookings")
+    .delete()
+    .eq("id", bookingId);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not be deleted");
+  }
 }
