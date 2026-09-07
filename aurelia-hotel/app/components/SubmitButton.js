@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useFormStatus } from "react-dom";
 
 function SubmitButton({ children, pendingLabel }) {
   const { pending } = useFormStatus();

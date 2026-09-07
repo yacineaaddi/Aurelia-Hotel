@@ -1,12 +1,8 @@
 "use client";
 
 import React from "react";
-import { useState } from "react";
-import { updateProfile } from "../_lib/action";
-import { useFormStatus } from "react-dom";
-import { updateGuest } from "../_lib/action";
-import Image from "next/image";
 import SubmitButton from "./SubmitButton";
+import { updateGuest } from "../_lib/action";
 
 export default function UpdateProfileForm({ guest, children }) {
   const { fullName, email, nationality, nationalID } = guest;
