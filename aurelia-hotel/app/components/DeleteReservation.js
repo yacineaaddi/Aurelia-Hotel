@@ -4,7 +4,7 @@ import { deleteReservation } from "../_lib/action";
 import { useTransition } from "react";
 import SpinnerMini from "./SpinnerMini";
 
-function DeleteReservation({ bookingId,onDelete }) {
+function DeleteReservation({ bookingId,onDelete,disabled }) {
   const [isPending, startTransition] = useTransition();
 
   function handleDelete() {
@@ -12,7 +12,7 @@ function DeleteReservation({ bookingId,onDelete }) {
       startTransition(() => onDelete(bookingId));
   }
   return (
-    <button
+    <button disabled={disabled}
       onClick={handleDelete}
       className="group flex items-center gap-2 uppercase text-xs font-bold text-primary-300 flex-grow px-3 hover:bg-accent-600 transition-colors hover:text-primary-900"
     >

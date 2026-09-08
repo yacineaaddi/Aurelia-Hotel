@@ -1,5 +1,5 @@
 import React from "react";
-import CabinCard from "@/app/_components/CabinCard";
+import CabinCard from "../components/CabinCard";
 import { getCabins } from "../_lib/data-service";
 import { unstable_noStore } from "next/cache";
 

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import Filter from "@/app/_components/Filter";
-import Spinner from "@/app/_components/Spinner";
-import CabinList from "@/app/_components/CabinList";
+import Filter from "../components/Filter";
+import Spinner from "../components/Spinner";
+import CabinList from "../components/CabinList";
 
 export const metadata = { title: "Rooms" };
 

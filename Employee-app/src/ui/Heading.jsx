@@ -30,7 +30,13 @@ const Heading = styled.h1`
       text-align: center;
     `}
 
-    line-height:1.4
+    ${(props) =>
+    props.center &&
+    css`
+      text-align: center;
+    `}
+
+  line-height: 1.4;
 `;
 
 export default Heading;

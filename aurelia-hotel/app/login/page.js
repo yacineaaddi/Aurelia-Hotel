@@ -1,4 +1,4 @@
-import SignInButton from "../_components/SignInButton";
+import SignInButton from "../components/SignInButton";
 
 export const metadata = { title: "login" };
 

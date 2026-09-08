@@ -47,7 +47,7 @@ export async function deleteReservation(bookingId) {
   if (!session) throw new Error("You must be signed in");
 
   const guestBookings = await getBookings(session.user.guestId);
-  const guestBookingIds = guestBookings.map((booking) => bookingId);
+  const guestBookingIds = guestBookings.map((booking) => booking.id);
 
   if (!guestBookingIds.includes(bookingId))
     throw new ErrorEvent("You are not allowed to delete this booking");
@@ -70,7 +70,7 @@ export async function updateBooking(formData) {
   if (!session) throw new Error("You must be signed in");
 
   const guestBookings = await getBookings(session.user.guestId);
-  const guestBookingIds = guestBookings.map((booking) => bookingId);
+  const guestBookingIds = guestBookings.map((booking) => booking.id);
 
   if (!guestBookingIds.includes(bookingId))
     throw new ErrorEvent("You are not allowed to update this booking");
@@ -95,4 +95,17 @@ export async function updateBooking(formData) {
   revalidatePath(`/account/reservations/edit/${bookingId}`);
 
   redirect("/account/reservations");
+}
+
+export async function deleteBooking(id) {
+  const { data, error } = await supabase.from("bookings").delete().eq("id", id);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not be deleted");
+  }
+
+  revalidatePath("/account/reservations");
+
+  return data;
 }
