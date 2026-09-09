@@ -7,8 +7,8 @@ import useLogin from "./useLogin";
 import Form from "../../ui/Form";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("admin@example.com");
+  const [password, setPassword] = useState("adminexample");
   const { login, isLoading } = useLogin();
 
   function handleSubmit(e) {
@@ -31,7 +31,6 @@ function LoginForm() {
         <Input
           type="email"
           id="email"
-          // This makes this form better for password managers
           autoComplete="username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
