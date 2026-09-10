@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Suspense } from "react";
 import Cabin from "@/app/components/Cabin";
 import Spinner from "@/app/components/Spinner";
