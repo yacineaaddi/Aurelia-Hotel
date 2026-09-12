@@ -12,14 +12,19 @@ const StyledUserAvatar = styled.div`
 `;
 
 const Avatar = styled.img`
-  display: block;
-  width: 4rem;
-  width: 3.6rem;
+  display: inline-block;
+  width: 3rem;
   aspect-ratio: 1;
   object-fit: cover;
   object-position: center;
   border-radius: 50%;
   outline: 2px solid var(--color-grey-100);
+`;
+
+const ContainerName = styled.span`
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
 export default function UserAvatar() {
@@ -32,7 +37,7 @@ export default function UserAvatar() {
         src={avatar || "default-user.jpg"}
         alt={`Avatar of ${fullName}`}
       />
-      <span>{fullName}</span>
+      <ContainerName>{fullName}</ContainerName>
     </StyledUserAvatar>
   );
 }

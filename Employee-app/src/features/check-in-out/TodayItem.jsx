@@ -9,18 +9,14 @@ import Button from "../../ui/Button";
 import Tag from "../../ui/Tag";
 
 const StyledTodayItem = styled.li`
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  gap: 0rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2.5rem;
   align-items: center;
-
   font-size: 1.4rem;
-  padding: 0.8rem 0;
-  border-bottom: 1px solid var(--color-grey-100);
-
-  &:first-child {
-    border-top: 1px solid var(--color-grey-100);
-  }
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-grey-300);
 `;
 
 const Guest = styled.div`

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import HeaderMenu from "./HeaderMenu";
 import UserAvatar from "../features/authentication/UserAvatar";
+import Logo from "./Logo";
 
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
@@ -12,13 +13,33 @@ const StyledHeader = styled.header`
   gap: 2.4rem;
   align-items: center;
   justify-content: flex-end;
+  position: sticky;
+  top: 0%;
+  width: 100%;
+
+  @media (max-width: 900px) {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.2rem 2rem;
+  }
 `;
 
-function Header() {
+const LogoContainer = styled.span`
+  display: none;
+
+  @media (max-width: 900px) {
+    display: block;
+  }
+`;
+
+function Header({ onClick }) {
   return (
     <StyledHeader>
+      <LogoContainer>
+        <Logo width="6rem" />
+      </LogoContainer>
       <UserAvatar />
-      <HeaderMenu />
+      <HeaderMenu onClick={onClick} />
     </StyledHeader>
   );
 }

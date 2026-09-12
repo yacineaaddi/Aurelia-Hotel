@@ -13,6 +13,10 @@ const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+
+  @media (max-width: 900px) {
+    align-items: center;
+  }
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -52,35 +56,40 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-function MainNav() {
+function MainNav({ isOpen, setIsOpen }) {
+  function handleClick() {
+    if (isOpen) {
+      setIsOpen((open) => !open);
+    } else return;
+  }
   return (
     <nav>
       <NavList>
-        <li>
+        <li onClick={handleClick}>
           <StyledNavLink to="/dashboard">
             <HiOutlineHome />
             <span>Home</span>
           </StyledNavLink>
         </li>
-        <li>
+        <li onClick={handleClick}>
           <StyledNavLink to="/bookings">
             <HiOutlineCalendar />
             <span>Booking</span>
           </StyledNavLink>
         </li>
-        <li>
+        <li onClick={handleClick}>
           <StyledNavLink to="/cabins">
             <HiOutlineHomeModern />
             <span>Rooms</span>
           </StyledNavLink>
         </li>
-        <li>
+        <li onClick={handleClick}>
           <StyledNavLink to="/users">
             <HiOutlineUsers />
             <span>Users</span>
           </StyledNavLink>
         </li>
-        <li>
+        <li onClick={handleClick}>
           <StyledNavLink to="/settings">
             <HiOutlineCog6Tooth />
             <span>Settings</span>

@@ -2,9 +2,17 @@ import React from "react";
 
 import { HiOutlineBriefcase, HiOutlineChartBar } from "react-icons/hi";
 import { HiOutlineBanknotes, HiOutlineCalendarDays } from "react-icons/hi2";
-
+import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
 import Stat from "./Stat";
+
+const StyledStatsBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+`;
 
 export default function Stats({
   bookings,
@@ -23,7 +31,7 @@ export default function Stats({
     (numDays * cabinCount);
 
   return (
-    <>
+    <StyledStatsBox>
       <Stat
         icon={<HiOutlineBriefcase />}
         title="Booking"
@@ -48,6 +56,6 @@ export default function Stats({
         value={Math.round(occupation * 100) + "%"}
         color="yellow"
       />
-    </>
+    </StyledStatsBox>
   );
 }
