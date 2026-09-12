@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 
 import DarkModeProvider from "./context/DarkModeContext";
 
-import GlobalStyles from "./styles/globalStyles";
+import GlobalStyles from "./styles/GlobalStyles";
 
 import PageNotFound from "./pages/PageNotFound";
 import Dashboard from "./pages/Dashboard";

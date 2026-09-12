@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import GlobalStyles from "../styles/globalStyles";
+import GlobalStyles from "../styles/GlobalStyles";
 import Heading from "./Heading";
 import Button from "./Button";
 

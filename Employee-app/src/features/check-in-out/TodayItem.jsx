@@ -10,8 +10,8 @@ import Tag from "../../ui/Tag";
 
 const StyledTodayItem = styled.li`
   display: grid;
-  grid-template-columns: 9rem 2rem 1fr 7rem 9rem;
-  gap: 1.2rem;
+  grid-template-columns: auto auto auto auto;
+  gap: 0rem;
   align-items: center;
 
   font-size: 1.4rem;
@@ -34,7 +34,6 @@ export default function TodayItem({ activity }) {
     <StyledTodayItem>
       {status === "unconfirmed" && <Tag type="green">Arriving</Tag>}
       {status === "checked-in" && <Tag type="blue">Departing</Tag>}
-      <Flag src={guests.countryFlag} alt={`Flag of ${guests.country}`} />
       <Guest>{guests.fullName}</Guest>
       <div>{numNights} nights</div>
       {status === "unconfirmed" && (
