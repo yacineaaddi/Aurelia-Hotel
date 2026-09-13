@@ -1,10 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-
 import CheckoutButton from "./CheckoutButton";
-
-import { Flag } from "../../ui/Flag";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 import Button from "../../ui/Button";
 import Tag from "../../ui/Tag";
 

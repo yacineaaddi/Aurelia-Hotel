@@ -1,7 +1,6 @@
-import React from "react";
+import CreateCabinForm from "./CreateBookingForm";
 import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
-import CreateCabinForm from "./CreateBookingForm";
 
 function AddBooking() {
   return (

@@ -1,14 +1,12 @@
-import { useForm } from "react-hook-form";
-
+import useCreateCabin from "./useCreateCabin";
 import FileInput from "../../ui/FileInput";
+import { useForm } from "react-hook-form";
+import useEditCabin from "./useEditCabin";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
-
-import useCreateCabin from "./useCreateCabin";
-import useEditCabin from "./useEditCabin";
 
 function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { isCreating, createCabin } = useCreateCabin();
@@ -52,8 +50,9 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   }
 
   function onError(error) {
-    console.log(error);
+    console.error(error);
   }
+
   return (
     <Form
       onSubmit={handleSubmit(onSubmit, onError)}

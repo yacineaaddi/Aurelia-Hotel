@@ -1,15 +1,11 @@
-import styled from "styled-components";
-
 import useTodayActivity from "./useTodayActvity";
-
-import TodayItem from "./TodayItem";
-
+import styled from "styled-components";
 import Heading from "../../ui/Heading";
 import Spinner from "../../ui/Spinner";
+import TodayItem from "./TodayItem";
 import Row from "../../ui/Row";
 
 const StyledToday = styled.div`
-  /* Box */
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
@@ -35,6 +31,7 @@ const TodayList = styled.ul`
   &::-webkit-scrollbar {
     width: 0 !important;
   }
+
   scrollbar-width: none;
   -ms-overflow-style: none;
 `;
@@ -48,6 +45,7 @@ const NoActivity = styled.p`
 
 function TodayActivity() {
   const { activities, isLoading } = useTodayActivity();
+
   return (
     <StyledToday>
       <Row type="horizontal">

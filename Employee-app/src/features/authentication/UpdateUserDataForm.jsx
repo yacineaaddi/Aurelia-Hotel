@@ -1,14 +1,14 @@
-import { useState } from "react";
 import useUpdateUser from "./useUpdateUser";
 import FileInput from "../../ui/FileInput";
-import useUser from "./useUser";
-import Button from "../../ui/Button";
-
-import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
+import Button from "../../ui/Button";
 import Input from "../../ui/Input";
+import Form from "../../ui/Form";
+import { useState } from "react";
+import useUser from "./useUser";
 
 function UpdateUserDataForm() {
+  // Nested destructuring + renaming
   const {
     user: {
       email,

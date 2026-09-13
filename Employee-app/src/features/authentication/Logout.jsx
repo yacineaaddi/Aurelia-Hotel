@@ -1,4 +1,3 @@
-import React from "react";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
 import SpinnerMini from "../../ui/SpinnerMini";
 import ButtonIcon from "../../ui/ButtonIcon";

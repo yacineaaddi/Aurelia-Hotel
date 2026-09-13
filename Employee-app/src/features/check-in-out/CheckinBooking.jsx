@@ -1,24 +1,20 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
-
 import BookingDataBox from "../../features/bookings/BookingDataBox";
-import { formatCurrency } from "../../utils/helpers";
-
 import { useMoveBack } from "../../hooks/useMoveBack";
+import { formatCurrency } from "../../utils/helpers";
 import useSettings from "../settings/useSettings";
 import useBooking from "../bookings/useBooking";
-import useChecking from "./useChecking";
-
 import ButtonGroup from "../../ui/ButtonGroup";
 import ButtonText from "../../ui/ButtonText";
+import { useState, useEffect } from "react";
 import Checkbox from "../../ui/Checkbox";
+import useChecking from "./useChecking";
 import Heading from "../../ui/Heading";
 import Spinner from "../../ui/Spinner";
+import styled from "styled-components";
 import Button from "../../ui/Button";
 import Row from "../../ui/Row";
 
 const Box = styled.div`
-  /* Box */
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
@@ -26,17 +22,15 @@ const Box = styled.div`
 `;
 
 function CheckinBooking() {
+  const { settings, isLoading: isLoadingSettings } = useSettings();
+  const { checkin, isCheckingIn } = useChecking();
+  const { booking, isLoading } = useBooking();
+  const moveBack = useMoveBack();
+
   const [confirmPaid, setConfirmPaid] = useState(false);
   const [addBreakfast, setAddBreakfast] = useState(false);
 
-  const { booking, isLoading } = useBooking();
-  const { settings, isLoading: isLoadingSettings } = useSettings();
-
   useEffect(() => setConfirmPaid(booking?.isPaid ?? false), [booking]);
-
-  const moveBack = useMoveBack();
-
-  const { checkin, isCheckingIn } = useChecking();
 
   if (isLoading || isLoadingSettings) return <Spinner />;
 

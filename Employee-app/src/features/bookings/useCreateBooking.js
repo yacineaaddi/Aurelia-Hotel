@@ -1,12 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-
 import { createEditBooking } from "../../services/apiBookings";
+import toast from "react-hot-toast";
 
 export default function useCreateBooking() {
   const queryClient = useQueryClient();
 
-  const { isLoading: isCreating, mutate: createBooking } = useMutation({
+  const { iscending: isCreating, mutate: createBooking } = useMutation({
     mutationFn: createEditBooking,
     onSuccess: () => {
       toast.success("New booking successfully created");
@@ -18,5 +17,3 @@ export default function useCreateBooking() {
   });
   return { isCreating, createBooking };
 }
-
-// Under dev

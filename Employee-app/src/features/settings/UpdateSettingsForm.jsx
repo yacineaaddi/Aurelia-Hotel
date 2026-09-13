@@ -1,15 +1,13 @@
+import useUpdateSetting from "../settings/useUpdateSetting";
+import useSettings from "./useSettings";
 import FormRow from "../../ui/FormRow";
 import Spinner from "../../ui/Spinner";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 
-import useUpdateSetting from "../settings/useUpdateSetting";
-import useSettings from "./useSettings";
-
 function UpdateSettingsForm() {
-  const { isLoading, settings = {} } = useSettings();
-
   const { isUpdating, updateSetting } = useUpdateSetting();
+  const { isLoading, settings = {} } = useSettings();
 
   if (isLoading) return <Spinner />;
 

@@ -1,6 +1,4 @@
-import React from "react";
-import styled from "styled-components";
-
+import { subDays, format, isSameDay, eachDayOfInterval } from "date-fns";
 import {
   AreaChart,
   Area,
@@ -10,13 +8,9 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-
-import { subDays, format, isSameDay, eachDayOfInterval } from "date-fns";
-
 import { useDarkMode } from "../../context/DarkModeContext";
-
 import DashboardBox from "./DashboardBox";
-
+import styled from "styled-components";
 import Heading from "../../ui/Heading";
 
 const StyledSalesChart = styled(DashboardBox)`

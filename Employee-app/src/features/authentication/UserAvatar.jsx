@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import React from "react";
 import useUser from "./useUser";
 
 const StyledUserAvatar = styled.div`

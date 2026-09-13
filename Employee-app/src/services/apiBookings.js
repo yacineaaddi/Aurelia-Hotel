@@ -138,14 +138,14 @@ export async function createEditBooking(newBooking, id) {
 
   const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
-  //1 - Create/edit cabin
+  // 1 - Create/edit cabin
 
   let query = supabase.from("cabins");
 
-  // A - Create
+  // 1-A - Create
   if (!id) query = query.insert([{ ...newBooking, image: imagePath }]);
 
-  // B - Edit
+  // 1-B - Edit
   if (id)
     query = query.update({ ...newBooking, image: imagePath }).eq("id", id);
 

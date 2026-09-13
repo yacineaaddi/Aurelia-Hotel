@@ -1,9 +1,7 @@
-import React from "react";
-
-import { HiOutlineBriefcase, HiOutlineChartBar } from "react-icons/hi";
 import { HiOutlineBanknotes, HiOutlineCalendarDays } from "react-icons/hi2";
-import styled from "styled-components";
+import { HiOutlineBriefcase, HiOutlineChartBar } from "react-icons/hi";
 import { formatCurrency } from "../../utils/helpers";
+import styled from "styled-components";
 import Stat from "./Stat";
 
 const StyledStatsBox = styled.div`

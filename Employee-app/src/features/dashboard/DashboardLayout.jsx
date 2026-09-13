@@ -1,16 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-
+import TodayActivity from "../check-in-out/TodayActivity";
 import useRecentBookings from "./useRecentBookings";
 import useRecentStays from "./useRecentStays";
 import useCabins from "../cabins/useCabins";
-
-import TodayActivity from "../check-in-out/TodayActivity";
 import DurationChart from "./DurationChart";
+import Spinner from "../../ui/Spinner";
+import styled from "styled-components";
 import SalesChart from "./SalesChart";
 import Stats from "./Stats";
-
-import Spinner from "../../ui/Spinner";
 
 const StyledDashboardLayout = styled.div`
   display: flex;
@@ -29,8 +25,8 @@ const StyledDashboardBox = styled.div`
 `;
 
 export default function DashboardLayout() {
-  const { bookings, isLoadingRecentBookings } = useRecentBookings();
   const { isLoadingRecentStays, confirmedStays, numDays } = useRecentStays();
+  const { bookings, isLoadingRecentBookings } = useRecentBookings();
   const { cabins, isLoadingCabins } = useCabins();
 
   if (isLoadingRecentBookings || isLoadingRecentStays || isLoadingCabins)

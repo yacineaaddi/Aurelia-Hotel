@@ -3,11 +3,10 @@ import styled from "styled-components";
 const StyledFormRow = styled.div`
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: 2rem;
   flex-wrap: wrap;
-
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;

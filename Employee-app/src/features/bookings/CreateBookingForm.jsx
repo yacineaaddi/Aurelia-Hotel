@@ -1,14 +1,15 @@
-import { useForm } from "react-hook-form";
-import { useEffect } from "react";
-import Textarea from "../../ui/Textarea";
-import FormRow from "../../ui/FormRow";
-import Button from "../../ui/Button";
-import Input from "../../ui/Input";
-import Form from "../../ui/Form";
 import useCreateBooking from "./useCreateBooking";
 import useSettings from "../settings/useSettings";
 import useCabins from "../cabins/useCabins";
+import { useForm } from "react-hook-form";
+import Textarea from "../../ui/Textarea";
+import FormRow from "../../ui/FormRow";
 import Spinner from "../../ui/Spinner";
+import Button from "../../ui/Button";
+import Input from "../../ui/Input";
+import { useEffect } from "react";
+import Form from "../../ui/Form";
+
 //import useEditCabin from "./useEditCabin";
 
 function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
@@ -24,7 +25,7 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
     minBookingLength,
   } = settings || {};
 
-  console.log(settings);
+  console.error(settings);
   //const isWorking = isCreating || isEditing;
 
   const { id: editId, ...editValues } = bookingToEdit;
@@ -48,7 +49,7 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
   function onSubmit(data) {}
 
   function onError(error) {
-    console.log(error);
+    console.error(error);
   }
 
   const startDate = watch("startDate");
@@ -191,7 +192,7 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
         >
           Cancel
         </Button>
-        <Button>{isEditSession ? "Edit room" : "Create new room"}</Button>
+        <Button>{isEditSession ? "Edit booking" : "Create new booking"}</Button>
       </FormRow>
     </Form>
   );

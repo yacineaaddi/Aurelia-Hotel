@@ -1,21 +1,17 @@
-import styled from "styled-components";
-import { format, isToday } from "date-fns";
-
-import Tag from "../../ui/Tag";
-import Table from "../../ui/Table";
-
-import { formatCurrency } from "../../utils/helpers";
-import { formatDistanceFromNow } from "../../utils/helpers";
-
-import Menus from "../../ui/Menus";
 import { HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye } from "react-icons/hi2";
-
-import { useNavigate } from "react-router-dom";
+import { formatDistanceFromNow } from "../../utils/helpers";
 import useCheckout from "../check-in-out/useCheckout";
-import Modal from "../../ui/Modal";
-import { HiTrash } from "react-icons/hi2";
+import { formatCurrency } from "../../utils/helpers";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import useDeleteBooking from "./useDeleteBooking";
+import { useNavigate } from "react-router-dom";
+import { format, isToday } from "date-fns";
+import { HiTrash } from "react-icons/hi2";
+import styled from "styled-components";
+import Modal from "../../ui/Modal";
+import Menus from "../../ui/Menus";
+import Table from "../../ui/Table";
+import Tag from "../../ui/Tag";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -47,20 +43,17 @@ const Amount = styled.div`
 function BookingRow({
   booking: {
     id: bookingId,
-    created_at,
     startDate,
     endDate,
     numNights,
-    numGuests,
     totalPrice,
     status,
     guests: { fullName: guestName, email },
     cabins: { name: cabinName },
   },
 }) {
-  const { checkout, isCheckingOut } = useCheckout();
   const { isDeleting, deleteBooking } = useDeleteBooking();
-
+  const { checkout, isCheckingOut } = useCheckout();
   const navigate = useNavigate();
 
   const statusToTagName = {

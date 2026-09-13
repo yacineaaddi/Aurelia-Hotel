@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
 import { format, isToday } from "date-fns";
 import {
   HiOutlineChatBubbleBottomCenterText,
@@ -8,12 +8,9 @@ import {
 } from "react-icons/hi2";
 
 import DataItem from "../../ui/DataItem";
-import { Flag } from "../../ui/Flag";
-
-import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
+import styled from "styled-components";
 
 const StyledBookingDataBox = styled.section`
-  /* Box */
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
@@ -116,7 +113,7 @@ function BookingDataBox({ booking }) {
     hasBreakfast,
     observations,
     isPaid,
-    guests: { fullName: guestName, email, country, countryFlag, nationalID },
+    guests: { fullName: guestName, email, nationalID },
     cabins: { name: cabinName },
   } = booking;
 
@@ -141,7 +138,6 @@ function BookingDataBox({ booking }) {
 
       <Section>
         <Guest>
-          {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />}
           <p>
             {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
           </p>

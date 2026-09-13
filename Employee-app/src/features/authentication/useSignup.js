@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 export default function useSignup() {
-  const { mutate: signup, isLoading } = useMutation({
+  const { mutate: signup, isPending: isLoading } = useMutation({
     mutationFn: signupApi,
     onSuccess: () => {
       toast.success(
