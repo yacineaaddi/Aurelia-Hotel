@@ -8,10 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 **/.env
 **/node_modules/
-**/node_modules/
 dist/
 dist-ssr/
-src/data/   
+Employee-app/src/data/   
 *.local
 */.next/
 # Editor directories and files
