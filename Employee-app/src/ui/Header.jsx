@@ -16,6 +16,7 @@ const StyledHeader = styled.header`
   position: sticky;
   top: 0%;
   width: 100%;
+  z-index: 1000;
 
   @media (max-width: 900px) {
     display: flex;

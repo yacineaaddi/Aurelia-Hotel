@@ -1,13 +1,16 @@
-import React from "react";
-
 import styled from "styled-components";
 
 const StyledFormRow = styled.div`
-  display: grid;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  grid-template-columns: 24rem 1fr 1.2fr;
-  gap: 2.4rem;
+  gap: 2rem;
+  flex-wrap: wrap;
 
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 1.2rem 0;
 
   &:first-child {

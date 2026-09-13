@@ -5,6 +5,7 @@ import BookingRow from "./BookingRow";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
+import styled from "styled-components";
 
 function BookingTable() {
   const { bookings, isLoading, count } = useBookings();

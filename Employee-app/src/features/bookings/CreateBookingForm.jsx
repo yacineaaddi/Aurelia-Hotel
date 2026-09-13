@@ -1,13 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-
-import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
-
 import useCreateBooking from "./useCreateBooking";
 import useSettings from "../settings/useSettings";
 import useCabins from "../cabins/useCabins";

@@ -5,6 +5,11 @@ import Button from "../../ui/Button";
 import Input from "../../ui/Input";
 import useLogin from "./useLogin";
 import Form from "../../ui/Form";
+import styled from "styled-components";
+
+const LoginBox = styled.div`
+  padding: 0.4rem 2rem;
+`;
 
 function LoginForm() {
   const [email, setEmail] = useState("admin@example.com");
@@ -26,33 +31,35 @@ function LoginForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormRowVertical label="Email address">
-        <Input
-          type="email"
-          id="email"
-          autoComplete="username"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={isLoading}
-        />
-      </FormRowVertical>
-      <FormRowVertical label="Password">
-        <Input
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          disabled={isLoading}
-        />
-      </FormRowVertical>
-      <FormRowVertical>
-        <Button size="large" disabled={isLoading}>
-          {!isLoading ? "Log in" : <SpinnerMini />}
-        </Button>
-      </FormRowVertical>
-    </Form>
+    <LoginBox>
+      <Form onSubmit={handleSubmit}>
+        <FormRowVertical label="Email address">
+          <Input
+            type="email"
+            id="email"
+            autoComplete="username"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={isLoading}
+          />
+        </FormRowVertical>
+        <FormRowVertical label="Password">
+          <Input
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={isLoading}
+          />
+        </FormRowVertical>
+        <FormRowVertical>
+          <Button size="large" disabled={isLoading}>
+            {!isLoading ? "Log in" : <SpinnerMini />}
+          </Button>
+        </FormRowVertical>
+      </Form>
+    </LoginBox>
   );
 }
 

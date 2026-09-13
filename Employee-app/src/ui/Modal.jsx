@@ -1,7 +1,7 @@
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import React, {
+import {
   useEffect,
   createContext,
   useState,
@@ -11,15 +11,23 @@ import React, {
 } from "react";
 
 const StyledModal = styled.div`
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--color-grey-0);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
-  padding: 3.2rem 4rem;
+  padding: 3.2rem 5rem;
   transition: all 0.5s;
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 40%;
+
+  @media (max-width: 1200px) {
+    padding: 5rem 3rem;
+    width: 90%;
+  }
 `;
 
 const Overlay = styled.div`
@@ -52,9 +60,6 @@ const Button = styled.button`
   & svg {
     width: 2.4rem;
     height: 2.4rem;
-    /* Sometimes we need both */
-    /* fill: var(--color-grey-500);
-    stroke: var(--color-grey-500); */
     color: var(--color-grey-500);
   }
 `;

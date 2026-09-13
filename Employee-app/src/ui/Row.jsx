@@ -18,6 +18,10 @@ const Row = styled.div`
       flex-direction: column;
       gap: 1.6rem;
     `}
+
+      @media (max-width: 900px) {
+    font-size: 1.2rem;
+  }
 `;
 
 Row.defaultProps = {

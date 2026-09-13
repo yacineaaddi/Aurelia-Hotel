@@ -14,7 +14,7 @@ const StyledToday = styled.div`
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
   width: 48%;
-  padding: 3.2rem;
+  padding: 2.4rem;
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
@@ -23,6 +23,7 @@ const StyledToday = styled.div`
 
   @media (max-width: 1350px) {
     width: 100%;
+    padding: 2.4rem 1rem;
   }
 `;
 
@@ -50,7 +51,7 @@ function TodayActivity() {
   return (
     <StyledToday>
       <Row type="horizontal">
-        <Heading as="h2">Today</Heading>
+        <Heading type="h3">Today</Heading>
       </Row>
       {!isLoading ? (
         activities?.length > 0 ? (

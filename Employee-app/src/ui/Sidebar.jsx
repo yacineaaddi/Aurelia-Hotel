@@ -40,6 +40,7 @@ const StyledSidebar = styled.aside`
   z-index: 1000;
 
   @media (max-width: 900px) {
+    padding: 14rem 6rem 2.4rem 2.4rem;
     width: 100%;
     display: ${(props) => (props.$isOpen ? "flex" : "none")};
   }

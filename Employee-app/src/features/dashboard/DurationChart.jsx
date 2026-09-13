@@ -24,6 +24,7 @@ const ChartBox = styled.div`
 
   @media (max-width: 1350px) {
     width: 100%;
+    padding: 2.4rem 1rem;
   }
 `;
 
@@ -147,7 +148,7 @@ export default function DurationChart({ confirmedStays }) {
 
   return (
     <ChartBox>
-      <Heading as="h2">Stay duration summary</Heading>
+      <Heading type="h3">Stay duration summary</Heading>
       <ResponsiveContainer height={240} width="100%">
         <PieChart>
           <Pie
