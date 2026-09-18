@@ -20,6 +20,10 @@ const Form = styled.form`
     
   overflow: hidden;
   font-size: 1.4rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 `;
 
 Form.defaultProps = { type: "regular" };

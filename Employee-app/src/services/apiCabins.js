@@ -10,7 +10,23 @@ export async function getCabins() {
   return data;
 }
 
+export async function getCabin(id) {
+  const { data, error } = await supabase
+    .from("cabins")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error(error.message);
+    throw new Error("Cabin not found");
+  }
+
+  return data;
+}
+
 export async function createEditCabin(newCabin, id) {
+  console.log("newBooking", newCabin, "id", id);
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
@@ -26,10 +42,13 @@ export async function createEditCabin(newCabin, id) {
   let query = supabase.from("cabins");
 
   // A - Create
-  if (!id) query = query.insert([{ ...newCabin, image: imagePath }]);
-
+  if (!id) {
+    query = query.insert([{ ...newCabin, image: imagePath }]);
+  }
   // B - Edit
-  if (id) query = query.update({ ...newCabin, image: imagePath }).eq("id", id);
+  else {
+    query = query.update({ ...newCabin, image: imagePath }).eq("id", id);
+  }
 
   const { data, error } = await query.select().single();
 

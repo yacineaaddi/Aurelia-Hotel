@@ -1,30 +1,9 @@
-import React from "react";
-import { styled, keyframes } from "styled-components";
+import { styled } from "styled-components";
 import { IoMdClose } from "react-icons/io";
-import Logo from "./Logo";
-import MainNav from "./MainNav";
-import Uploader from "../data/Uploader";
 import MenuButton from "./MenuButton";
-
-const openMenu = keyframes`
-  from {
-    transform: translateX(-100%);
-  }
-
-  to {
-    transform: translateX(0);
-  }
-`;
-
-const closeMenu = keyframes`
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-100%);
-  }
-`;
+import Uploader from "../data/Uploader";
+import MainNav from "./MainNav";
+import Logo from "./Logo";
 
 const StyledSidebar = styled.aside`
   position: fixed;
@@ -51,7 +30,7 @@ export default function Sidebar({ onClick, isOpen, setIsOpen }) {
     <StyledSidebar $isOpen={isOpen}>
       <Logo />
       <MainNav isOpen={isOpen} setIsOpen={setIsOpen} />
-      {/*<Uploader />*/}
+      <Uploader />
       <MenuButton>
         <IoMdClose onClick={onClick} />
       </MenuButton>

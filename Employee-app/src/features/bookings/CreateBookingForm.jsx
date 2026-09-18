@@ -1,3 +1,5 @@
+import { getCabin } from "../../services/apiCabins";
+import useEditCabin from "../cabins/useEditCabin";
 import useCreateBooking from "./useCreateBooking";
 import useSettings from "../settings/useSettings";
 import useCabins from "../cabins/useCabins";
@@ -10,23 +12,15 @@ import Input from "../../ui/Input";
 import { useEffect } from "react";
 import Form from "../../ui/Form";
 
-//import useEditCabin from "./useEditCabin";
-
 function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
   const { isLoading, error, settings } = useSettings();
   const { isCreating, createBooking } = useCreateBooking();
   const { isLoadingCabins, cabins } = useCabins();
+  const { editCabin, isEditing } = useEditCabin();
 
-  //const { editCabin, isEditing } = useEditCabin();
-  const {
-    breakfastPrice,
-    maxBookingLength,
-    maxGuestPerBooking,
-    minBookingLength,
-  } = settings || {};
+  const { breakfastPrice, maxBookingLength, minBookingLength } = settings || {};
 
-  console.error(settings);
-  //const isWorking = isCreating || isEditing;
+  const isWorking = isCreating || isEditing;
 
   const { id: editId, ...editValues } = bookingToEdit;
 
@@ -40,13 +34,38 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
     formState,
     watch,
     setValue,
+    setError,
+    clearErrors,
   } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
 
   const { errors } = formState;
 
-  function onSubmit(data) {}
+  function onSubmit(data) {
+    const { cabinPrice, extrasPrice, totalPrice, ...bookingData } = data;
+
+    if (isEditSession)
+      createBooking(
+        { newCabinData: { ...bookingData }, id: editId },
+        {
+          onSuccess: (data) => {
+            reset();
+            onCloseModal?.();
+          },
+        },
+      );
+    else
+      createBooking(
+        { ...bookingData },
+        {
+          onSuccess: (data) => {
+            reset();
+            onCloseModal?.();
+          },
+        },
+      );
+  }
 
   function onError(error) {
     console.error(error);
@@ -54,6 +73,10 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
 
   const startDate = watch("startDate");
   const endDate = watch("endDate");
+  const cabinId = watch("cabinId");
+  const numNights = watch("numNights");
+  const numGuests = watch("numGuests");
+  const hasBreakfast = watch("hasBreakfast");
 
   useEffect(() => {
     if (!startDate || !endDate) return;
@@ -61,8 +84,64 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
     const difference =
       (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24);
 
-    setValue("numNights", difference);
-  }, [startDate, endDate, setValue]);
+    if (difference >= minBookingLength && difference <= maxBookingLength) {
+      clearErrors("numNights");
+      setValue("numNights", difference);
+    } else {
+      setError("numNights", {
+        type: "custom",
+        message: `Num nights must be between ${minBookingLength} and ${maxBookingLength} nights`,
+      });
+    }
+  }, [
+    minBookingLength,
+    maxBookingLength,
+    clearErrors,
+    startDate,
+    endDate,
+    setValue,
+    setError,
+  ]);
+
+  useEffect(() => {
+    async function calculatePrices() {
+      if (!cabinId) return;
+
+      const cabin = await getCabin(cabinId);
+
+      if (numGuests > cabin.maxCapacity) {
+        setError("numGuests", {
+          type: "custom",
+          message: `Number of guests must be equal to or less than ${cabin.maxCapacity}`,
+        });
+      } else {
+        clearErrors("numGuests");
+      }
+
+      const cabinPrice = numNights * (cabin.regularPrice - cabin.discount);
+
+      const extrasPrice = hasBreakfast
+        ? numNights * breakfastPrice * numGuests
+        : 0;
+
+      const totalPrice = cabinPrice + extrasPrice || cabinPrice;
+
+      setValue("cabinPrice", cabinPrice);
+      setValue("extrasPrice", extrasPrice);
+      setValue("totalPrice", totalPrice);
+    }
+
+    calculatePrices();
+  }, [
+    cabinId,
+    numNights,
+    numGuests,
+    hasBreakfast,
+    breakfastPrice,
+    setValue,
+    setError,
+    clearErrors,
+  ]);
 
   if (!settings || !cabins) return <Spinner />;
 
@@ -71,13 +150,35 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
       onSubmit={handleSubmit(onSubmit, onError)}
       type={onCloseModal ? "modal" : "regular"}
     >
+      <FormRow label="Number of guests" error={errors?.numGuests?.message}>
+        <Input
+          type="number"
+          id="numGuests"
+          defaultValue={1}
+          {...register("numGuests", {
+            valueAsNumber: true,
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
       <FormRow label="Start date" error={errors?.startDate?.message}>
         <Input
           type="date"
           id="startDate"
-          //disabled={isWorking}
+          disabled={isWorking}
           {...register("startDate", {
             required: "This field is required",
+            validate: (value) => {
+              const selectedDate = new Date(`${value}T00:00:00`);
+
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+              today.setDate(today.getDate());
+
+              return (
+                selectedDate >= today || "Start Day must be at least today"
+              );
+            },
           })}
         />
       </FormRow>
@@ -86,9 +187,20 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
         <Input
           type="date"
           id="endDate"
-          //disabled={isWorking}
+          disabled={isWorking}
           {...register("endDate", {
             required: "This field is required",
+            validate: (value) => {
+              const selectedDate = new Date(`${value}T00:00:00`);
+
+              const tomorrow = new Date();
+              tomorrow.setHours(0, 0, 0, 0);
+              tomorrow.setDate(tomorrow.getDate() + minBookingLength);
+
+              return (
+                selectedDate >= tomorrow || "End date must be at least tomorrow"
+              );
+            },
           })}
         />
       </FormRow>
@@ -97,23 +209,7 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
           id="numNights"
           type="number"
           disabled={true}
-          {...register("numNights", {
-            validate: () => {
-              const startDate = getValues("startDate");
-              const endDate = getValues("endDate");
-              if (!startDate || !endDate) return true;
-
-              const difference =
-                (new Date(endDate) - new Date(startDate)) /
-                (1000 * 60 * 60 * 24);
-
-              return (
-                (difference >= minBookingLength &&
-                  difference <= maxBookingLength) ||
-                `Num nights must be between ${minBookingLength} and ${maxBookingLength} nights`
-              );
-            },
-          })}
+          {...register("numNights")}
         />
       </FormRow>
 
@@ -125,62 +221,84 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
         </select>
       </FormRow>
 
-      <FormRow label="Include breakfast" error={errors?.hasbreakfast?.message}>
-        <select id="hasbreakfast" {...register("hasbreakfast")}>
+      <FormRow label="Include breakfast" error={errors?.hasBreakfast?.message}>
+        <select
+          id="hasbreakfast"
+          {...register("hasBreakfast", {
+            setValueAs: (value) => value === "true",
+          })}
+        >
           <option value="true">Yes</option>
           <option value="false">No</option>
         </select>
       </FormRow>
 
       <FormRow label="Is paid" error={errors?.isPaid?.message}>
-        <select id="isPaid" {...register("isPaid")}>
+        <select
+          id="isPaid"
+          {...register("isPaid", {
+            setValueAs: (value) => value === "true",
+          })}
+        >
           <option value="true">Yes</option>
           <option value="false">No</option>
         </select>
       </FormRow>
 
-      <FormRow label="Select room" error={errors?.isPaid?.message}>
-        <select id="cabinId" {...register("cabinId")}>
+      <FormRow label="Select room" error={errors?.cabinId?.message}>
+        <select
+          id="cabinId"
+          {...register("cabinId", {
+            valueAsNumber: true,
+          })}
+        >
           {cabins.map((cabin) => (
             <option value={cabin.id}>{cabin.name}</option>
           ))}
         </select>
       </FormRow>
 
-      <FormRow label="Number of guests" error={errors?.numGuests?.message}>
-        <Input
-          type="number"
-          id="numGuests"
-          defaultValue={1}
-          {...register("numGuests", {
-            required: "This field is required",
-            validate: (numGuests) => {
-              return (
-                numGuests <= maxGuestPerBooking ||
-                `Number of guests must be equal or less than ${maxGuestPerBooking}`
-              );
-            },
-          })}
-        />
-      </FormRow>
-
-      <FormRow label="Cabin price" error={errors?.CabinPrice?.message}>
+      <FormRow label="Cabin price" error={errors?.cabinPrice?.message}>
         <Input
           type="number"
           id="CabinPrice"
           disabled={true}
-          value={5}
-          {...register("CabinPrice", { required: "This field is required" })}
+          {...register("cabinPrice", {
+            valueAsNumber: true,
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
+      <FormRow label="Extras price" error={errors?.extrasPrice?.message}>
+        <Input
+          type="number"
+          id="CabinPrice"
+          disabled={true}
+          {...register("extrasPrice", {
+            valueAsNumber: true,
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
+      <FormRow label="Total price" error={errors?.totalPrice?.message}>
+        <Input
+          type="number"
+          id="CabinPrice"
+          disabled={true}
+          {...register("totalPrice", {
+            valueAsNumber: true,
+            required: "This field is required",
+          })}
         />
       </FormRow>
 
-      <FormRow label="Observations" error={errors?.description?.message}>
+      <FormRow label="Observations" error={errors?.observations?.message}>
         <Textarea
           type="text"
           id="observation"
           defaultValue=""
-          //disabled={isWorking}
-          {...register("observation")}
+          disabled={isWorking}
+          {...register("observations")}
         />
       </FormRow>
 

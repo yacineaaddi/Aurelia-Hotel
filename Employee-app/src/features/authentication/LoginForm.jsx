@@ -6,13 +6,17 @@ import Input from "../../ui/Input";
 import useLogin from "./useLogin";
 import Form from "../../ui/Form";
 import { useState } from "react";
+
 const LoginBox = styled.div`
-  padding: 0.4rem 2rem;
+  max-width: 95%;
+  width: 36rem;
+  border-radius: 20px;
+  outline: 1px solid #fca24e;
 `;
 
 function LoginForm() {
   const [email, setEmail] = useState("admin@example.com");
-  const [password, setPassword] = useState("adminexample");
+  const [password, setPassword] = useState("123456789");
   const { login, isLoading } = useLogin();
 
   function handleSubmit(e) {

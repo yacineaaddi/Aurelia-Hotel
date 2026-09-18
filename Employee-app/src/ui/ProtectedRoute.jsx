@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { Navigate } from "react-router-dom";
 import useUser from "../features/authentication/useUser";
+import { Navigate } from "react-router-dom";
+import styled from "styled-components";
 import Spinner from "./Spinner";
 
 const FullPage = styled.div`

@@ -1,12 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { HiOutlineUser } from "react-icons/hi2";
-import MenuButton from "./MenuButton";
-import ButtonIcon from "./ButtonIcon";
-import DarkModeToggle from "./DarkModeToggle";
 import Logout from "../features/authentication/Logout";
+import { HiOutlineUser } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
+import DarkModeToggle from "./DarkModeToggle";
 import { LuMenu } from "react-icons/lu";
+
+import styled from "styled-components";
+import ButtonIcon from "./ButtonIcon";
 
 const StyledHeaderMenu = styled.ul`
   display: flex;

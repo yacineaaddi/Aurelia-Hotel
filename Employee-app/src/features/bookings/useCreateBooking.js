@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 export default function useCreateBooking() {
   const queryClient = useQueryClient();
 
-  const { iscending: isCreating, mutate: createBooking } = useMutation({
+  const { isPending: isCreating, mutate: createBooking } = useMutation({
     mutationFn: createEditBooking,
     onSuccess: () => {
       toast.success("New booking successfully created");
