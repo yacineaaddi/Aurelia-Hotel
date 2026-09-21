@@ -11,7 +11,10 @@ lerna-debug.log*
 dist/
 dist-ssr/
 Employee-app/src/services/supabase.js
-Employee-app/src/data/
+Employee-app/src/data/data-bookings.js
+Employee-app/src/data/data-cabins.js
+Employee-app/src/data/data-guests.js
+Employee-app/src/data/images/
 *.local
 */.next/
 # Editor directories and files
