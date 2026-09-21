@@ -185,6 +185,7 @@ export async function createEditBooking(newBookingData, id) {
 
   const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;*/
   // 1 - Create/edit cabin
+
   let query = supabase.from("bookings");
 
   // 1-A - Create

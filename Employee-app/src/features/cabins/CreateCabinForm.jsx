@@ -12,18 +12,20 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { isCreating, createCabin } = useCreateCabin();
   const { editCabin, isEditing } = useEditCabin();
 
-  const isWorking = isCreating || isEditing;
+  const isPending = isCreating || isEditing;
 
   const { id: editId, ...editValues } = cabinToEdit;
 
   const isEditSession = Boolean(editId);
 
-  const { register, handleSubmit, reset, getValues, formState } = useForm({
+  const { register, handleSubmit, reset, formState, watch } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
 
   const { errors } = formState;
 
+  const CabinPrice = watch("regularPrice");
+  console.log(CabinPrice);
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
@@ -62,7 +64,6 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         <Input
           type="text"
           id="name"
-          disabled={isWorking}
           {...register("name", { required: "This field is required" })}
         />
       </FormRow>
@@ -71,7 +72,6 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         <Input
           type="number"
           id="maxCapacity"
-          disabled={isWorking}
           {...register("maxCapacity", {
             required: "This field is required",
             min: { value: 1, message: "Capacity should at least 1" },
@@ -79,7 +79,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Regular price" error={errors?.regularPrice?.message}>
+      <FormRow label="Cabin price" error={errors?.regularPrice?.message}>
         <Input
           type="number"
           id="regularPrice"
@@ -91,13 +91,9 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         <Input
           type="number"
           id="discount"
-          disabled={isWorking}
-          defaultValue={0}
           {...register("discount", {
-            required: "This field is required",
             validate: (value) =>
-              value <= getValues().regularPrice ||
-              "Discount should be less than regular price",
+              CabinPrice > value || "Discount should be less than Cabin price",
           })}
         />
       </FormRow>
@@ -106,13 +102,12 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         <Textarea
           type="number"
           id="description"
-          defaultValue=""
-          disabled={isWorking}
+          disabled={isPending}
           {...register("description", { required: "This field is required" })}
         />
       </FormRow>
 
-      <FormRow label="Room image">
+      <FormRow label="Room image" error={errors?.image?.message}>
         <FileInput
           id="image"
           accept="image/*"
@@ -130,7 +125,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         >
           Cancel
         </Button>
-        <Button disabled={isWorking}>
+        <Button disabled={isPending}>
           {isEditSession ? "Edit room" : "Create new room"}
         </Button>
       </FormRow>
