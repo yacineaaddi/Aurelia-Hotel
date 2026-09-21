@@ -1,13 +1,16 @@
 import { PAGE_SIZE } from "../utils/constants";
 import { getToday } from "../utils/helpers";
+import toast from "react-hot-toast";
 import supabase from "./supabase";
 
 export async function getBookings({ filter, sortBy, page }) {
   let query = supabase
     .from("bookings")
     .select(
-      "id,created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)",
-      { count: "exact" },
+      "*, cabinName(name), nationalID(fullName, email, nationality,nationalID)",
+      {
+        count: "exact",
+      },
     );
 
   if (filter) query = query.eq(filter.field, filter.value);
@@ -173,35 +176,82 @@ export async function createEditBooking(newBooking, id) {
   return data;
 }*/
 
-export async function createEditBooking(newBookingData, id) {
-  console.log("newBooking", newBookingData, "id", id);
-  //const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+export async function createEditBooking({ newBookingData, id }) {
+  console.log("Booking", newBookingData, "id", id);
 
-  //const hasImagePath = newBooking.image?.startsWith?.(supabaseUrl);
+  const { email, fullName, nationality, nationalID, ...bookingData } =
+    newBookingData;
 
-  /*const imageName = hasImagePath
-    ? newBooking.image
-    : `${Math.random()}-${newBooking.image.name}`.replaceAll("/", "");
+  let bookingsQuery = supabase.from("bookings");
+  let guestsQuery = supabase.from("guests");
 
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;*/
-  // 1 - Create/edit cabin
+  // Create/edit cabin
 
-  let query = supabase.from("bookings");
+  // CREATE
 
-  // 1-A - Create
   if (!id) {
-    query = query.insert([{ ...newBookingData }]);
+    // Check whether this guest already exists
+    const { data: existingGuest, error: guestError } = await guestsQuery
+      .select("nationalID")
+      .eq("nationalID", nationalID)
+      .maybeSingle();
+
+    if (guestError) {
+      console.error(guestError);
+      throw new Error("Could not check guest");
+    }
+
+    // Create guest only if they don't already exist
+    if (!existingGuest) {
+      const { error: createGuestError } = await guestsQuery.insert([
+        {
+          nationalID,
+          email,
+          fullName,
+          nationality,
+        },
+      ]);
+
+      if (createGuestError) {
+        console.error(createGuestError);
+        throw new Error("Guest could not be created");
+      }
+    }
+
+    // Create booking for both existing and new guests
+    const { data, error } = await bookingsQuery
+      .insert([
+        {
+          nationalID,
+          ...bookingData,
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      console.error(error);
+      throw new Error("Booking could not be created");
+    }
+    toast.success("New booking successfully created");
+    return data;
   }
-  // 1-B - Edit
-  else {
-    query = query.update({ ...newBookingData }).eq("id", id);
-  }
-  const { data, error } = await query.select().single();
+
+  // EDIT
+  console.log("bookingData", bookingData, "id", id);
+  const { data, error } = await bookingsQuery
+    .update({
+      ...bookingData,
+      nationalID,
+    })
+    .eq("id", id)
+    .select()
+    .single();
 
   if (error) {
     console.error(error);
-    throw new Error("Cabins could not be created");
+    throw new Error("Booking could not be updated");
   }
-
+  toast.success("Booking successfully edited");
   return data;
 }

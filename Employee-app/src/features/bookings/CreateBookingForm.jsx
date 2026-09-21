@@ -46,7 +46,7 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
   const numNights = watch("numNights");
   const numGuests = watch("numGuests");
   const hasBreakfast = watch("hasBreakfast");
-  const NationalId = watch("NationalID", "");
+  const NationalId = watch("nationalID", "");
 
   useEffect(() => {
     if (!startDate || !endDate) return;
@@ -97,7 +97,7 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
       const totalPrice = cabinPrice + extrasPrice || cabinPrice;
 
       setValue("cabinPrice", cabinPrice);
-      setValue("extrasPrice", extrasPrice);
+      // setValue("extrasPrice", extrasPrice);
       setValue("totalPrice", totalPrice);
     }
 
@@ -115,7 +115,7 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
 
   const newGuestForm =
     NationalId?.toString().trim() !== "" &&
-    nationalIDs.some((value) => value === NationalId);
+    nationalIDs?.some((value) => value === NationalId);
 
   function onSubmit(data) {
     const {
@@ -128,11 +128,21 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
       ...bookingData
     } = data;
 
+    const finalBookingData =
+      !newGuestForm && !isEditSession
+        ? {
+            ...bookingData,
+            email,
+            fullName,
+            nationality,
+          }
+        : bookingData;
+
     if (isEditSession)
       createBooking(
-        { newCabinData: { ...bookingData }, id: editId },
+        { newBookingData: finalBookingData, id: editId },
         {
-          onSuccess: (data) => {
+          onSuccess: () => {
             reset();
             onCloseModal?.();
           },
@@ -140,9 +150,9 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
       );
     else
       createBooking(
-        { ...bookingData },
+        { newBookingData: finalBookingData },
         {
-          onSuccess: (data) => {
+          onSuccess: () => {
             reset();
             onCloseModal?.();
           },
@@ -154,7 +164,7 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
     console.error(error);
   }
 
-  if (!settings || !cabins) return <Spinner />;
+  if (!settings || !cabins || !guests) return <Spinner />;
 
   return (
     <Form
@@ -169,29 +179,32 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
           {...register("numGuests", {
             valueAsNumber: true,
             required: "This field is required",
+            min: { value: 1, message: "Capacity should at least 1" },
           })}
         />
       </FormRow>
 
       <FormRow
         label="National ID"
-        error={errors?.NationalID?.message}
-        alert={newGuestForm && `User is already registred`}
+        error={errors?.nationalID?.message}
+        alert={newGuestForm && !isEditSession && `User is already registred`}
       >
         <Input
           type="text"
-          id="NationalID"
-          {...register("NationalID", {
+          id="nationalID"
+          disabled={isEditSession}
+          {...register("nationalID", {
             required: "This field is required",
           })}
         />
       </FormRow>
-      {!newGuestForm && (
+      {!newGuestForm || isEditSession ? (
         <>
           <FormRow label="Full name" error={errors?.fullName?.message}>
             <Input
               type="text"
               id="fullName"
+              disabled={isEditSession}
               {...register("fullName", {
                 required: "This field is required",
               })}
@@ -201,6 +214,7 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
             <Input
               type="email"
               id="email"
+              disabled={isEditSession}
               {...register("email", {
                 required: "This field is required",
                 pattern: {
@@ -212,14 +226,17 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
           </FormRow>
           <FormRow label="Nationality" error={errors?.nationality?.message}>
             <Input
-              type="number"
+              type="text"
               id="nationality"
+              disabled={isEditSession}
               {...register("nationality", {
                 required: "This field is required",
               })}
             />
           </FormRow>
         </>
+      ) : (
+        <></>
       )}
       <FormRow label="Start date" error={errors?.startDate?.message}>
         <Input
@@ -274,8 +291,8 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
       <FormRow label="Status" error={errors?.status?.message}>
         <select id="status" {...register("status")}>
           <option value="unconfirmed">Unconfirmed</option>
-          <option value="checked in">Checked in</option>
-          <option value="checked out">Checked out</option>
+          <option value="checked-in">Checked in</option>
+          <option value="checked-out">Checked out</option>
         </select>
       </FormRow>
 

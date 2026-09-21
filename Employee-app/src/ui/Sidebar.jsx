@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { IoMdClose } from "react-icons/io";
-import MenuButton from "./MenuButton";
 import Uploader from "../data/Uploader";
+import MenuButton from "./MenuButton";
 import MainNav from "./MainNav";
 import Logo from "./Logo";
 

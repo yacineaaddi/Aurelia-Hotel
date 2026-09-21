@@ -1,7 +1,13 @@
-import { HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye } from "react-icons/hi2";
+import {
+  HiArrowDownOnSquare,
+  HiArrowUpOnSquare,
+  HiEye,
+  HiPencil,
+} from "react-icons/hi2";
 import { formatDistanceFromNow } from "../../utils/helpers";
 import useCheckout from "../check-in-out/useCheckout";
 import { formatCurrency } from "../../utils/helpers";
+import CreateBookingForm from "./CreateBookingForm";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import useDeleteBooking from "./useDeleteBooking";
 import { useNavigate } from "react-router-dom";
@@ -40,21 +46,47 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
-function BookingRow({
-  booking: {
-    id: bookingId,
+function BookingRow({ booking }) {
+  const { isDeleting, deleteBooking } = useDeleteBooking();
+  const { checkout, isCheckingOut } = useCheckout();
+  const navigate = useNavigate();
+
+  const {
+    id,
     startDate,
     endDate,
     numNights,
     totalPrice,
+    cabinPrice,
+    hasBreakfast,
+    isPaid,
+    numGuests,
+    observations,
+    extrasPrice,
     status,
-    guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
-  },
-}) {
-  const { isDeleting, deleteBooking } = useDeleteBooking();
-  const { checkout, isCheckingOut } = useCheckout();
-  const navigate = useNavigate();
+    nationalID: { fullName, email, nationality, nationalID },
+    cabinName: { name: cabinName },
+  } = booking;
+
+  const newBookingData = {
+    id,
+    startDate: new Date(startDate).toISOString().slice(0, 10),
+    endDate: new Date(endDate).toISOString().slice(0, 10),
+    numNights,
+    totalPrice,
+    numGuests,
+    cabinPrice,
+    hasBreakfast,
+    isPaid,
+    observations,
+    extrasPrice,
+    status,
+    nationalID,
+    cabinName,
+    fullName,
+    email,
+    nationality,
+  };
 
   const statusToTagName = {
     unconfirmed: "blue",
@@ -67,8 +99,9 @@ function BookingRow({
       <Cabin>{cabinName}</Cabin>
 
       <Stacked>
-        <span>{guestName}</span>
+        <span>{fullName}</span>
         <span>{email}</span>
+        <span>national ID : {nationalID}</span>
       </Stacked>
 
       <Stacked>
@@ -89,11 +122,11 @@ function BookingRow({
       <Amount>{formatCurrency(totalPrice)}</Amount>
       <Modal>
         <Menus.Menu>
-          <Menus.Toggle id={bookingId} />
-          <Menus.List id={bookingId}>
+          <Menus.Toggle id={id} />
+          <Menus.List id={id}>
             <Menus.Button
               icon={<HiEye />}
-              onClick={() => navigate(`/bookings/${bookingId}`)}
+              onClick={() => navigate(`/bookings/${id}`)}
             >
               See details
             </Menus.Button>
@@ -101,7 +134,7 @@ function BookingRow({
             {status === "unconfirmed" && (
               <Menus.Button
                 icon={<HiArrowDownOnSquare />}
-                onClick={() => navigate(`/checkin/${bookingId}`)}
+                onClick={() => navigate(`/checkin/${id}`)}
               >
                 Check in
               </Menus.Button>
@@ -109,7 +142,7 @@ function BookingRow({
             {status === "checked-in" && (
               <Menus.Button
                 icon={<HiArrowUpOnSquare />}
-                onClick={() => checkout(bookingId)}
+                onClick={() => checkout(id)}
                 disabled={isCheckingOut}
               >
                 Check out
@@ -119,6 +152,9 @@ function BookingRow({
             <Modal.Open opens="delete">
               <Menus.Button icon={<HiTrash />}>Delete booking</Menus.Button>
             </Modal.Open>
+            <Modal.Open opens="edit">
+              <Menus.Button icon={<HiPencil />}>Edit booking</Menus.Button>
+            </Modal.Open>
           </Menus.List>
         </Menus.Menu>
 
@@ -127,9 +163,12 @@ function BookingRow({
             resourceName="booking"
             disabled={isDeleting}
             onConfirm={() => {
-              deleteBooking(bookingId);
+              deleteBooking(id);
             }}
           />
+        </Modal.Window>
+        <Modal.Window name="edit">
+          <CreateBookingForm bookingToEdit={newBookingData} />
         </Modal.Window>
       </Modal>
     </Table.Row>
