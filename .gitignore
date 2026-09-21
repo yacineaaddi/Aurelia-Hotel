@@ -10,10 +10,6 @@ lerna-debug.log*
 **/node_modules/
 dist/
 dist-ssr/
-Employee-app/src/data/data-bookings.js
-Employee-app/src/data/data-cabins.js
-Employee-app/src/data/data-guests.js
-Employee-app/src/data/images/
 *.local
 */.next/
 # Editor directories and files
