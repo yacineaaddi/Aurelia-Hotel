@@ -23,6 +23,7 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = bookingToEdit;
   const isEditSession = Boolean(editId);
 
+  console.log("editValues", editValues);
   const nationalIDs = guests?.map((obj) => obj.nationalID);
 
   const {
@@ -47,6 +48,9 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
   const numGuests = watch("numGuests");
   const hasBreakfast = watch("hasBreakfast");
   const NationalId = watch("nationalID", "");
+
+  console.log("hasBreakfast", typeof hasBreakfast, hasBreakfast);
+  console.log("isPaid", typeof watch("isPaid"), watch("isPaid"));
 
   useEffect(() => {
     if (!startDate || !endDate) return;
@@ -90,14 +94,13 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
 
       const cabinPrice = numNights * (cabin.regularPrice - cabin.discount);
 
-      const extrasPrice = hasBreakfast
-        ? numNights * breakfastPrice * numGuests
-        : 0;
+      const extrasPrice =
+        hasBreakfast === "true" ? numNights * breakfastPrice * numGuests : 0;
 
-      const totalPrice = cabinPrice + extrasPrice || cabinPrice;
+      const totalPrice = cabinPrice + extrasPrice;
 
       setValue("cabinPrice", cabinPrice);
-      // setValue("extrasPrice", extrasPrice);
+      setValue("extrasPrice", extrasPrice);
       setValue("totalPrice", totalPrice);
     }
 
@@ -125,22 +128,30 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
       email,
       fullName,
       nationality,
+      hasBreakfast,
+      isPaid,
       ...bookingData
     } = data;
 
-    const finalBookingData =
+    const finalBookingData = {
+      ...bookingData,
+      hasBreakfast: hasBreakfast === "true",
+      isPaid: isPaid === "true",
+    };
+
+    const finalData =
       !newGuestForm && !isEditSession
         ? {
-            ...bookingData,
+            ...finalBookingData,
             email,
             fullName,
             nationality,
           }
-        : bookingData;
+        : finalBookingData;
 
     if (isEditSession)
       createBooking(
-        { newBookingData: finalBookingData, id: editId },
+        { newBookingData: finalData, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -150,7 +161,7 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
       );
     else
       createBooking(
-        { newBookingData: finalBookingData },
+        { newBookingData: finalData },
         {
           onSuccess: () => {
             reset();
@@ -297,24 +308,14 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
       </FormRow>
 
       <FormRow label="Include breakfast" error={errors?.hasBreakfast?.message}>
-        <select
-          id="hasbreakfast"
-          {...register("hasBreakfast", {
-            setValueAs: (value) => value === "true",
-          })}
-        >
+        <select id="hasbreakfast" {...register("hasBreakfast")}>
           <option value="true">Yes</option>
           <option value="false">No</option>
         </select>
       </FormRow>
 
       <FormRow label="Is paid" error={errors?.isPaid?.message}>
-        <select
-          id="isPaid"
-          {...register("isPaid", {
-            setValueAs: (value) => value === "true",
-          })}
-        >
+        <select id="isPaid" {...register("isPaid")}>
           <option value="true">Yes</option>
           <option value="false">No</option>
         </select>
