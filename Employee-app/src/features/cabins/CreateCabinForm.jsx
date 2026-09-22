@@ -25,7 +25,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { errors } = formState;
 
   const CabinPrice = watch("regularPrice");
-  console.log(CabinPrice);
+
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
@@ -74,7 +74,6 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           id="maxCapacity"
           {...register("maxCapacity", {
             required: "This field is required",
-            min: { value: 1, message: "Capacity should at least 1" },
           })}
         />
       </FormRow>

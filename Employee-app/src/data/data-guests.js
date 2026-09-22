@@ -13,7 +13,7 @@ export const guests = [
   },
   {
     fullName: "Jonatan Johansson",
-    email: "jonatanjJohansson@example.com",
+    email: "jonatanjJoha@example.com",
     nationality: "Finland",
     nationalID: "L074454",
   },
@@ -26,7 +26,7 @@ export const guests = [
   {
     fullName: "Jonas Anderson",
     email: "andersonjonas@example.com",
-    nationality: "Bolivia (Plurinational State of)",
+    nationality: "Bolivia",
     nationalID: "C520146",
   },
   {

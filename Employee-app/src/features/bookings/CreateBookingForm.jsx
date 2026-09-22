@@ -23,7 +23,6 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = bookingToEdit;
   const isEditSession = Boolean(editId);
 
-  console.log("editValues", editValues);
   const nationalIDs = guests?.map((obj) => obj.nationalID);
 
   const {

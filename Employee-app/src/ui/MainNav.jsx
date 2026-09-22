@@ -6,7 +6,11 @@ import {
 } from "react-icons/hi2";
 import { HiOutlineHome } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
+import { FaUsers } from "react-icons/fa";
 import styled from "styled-components";
+import { FaUser } from "react-icons/fa";
+import { CiUser } from "react-icons/ci";
+import { FaRegUser } from "react-icons/fa6";
 
 const NavList = styled.ul`
   display: flex;
@@ -83,8 +87,14 @@ function MainNav({ isOpen, setIsOpen }) {
           </StyledNavLink>
         </li>
         <li onClick={handleClick}>
+          <StyledNavLink to="/guests">
+            <FaUsers />
+            <span>Guests</span>
+          </StyledNavLink>
+        </li>
+        <li onClick={handleClick}>
           <StyledNavLink to="/users">
-            <HiOutlineUsers />
+            <FaRegUser />
             <span>Users</span>
           </StyledNavLink>
         </li>
