@@ -11,8 +11,8 @@ export default function useEditGuest() {
       toast.success("Guest successfully edited");
       queryClient.invalidateQueries({ queryKey: ["guests"] });
     },
-    onError: (err) => {
-      toast.error(err.message);
+    onError: () => {
+      toast.error("Guest could not be edited");
     },
   });
 

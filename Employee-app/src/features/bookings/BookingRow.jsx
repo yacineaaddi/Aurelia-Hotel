@@ -11,6 +11,7 @@ import CreateBookingForm from "./CreateBookingForm";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import useDeleteBooking from "./useDeleteBooking";
 import { useNavigate } from "react-router-dom";
+import useCabins from "../cabins/useCabins";
 import { format, isToday } from "date-fns";
 import { HiTrash } from "react-icons/hi2";
 import styled from "styled-components";
@@ -24,6 +25,15 @@ const Cabin = styled.div`
   font-weight: 600;
   color: var(--color-grey-600);
   font-family: "Sono";
+`;
+
+const Img = styled.img`
+  display: block;
+  width: 6.4rem;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.5) translateX(-7px);
 `;
 
 const Stacked = styled.div`
@@ -46,7 +56,7 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
-function BookingRow({ booking }) {
+function BookingRow({ booking, cabins }) {
   const { isDeleting, deleteBooking } = useDeleteBooking();
   const { checkout, isCheckingOut } = useCheckout();
   const navigate = useNavigate();
@@ -58,11 +68,8 @@ function BookingRow({ booking }) {
     numNights,
     totalPrice,
     cabinPrice,
-    hasBreakfast,
-    isPaid,
     numGuests,
     observations,
-    extrasPrice,
     status,
     nationalID: { fullName, email, nationality, nationalID },
     cabinName: { name: cabinName },
@@ -92,9 +99,12 @@ function BookingRow({ booking }) {
     "checked-out": "silver",
   };
 
+  const cabinData = cabins?.filter((cabin) => cabin.name === cabinName);
+  const { image: cabinImage } = cabinData[0];
+
   return (
     <Table.Row>
-      <Cabin>{cabinName}</Cabin>
+      <Img src={cabinImage} />
 
       <Stacked>
         <span>{fullName}</span>

@@ -1,5 +1,6 @@
 import { deleteCabin as deleteCabinApi } from "../../services/apiCabins";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 export default function useDeleteCabin() {
   const queryClient = useQueryClient();
@@ -10,7 +11,7 @@ export default function useDeleteCabin() {
       queryClient.invalidateQueries({ queryKey: ["cabins"] });
     },
     onError: (err) => {
-      alert(err.message);
+      toast.error("Cabin could not be deleted");
     },
   });
   return { isDeleting, deleteCabin };

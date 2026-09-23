@@ -7,6 +7,6 @@ export default function useGuests() {
     data: guests,
     error,
   } = useQuery({ queryKey: ["guests"], queryFn: getGuests });
-  console.log(guests);
+
   return { isLoadingGuests, guests, error };
 }

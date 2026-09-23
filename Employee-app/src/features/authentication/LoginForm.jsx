@@ -11,7 +11,7 @@ const LoginBox = styled.div`
   max-width: 95%;
   width: 36rem;
   border-radius: 20px;
-  outline: 1px solid #fca24e;
+  outline: 1px solid var(--color-orange);
 `;
 
 function LoginForm() {

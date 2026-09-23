@@ -4,11 +4,14 @@ import useCabins from "./useCabins";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
+import Error from "../../ui/Error";
 import CabinRow from "./CabinRow";
 
 function CabinTable() {
-  const { isLoading, cabins } = useCabins();
+  const { isLoading, cabins, error } = useCabins();
   const [searchParams] = useSearchParams();
+
+  if (error) return <Error data="cabins" />;
 
   if (isLoading) return <Spinner />;
 
@@ -34,9 +37,9 @@ function CabinTable() {
   );
   return (
     <Menus>
-      <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+      <Table columns="1fr 1fr 2fr 1.4fr 1fr 1fr">
         <Table.Header>
-          <div></div>
+          <div>Image</div>
           <div>Rooms</div>
           <div>Capacity</div>
           <div>Price</div>

@@ -7,7 +7,6 @@ import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 
 export default function GuestRow({ guest }) {
-  console.log(guest);
   const { isDeleting, deleteGuestFn } = useDeleteGuest();
 
   const { id: guestId, fullName, nationalID, nationality, email } = guest;
@@ -41,7 +40,9 @@ export default function GuestRow({ guest }) {
               <ConfirmDelete
                 resourceName="guests"
                 disabled={isDeleting}
-                onConfirm={() => deleteGuestFn(guestId)}
+                onConfirm={() => {
+                  /*alert("hello world"); */ deleteGuestFn(guestId);
+                }}
               />
             </Modal.Window>
           </Menus.Menu>

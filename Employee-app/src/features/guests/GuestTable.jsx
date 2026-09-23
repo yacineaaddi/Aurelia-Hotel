@@ -4,17 +4,20 @@ import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
 import GuestRow from "./GuestRow";
+import Error from "../../ui/Error";
 
 function GuestTable() {
-  const { isLoadingGuests, guests } = useGuests();
-  console.log(guests);
+  let { isLoadingGuests, guests, error } = useGuests();
+
+  if (error) return <Error data="guests" />;
+
   if (isLoadingGuests) return <Spinner />;
 
   if (!guests) return <Empty resourceName="guests" />;
 
   return (
     <Menus>
-      <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+      <Table columns="1.5fr 2fr 1.7fr 1fr 1fr">
         <Table.Header>
           <div>full Name</div>
           <div>Email</div>

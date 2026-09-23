@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 import { IoMdClose } from "react-icons/io";
-import Uploader from "../data/Uploader";
 import MenuButton from "./MenuButton";
 import MainNav from "./MainNav";
 import Logo from "./Logo";
@@ -30,7 +29,6 @@ export default function Sidebar({ onClick, isOpen, setIsOpen }) {
     <StyledSidebar $isOpen={isOpen}>
       <Logo />
       <MainNav isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Uploader />
       <MenuButton>
         <IoMdClose onClick={onClick} />
       </MenuButton>

@@ -4,8 +4,8 @@ export async function getCabins() {
   const { data, error } = await supabase.from("cabins").select("*");
 
   if (error) {
-    console.error(error);
-    throw new Error("Cabins could not be loaded");
+    console.error(error.message);
+    throw error;
   }
   return data;
 }
@@ -21,7 +21,7 @@ export async function getCabin(cabinName) {
     console.error(error.message);
     throw new Error("Cabin not found");
   }
-
+  console.log(data);
   return data;
 }
 
@@ -53,7 +53,7 @@ export async function createEditCabin(newCabin, id) {
 
   if (error) {
     console.error(error);
-    throw new Error("Cabins could not be created");
+    throw error;
   }
 
   if (hasImagePath) return data;
@@ -63,12 +63,14 @@ export async function createEditCabin(newCabin, id) {
     .upload(imageName, newCabin.image);
 
   if (storageError) {
+    /*  console.error("Cabins could not be uploaded and the cabin was not created");
+
     await supabase
       .from("cabins")
       .delete()
       .eq("id", data.id); /*BUG: data is not defined*/
 
-    console.log("Cabins could not be uploaded and the cabin was not created");
+    throw error;
   }
   return data;
 }
@@ -78,7 +80,7 @@ export async function deleteCabin(id) {
 
   if (error) {
     console.error(error);
-    throw new Error("Cabin could not be deleted");
+    throw error;
   }
   return data;
 }

@@ -20,13 +20,13 @@ const StyledModal = styled.div`
   box-shadow: var(--shadow-lg);
   padding: 3.2rem 5rem;
   transition: all 0.5s;
-  max-height: 90vh;
-  overflow-y: auto;
-  width: 40%;
+  height: fit-content;
+  width: 42%;
+  border: 1px solid red;
 
   @media (max-width: 1200px) {
     padding: 5rem 3rem;
-    width: 90%;
+    width: 80%;
   }
 `;
 

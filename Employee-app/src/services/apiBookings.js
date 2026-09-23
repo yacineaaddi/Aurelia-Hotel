@@ -30,7 +30,7 @@ export async function getBookings({ filter, sortBy, page }) {
 
   if (error) {
     console.error(error);
-    throw new Error("Bookings could not be loaded");
+    throw error;
   }
 
   return { data, count };
@@ -45,7 +45,7 @@ export async function getBooking(id) {
 
   if (error) {
     console.error(error.message);
-    throw new Error("Booking not found");
+    throw error;
   }
 
   return data;
@@ -100,7 +100,7 @@ export async function getStaysTodayActivity() {
 
   if (error) {
     console.error(error);
-    throw new Error("Bookings could not get loaded");
+    throw error;
   }
   return data;
 }
@@ -114,7 +114,7 @@ export async function updateBooking(id, obj) {
     .single();
 
   if (error) {
-    throw new Error("Booking could not be updated");
+    throw error;
   }
 
   return data;
@@ -125,7 +125,7 @@ export async function deleteBooking(id) {
 
   if (error) {
     console.error(error);
-    throw new Error("Booking could not be deleted");
+    throw error;
   }
   return data;
 }
@@ -177,15 +177,13 @@ export async function createEditBooking(newBooking, id) {
 }*/
 
 export async function createEditBooking({ newBookingData, id }) {
-  console.log("Booking", newBookingData, "id", id);
-
   const { email, fullName, nationality, nationalID, ...bookingData } =
     newBookingData;
 
   let bookingsQuery = supabase.from("bookings");
   let guestsQuery = supabase.from("guests");
 
-  // Create/edit cabin
+  // Create/ Edit cabin
 
   // CREATE
 
@@ -198,7 +196,7 @@ export async function createEditBooking({ newBookingData, id }) {
 
     if (guestError) {
       console.error(guestError);
-      throw new Error("Could not check guest");
+      throw guestError;
     }
 
     // Create guest only if they don't already exist
@@ -214,7 +212,7 @@ export async function createEditBooking({ newBookingData, id }) {
 
       if (createGuestError) {
         console.error(createGuestError);
-        throw new Error("Guest could not be created");
+        throw createGuestError;
       }
     }
 
@@ -231,14 +229,13 @@ export async function createEditBooking({ newBookingData, id }) {
 
     if (error) {
       console.error(error);
-      throw new Error("Booking could not be created");
+      throw error;
     }
     toast.success("New booking successfully created");
     return data;
   }
 
   // EDIT
-  console.log("bookingData", bookingData, "id", id);
   const { data, error } = await bookingsQuery
     .update({
       ...bookingData,
@@ -250,7 +247,7 @@ export async function createEditBooking({ newBookingData, id }) {
 
   if (error) {
     console.error(error);
-    throw new Error("Booking could not be updated");
+    throw error;
   }
   toast.success("Booking successfully edited");
   return data;

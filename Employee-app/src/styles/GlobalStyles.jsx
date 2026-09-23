@@ -94,7 +94,7 @@ const GlobalStyles = createGlobalStyle`
   --color-brand-900: #312e81;
 
   --color-brand-1000: #FCA24E;
-
+  --color-orange:#fca24e;
 
   --border-radius-tiny: 3px;
   --border-radius-sm: 5px;

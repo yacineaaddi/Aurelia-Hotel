@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createEditBooking } from "../../services/apiBookings";
+import toast from "react-hot-toast";
 
 export default function useCreateBooking() {
   const queryClient = useQueryClient();
@@ -9,8 +10,8 @@ export default function useCreateBooking() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
     },
-    onError: (err) => {
-      alert(err.message);
+    onError: () => {
+      toast.error("Error, please try again");
     },
   });
 

@@ -7,7 +7,7 @@ export async function getGuests() {
 
   if (error) {
     console.error(error);
-    throw new Error("Guests could not be loaded");
+    throw error;
   }
   return data;
 }
@@ -21,7 +21,7 @@ export async function editGuest({ editedGuest, editId }) {
 
   if (error) {
     console.error(error);
-    throw new Error("Guest could not be edited");
+    throw error;
   }
 
   return data;
@@ -32,7 +32,8 @@ export async function deleteGuest(id) {
 
   if (error) {
     console.error(error);
-    throw new Error("guest could not be deleted");
+    throw error;
   }
+
   return data;
 }
