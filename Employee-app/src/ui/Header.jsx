@@ -1,4 +1,5 @@
 import UserAvatar from "../features/authentication/UserAvatar";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HeaderMenu from "./HeaderMenu";
 import Logo from "./Logo";
@@ -31,14 +32,20 @@ const LogoContainer = styled.span`
   }
 `;
 
-function Header({ onClick }) {
+function Header({ onClick, isOpen, setIsOpen }) {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate("/dashboard");
+  }
+
   return (
     <StyledHeader>
-      <LogoContainer>
+      <LogoContainer onClick={handleClick}>
         <Logo width="6rem" />
       </LogoContainer>
       <UserAvatar />
-      <HeaderMenu onClick={onClick} />
+      <HeaderMenu onClick={onClick} isOpen={isOpen} setIsOpen={setIsOpen} />
     </StyledHeader>
   );
 }

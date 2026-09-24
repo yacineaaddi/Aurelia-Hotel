@@ -3,7 +3,6 @@ import { HiOutlineUser } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
 import { LuMenu } from "react-icons/lu";
-
 import styled from "styled-components";
 import ButtonIcon from "./ButtonIcon";
 
@@ -26,13 +25,20 @@ const StyledIcon = styled.div`
   }
 `;
 
-export default function HeaderMenu({ onClick }) {
+export default function HeaderMenu({ onClick, isOpen, setIsOpen }) {
   const navigate = useNavigate();
+
+  function handleClick() {
+    if (isOpen) {
+      setIsOpen((open) => !open);
+    }
+    navigate("/account");
+  }
 
   return (
     <StyledHeaderMenu>
       <li>
-        <ButtonIcon onClick={() => navigate("/account")}>
+        <ButtonIcon onClick={handleClick}>
           <HiOutlineUser />
         </ButtonIcon>
       </li>

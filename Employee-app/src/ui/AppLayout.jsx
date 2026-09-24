@@ -45,7 +45,7 @@ function AppLayout() {
     <StyledAppLayout>
       <Sidebar onClick={handleClick} isOpen={isOpen} setIsOpen={setIsOpen} />
       <ContainerBox>
-        <Header onClick={handleClick} />
+        <Header onClick={handleClick} isOpen={isOpen} setIsOpen={setIsOpen} />
         <Main>
           <Container>
             <Outlet />

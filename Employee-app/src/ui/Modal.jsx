@@ -18,11 +18,12 @@ const StyledModal = styled.div`
   background-color: var(--color-grey-0);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
+  max-height: 90vh;
+  overflow-y: auto;
   padding: 3.2rem 5rem;
   transition: all 0.5s;
   height: fit-content;
   width: 42%;
-  border: 1px solid red;
 
   @media (max-width: 1200px) {
     padding: 5rem 3rem;
@@ -96,10 +97,19 @@ function Window({ children, name }) {
           close();
         }
       }
+      function handleType(e) {
+        if (e.key === "Escape") {
+          close();
+        }
+      }
 
       document.addEventListener("click", handleClick, true);
+      document.addEventListener("keydown", handleType, true);
 
-      return () => document.removeEventListener("click", handleClick, true);
+      return () => {
+        document.removeEventListener("click", handleClick, true);
+        document.addEventListener("keydown", handleType, true);
+      };
     },
     [close],
   );
