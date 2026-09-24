@@ -3,6 +3,7 @@ import useOutsideClick from "../hooks/useOutsideClick";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const Menu = styled.div`
   display: flex;
@@ -79,7 +80,7 @@ function Menus({ children }) {
     </MenusContext.Provider>
   );
 }
-
+/*
 function Toggle({ id }) {
   const { openId, close, open, setPosition } = useContext(MenusContext);
 
@@ -94,9 +95,52 @@ function Toggle({ id }) {
 
     openId === "" || openId !== id ? open(id) : close();
   }
+*/
+function Toggle({ id }) {
+  const { openId, close, open, setPosition } = useContext(MenusContext);
+
+  useEffect(
+    function () {
+      if (!openId) return;
+
+      function handleScroll() {
+        const button = document.querySelector(`[data-menu-id="${openId}"]`);
+
+        if (!button) return;
+
+        const rect = button.getBoundingClientRect();
+
+        setPosition({
+          x: window.innerWidth - rect.width - rect.x,
+          y: rect.y + rect.height + 8,
+        });
+      }
+
+      document.addEventListener("scroll", handleScroll, true);
+
+      return () => {
+        document.removeEventListener("scroll", handleScroll, true);
+      };
+    },
+    [openId, setPosition],
+  );
+
+  function handleClick(e) {
+    e.stopPropagation();
+
+    const button = e.currentTarget;
+    const rect = button.getBoundingClientRect();
+
+    setPosition({
+      x: window.innerWidth - rect.width - rect.x,
+      y: rect.y + rect.height + 8,
+    });
+
+    openId === "" || openId !== id ? open(id) : close();
+  }
 
   return (
-    <StyledToggle onClick={handleClick}>
+    <StyledToggle data-menu-id={id} onClick={handleClick}>
       <HiEllipsisVertical />
     </StyledToggle>
   );
