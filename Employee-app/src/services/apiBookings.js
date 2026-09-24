@@ -129,52 +129,6 @@ export async function deleteBooking(id) {
   }
   return data;
 }
-/*
-export async function createEditBooking(newBooking, id) {
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-
-  const hasImagePath = newBooking.image?.startsWith?.(supabaseUrl);
-
-  const imageName = hasImagePath
-    ? newBooking.image
-    : `${Math.random()}-${newBooking.image.name}`.replaceAll("/", "");
-
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
-
-  // 1 - Create/edit cabin
-
-  let query = supabase.from("cabins");
-
-  // 1-A - Create
-  if (!id) query = query.insert([{ ...newBooking, image: imagePath }]);
-
-  // 1-B - Edit
-  if (id)
-    query = query.update({ ...newBooking, image: imagePath }).eq("id", id);
-
-  const { data, error } = await query.select().single();
-
-  if (error) {
-    console.error(error);
-    throw new Error("Cabins could not be created");
-  }
-
-  if (hasImagePath) return data;
-
-  const { error: storageError } = await supabase.storage
-    .from("cabin-images")
-    .upload(imageName, newBooking.image);
-
-  if (storageError) {
-    await supabase
-      .from("cabins")
-      .delete()
-      .eq("id", data.id); BUG: data is not defined
-
-    console.log("Cabins could not be uploaded and the cabin was not created");
-  }
-  return data;
-}*/
 
 export async function createEditBooking({ newBookingData, id }) {
   const { email, fullName, nationality, nationalID, ...bookingData } =

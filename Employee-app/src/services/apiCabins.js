@@ -1,5 +1,7 @@
 import supabase from "./supabase";
 
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+
 export async function getCabins() {
   const { data, error } = await supabase.from("cabins").select("*");
 
@@ -26,8 +28,6 @@ export async function getCabin(cabinName) {
 }
 
 export async function createEditCabin(newCabin, id) {
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
 
   const imageName = hasImagePath

@@ -1,5 +1,7 @@
 import supabase from "./supabase";
 
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+
 export async function signup({ fullName, email, password }) {
   const { data, error } = await supabase.auth.admin.createUser({
     email,
@@ -43,7 +45,6 @@ export async function logout() {
 }
 
 export async function updateCurrentUser({ password, fullName, avatar }) {
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
   // 1. Update password or fullname
 
   let updateData;

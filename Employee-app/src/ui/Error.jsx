@@ -6,6 +6,7 @@ const ErrorContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 10rem 0rem;
 `;
 
 const ErrorContent = styled.div`

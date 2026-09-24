@@ -11,7 +11,6 @@ import CreateBookingForm from "./CreateBookingForm";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import useDeleteBooking from "./useDeleteBooking";
 import { useNavigate } from "react-router-dom";
-import useCabins from "../cabins/useCabins";
 import { format, isToday } from "date-fns";
 import { HiTrash } from "react-icons/hi2";
 import styled from "styled-components";
@@ -19,22 +18,7 @@ import Modal from "../../ui/Modal";
 import Menus from "../../ui/Menus";
 import Table from "../../ui/Table";
 import Tag from "../../ui/Tag";
-
-const Cabin = styled.div`
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--color-grey-600);
-  font-family: "Sono";
-`;
-
-const Img = styled.img`
-  display: block;
-  width: 6.4rem;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  object-position: center;
-  transform: scale(1.5) translateX(-7px);
-`;
+import Img from "../../ui/Img";
 
 const Stacked = styled.div`
   display: flex;
@@ -109,9 +93,8 @@ function BookingRow({ booking, cabins }) {
       <Stacked>
         <span>{fullName}</span>
         <span>{email}</span>
-        <span>national ID : {nationalID}</span>
       </Stacked>
-
+      <span>{nationalID}</span>
       <Stacked>
         <span>
           {isToday(new Date(startDate))
