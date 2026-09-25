@@ -12,6 +12,10 @@ A full-stack hotel reservation platform composed of two separate React applicati
 
 - Customer Website :
 
+## 📸 Screenshots
+
+![Alt Text](assets/admin.jpg)
+
 ## ✨ Features
 
 **Customer**
