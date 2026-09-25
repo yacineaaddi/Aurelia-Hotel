@@ -25,11 +25,12 @@ const StyledHeader = styled(CommonRow)`
   letter-spacing: 0.4px;
   font-weight: 600;
   color: var(--color-grey-600);
+  text-wrap: nowrap;
 `;
 
 const StyledRow = styled(CommonRow)`
   padding: 1.6rem 2.4rem;
-
+  text-wrap: nowrap;
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
   }

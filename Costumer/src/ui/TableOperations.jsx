@@ -5,6 +5,7 @@ const TableOperations = styled.div`
   align-items: center;
   gap: 1.6rem;
   flex-wrap: wrap;
+  text-wrap: nowrap;
 `;
 
 export default TableOperations;
