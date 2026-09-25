@@ -1,6 +1,6 @@
-# 📦 Hotel Admin Dashboard
+# 📦 Hotel reservation platform
 
-A full-stack hotel management platform where hotel staff can manage cabins, bookings, guests, and hotel settings
+A full-stack hotel reservation platform where guests can browse cabins and make/manage reservations
 
 ## 🔗 Link
 
@@ -10,26 +10,24 @@ A full-stack hotel management platform where hotel staff can manage cabins, book
 
 ## ✨ Features
 
-- Protected routes & authentication
-- Dashboard & booking statistics
-- Cabin CRUD & image uploads
-- Booking management
-- Guest management
-- Hotel settings
+- Create, edit, and cancel reservations
+- View cabin details and pricing
+- Automatic price calculation
+- Check availability
+- Breakfast option
+- Browse cabins
 
 ## 🧠 React Patterns
 
-- React Query / Server State
-- Reusable UI Components
-- Compound Components
-- Protected Routes
-- Error Boundaries
-- React Hook Form
+- Server & Client Components
+- Error & Loading Boundaries
+- URL State Management
+- Dynamic Routing
+- Server Actions
+- Form Handling
 - Optimistic UI
-- Service Layer
 - Custom Hooks
 - Context API
-- Portals
 
 ## 📁 Folder Structure
 
@@ -59,22 +57,19 @@ customer/
 
 **Frontend**
 
-- TanStack React Query
-- Styled Components
-- React Hook Form
-- React Hot Toast
-- React Router
-- Recharts
-- React
-- Vite
+- Next.js 14
+- React 18
+- Tailwind CSS
+- NextAuth.js
+- React Day Picker
+- date-fns
+- Heroicons
 
-**Backend**
+**Backend / BaaS**
 
-- Row Level Security (RLS)
-- Supabase Storage
-- Supabase Auth
-- PostgreSQL
 - Supabase
+- PostgreSQL
+- Supabase Authentication
 
 **Authentication**
 
@@ -96,7 +91,7 @@ customer/
 
    ```bash
    cd Aurelia-Hotel
-   cd admin
+   cd customer
    ```
 
 3. Install dependencies:
