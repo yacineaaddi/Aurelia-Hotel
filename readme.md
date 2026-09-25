@@ -4,13 +4,13 @@ A full-stack hotel reservation platform composed of two separate React applicati
 
 - Hotel Admin Dashboard : hotel staff can manage cabins, bookings, guests, and hotel settings
 
-- Customer Website : guests can browse cabins and make/manage reservations
+- Hotel reservation platform : guests can browse cabins and make/manage reservations
 
 ## 🔗 Links
 
 - Hotel Admin Dashboard :
 
-- Customer Website :
+- Hotel reservation platform :
 
 ## 📸 Screenshots
 

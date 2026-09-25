@@ -48,7 +48,6 @@ customer/
 ├── node_modules/
 ├── public/
 ├── README.md
-├── LICENSE
 └── ...
 
 ```

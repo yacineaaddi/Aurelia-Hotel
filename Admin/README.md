@@ -1,6 +1,6 @@
 # 📦 Hotel Admin Dashboard
 
-A full-stack hotel management platform where hotel staff can manage cabins, bookings, guests, and hotel settings
+A full-stack hotel management dashboard where hotel staff can manage cabins, bookings, guests, and hotel settings
 
 ## 🔗 Link
 
@@ -35,17 +35,16 @@ A full-stack hotel management platform where hotel staff can manage cabins, book
 
 ```
 
-customer/
-├── next/
-├── app/
-│   ├── _lib/
-│   ├── _styles/
-│   ├── about/
-│   ├── account/
-│   ├── api/
-│   ├── cabins/
-│   ├── components/
-│   ├── login/
+admin/
+├── src/
+│   ├── context/
+│   ├── features/
+│   ├── hooks/
+│   ├── pages/
+│   ├── services/
+│   ├── styles/
+│   ├── ui/
+│   ├── utils/
 │   └── ...
 ├── node_modules/
 ├── public/
