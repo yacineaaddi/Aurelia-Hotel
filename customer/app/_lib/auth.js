@@ -26,12 +26,15 @@ const authConfig = {
       }
     },
     async session({ session, user }) {
+      console.log("session", session);
       const guest = await getGuest(session.user.email);
-
+      console.log("guest", guest);
       if (guest) {
         session.user.guestId = guest.id;
+        session.user.nationalID = guest.nationalID;
+        session.user.nationality = guest.nationality;
       }
-
+      console.log("session", session);
       return session;
     },
   },

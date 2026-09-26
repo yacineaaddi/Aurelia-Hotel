@@ -7,7 +7,7 @@ export default async function CabinList({ filter }) {
   unstable_noStore();
 
   const cabins = await getCabins();
-
+  console.log(cabins);
   if (!cabins.length) return null;
 
   let displayedCabins;

@@ -6,8 +6,9 @@ import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 
 function SignupForm() {
-  const { signup, isLoading } = useSignup();
   const { register, formState, getValues, handleSubmit, reset } = useForm();
+  const { signup, isLoading } = useSignup();
+
   const { errors } = formState;
 
   function onSubmit({ fullName, email, password }) {

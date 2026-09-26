@@ -6,7 +6,7 @@ A full-stack hotel management dashboard where hotel staff can manage cabins, boo
 
 ## 📸 Screenshots
 
-![Alt Text](assets/screenshot.png)
+![Alt Text](assets/admin.jpg)
 
 ## ✨ Features
 
@@ -49,7 +49,6 @@ admin/
 ├── node_modules/
 ├── public/
 ├── README.md
-├── LICENSE
 └── ...
 
 ```

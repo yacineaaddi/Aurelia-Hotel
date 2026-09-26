@@ -42,7 +42,7 @@ export const getCabins = async function () {
 
   if (error) {
     console.error(error);
-    throw new Error("Cabins could not be loaded");
+    throw error;
   }
 
   return data;
@@ -56,7 +56,7 @@ export async function getGuest(email) {
     .eq("email", email)
     .single();
 
-  // No error here! We handle the possibility of no guest in the sign in callback
+  // No error here! i handled the possibility of no guest in the sign in callback
   return data;
 }
 
@@ -75,13 +75,13 @@ export async function getBooking(id) {
   return data;
 }
 
-export async function getBookings(guestId) {
+export async function getBookings(nationalID) {
   const { data, error, count } = await supabase
     .from("bookings")
     .select(
-      "id, created_at, startDate, endDate, numNights, numGuests, totalPrice, guestId, cabinId, cabins(name, image)",
+      "id, created_at, startDate, endDate, numNights, numGuests, totalPrice,cabinPrice, status,hasBreakfast,isPaid,observations,extrasPrice,totalPrice,nationalID, cabinName(name, image)",
     )
-    .eq("guestId", guestId)
+    .eq("nationalID", nationalID)
     .order("startDate");
 
   if (error) {
@@ -92,7 +92,7 @@ export async function getBookings(guestId) {
   return data;
 }
 
-export async function getBookedDatesByCabinId(cabinId) {
+export async function getBookedDatesByCabinName(cabinName) {
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
@@ -101,7 +101,7 @@ export async function getBookedDatesByCabinId(cabinId) {
   const { data, error } = await supabase
     .from("bookings")
     .select("*")
-    .eq("cabinId", cabinId)
+    .eq("cabinName", cabinName)
     .or(`startDate.gte.${today},status.eq.checked-in`);
 
   if (error) {
@@ -127,7 +127,7 @@ export async function getSettings() {
 
   if (error) {
     console.error(error);
-    throw new Error("Settings could not be loaded");
+    throw error;
   }
 
   return data;
