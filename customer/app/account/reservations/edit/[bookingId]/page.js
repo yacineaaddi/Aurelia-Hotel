@@ -1,11 +1,36 @@
-import { updateBooking } from "@/app/_lib/action";
-import { getBooking, getCabin } from "@/app/_lib/data-service";
+import ReservationCabinSelector from "./ReservationCabinSelector";
 import SubmitButton from "@/app/components/SubmitButton";
+import { updateBooking } from "@/app/_lib/action";
+import {
+  getBooking,
+  getCabin,
+  getCabins,
+  getBookedDatesByCabinName,
+  getSettings,
+} from "@/app/_lib/data-service";
 
 export default async function Page({ params }) {
   const { bookingId } = params;
-  const { numGuests, observations, cabinId } = await getBooking(bookingId);
-  const { maxCapacity } = await getCabin(cabinId);
+
+  const booking = await getBooking(bookingId);
+
+  const {
+    numGuests,
+    observations,
+    startDate,
+    endDate,
+    cabinName,
+    hasBreakfast,
+  } = booking;
+
+  const [settings, bookedDates, cabin, cabinData] = await Promise.all([
+    getSettings(),
+    getBookedDatesByCabinName(cabinName),
+    getCabin(cabinName),
+    getCabins(),
+  ]);
+
+  const cabinsNames = cabinData?.map((cabin) => cabin.name);
 
   return (
     <div>
@@ -21,6 +46,7 @@ export default async function Page({ params }) {
 
         <div className="space-y-2">
           <label htmlFor="numGuests">How many guests?</label>
+
           <select
             name="numGuests"
             id="numGuests"
@@ -28,21 +54,34 @@ export default async function Page({ params }) {
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
             required
           >
-            <option value="" key="">
-              Select number of guests...
-            </option>
-            {Array.from({ length: maxCapacity }, (_, i) => i + 1).map((x) => (
-              <option value={x} key={x}>
-                {x} {x === 1 ? "guest" : "guests"}
-              </option>
-            ))}
+            <option value="">Select number of guests...</option>
+
+            {Array.from({ length: cabin.maxCapacity }, (_, i) => i + 1).map(
+              (x) => (
+                <option value={x} key={x}>
+                  {x} {x === 1 ? "guest" : "guests"}
+                </option>
+              ),
+            )}
           </select>
         </div>
+
+        <ReservationCabinSelector
+          cabins={cabinsNames}
+          cabinName={cabinName}
+          bookedDates={bookedDates}
+          cabin={cabin}
+          settings={settings}
+          startDate={startDate}
+          endDate={endDate}
+          hasBreakfast={hasBreakfast}
+        />
 
         <div className="space-y-2">
           <label htmlFor="observations">
             Anything we should know about your stay?
           </label>
+
           <textarea
             name="observations"
             defaultValue={observations}

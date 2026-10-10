@@ -2,15 +2,12 @@ import { eachDayOfInterval } from "date-fns";
 import supabase from "./supabase";
 import { notFound } from "next/navigation";
 
-export async function getCabin(id) {
+export async function getCabin(name) {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
-    .eq("id", id)
+    .eq("name", name)
     .single();
-
-  // For testing
-  // await new Promise((res) => setTimeout(res, 1000));
 
   if (error) {
     console.error(error);
@@ -34,7 +31,7 @@ export async function getCabinPrice(id) {
   return data;
 }
 
-export const getCabins = async function () {
+export async function getCabins() {
   const { data, error } = await supabase
     .from("cabins")
     .select("id, name, maxCapacity, regularPrice, discount, image")
@@ -46,7 +43,7 @@ export const getCabins = async function () {
   }
 
   return data;
-};
+}
 
 // Guests are uniquely identified by their email address
 export async function getGuest(email) {

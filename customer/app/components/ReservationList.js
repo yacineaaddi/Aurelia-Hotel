@@ -13,6 +13,7 @@ function ReservationList({ bookings }) {
         await deleteBooking(bookingId);
       } catch (error) {
         console.error("Delete failed", error);
+        throw error;
       }
     });
   }

@@ -20,7 +20,7 @@ function isAlreadyBooked(range, datesArr) {
   );
 }
 
-function DateSelector({ settings, bookedDates, cabin }) {
+function DateSelector({ settings, bookedDates, cabin, hasBreakfast }) {
   const { range, setRange, resetRange } = useReservation();
 
   function handleSelect(newRange) {
@@ -36,6 +36,12 @@ function DateSelector({ settings, bookedDates, cabin }) {
   const numNights = differenceInDays(range?.to, range?.from);
 
   const cabinPrice = numNights * (regularPrice - discount);
+
+  const breakfastPriceperNight = numNights * settings.breakfastPrice;
+
+  const totalPrice = hasBreakfast
+    ? cabinPrice + breakfastPriceperNight
+    : cabinPrice;
 
   const { minBookingLength, maxBookingLength } = settings;
 
@@ -79,9 +85,17 @@ function DateSelector({ settings, bookedDates, cabin }) {
               <p className="bg-accent-600 px-3 py-2 text-2xl">
                 <span>&times;</span> <span>{numNights}</span>
               </p>
+              {hasBreakfast && (
+                <p>
+                  <span className="text-lg font-md ">BreakfastPrice</span>{" "}
+                  <span className="text-2xl font-font-md">
+                    ${breakfastPriceperNight}
+                  </span>
+                </p>
+              )}
               <p>
                 <span className="text-lg font-bold uppercase">Total</span>{" "}
-                <span className="text-2xl font-semibold">${cabinPrice}</span>
+                <span className="text-2xl font-semibold">${totalPrice}</span>
               </p>
             </>
           ) : null}
