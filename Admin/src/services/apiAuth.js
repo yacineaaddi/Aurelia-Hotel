@@ -1,7 +1,7 @@
 import supabase from "./supabase";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-
+/*
 export async function signup({ fullName, email, password }) {
   const { data, error } = await supabase.auth.admin.createUser({
     email,
@@ -9,6 +9,22 @@ export async function signup({ fullName, email, password }) {
     user_metadata: {
       fullName,
       avatar: "",
+    },
+  });
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+*/
+
+// Sign up new admin account using supabase edge function
+export async function signup({ fullName, email, password }) {
+  const { data, error } = await supabase.functions.invoke("create-auth-user", {
+    body: {
+      fullName: fullName,
+      email: email,
+      password: password,
     },
   });
 

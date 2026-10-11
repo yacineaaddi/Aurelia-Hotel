@@ -106,6 +106,7 @@ A full-stack hotel reservation platform composed of two separate React applicati
 ## 📁 Folder Structure
 
 ```
+
 Aurelia-hotel/
 │ ├── customer/
 │ └── admin/
