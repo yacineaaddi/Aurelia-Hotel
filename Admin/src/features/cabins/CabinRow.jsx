@@ -55,7 +55,7 @@ export default function CabinRow({ cabin }) {
   return (
     <Table.Row>
       <Img src={image} />
-      <Cabin>{name}</Cabin>
+      <Cabin>&emsp;{name}</Cabin>
       <div>Fits up to {maxCapacity} guests</div>
       <Price>{formatCurrency(regularPrice)}</Price>
       {discount ? (

@@ -49,17 +49,27 @@ A full-stack hotel reservation platform composed of two separate React applicati
 - Context API
 - Portals
 
-## 📁 Folder Structure
+## 🗄️ Technical Architecture
 
-```
-Aurelia-hotel/
-│ ├── customer/
-│ └── admin/
-├── LICENSE
-├── README.md
-└── .gitignore
+**Customer**
 
-```
+- Guests browse available cabins and view their details
+- The data service retrieves cabin information and hotel settings from Supabase
+- Guests select their reservation dates using the date picker
+- NextAuth.js manages authentication and user sessions
+- Server Actions handle reservation operations and call the data service
+- Supabase stores and retrieves booking and guest data
+- Next.js renders the updated pages and reservation information
+
+**Admin**
+
+- Hotel staff sign in through Supabase Authentication
+- Protected routes restrict access to authenticated users
+- React components use React Query and the Supabase client to fetch and modify hotel data
+- Supabase PostgreSQL stores cabins, bookings, guests, and hotel settings
+- Supabase Storage stores cabin images
+- React Query manages cached server data and refreshes relevant queries after mutations
+- Recharts visualizes booking and hotel performance data
 
 ## 🛠️ Tech Stack
 
@@ -92,6 +102,18 @@ Aurelia-hotel/
 **Deployment**
 
 - Vercel
+
+## 📁 Folder Structure
+
+```
+Aurelia-hotel/
+│ ├── customer/
+│ └── admin/
+├── LICENSE
+├── README.md
+└── .gitignore
+
+```
 
 ## 📄 License
 

@@ -91,8 +91,8 @@ function BookingRow({ booking, cabins }) {
       <Img src={cabinImage} />
 
       <Stacked>
-        <span>{fullName}</span>
-        <span>{email}</span>
+        <span>&ensp;{fullName}</span>
+        <span>&ensp;{email}</span>
       </Stacked>
       <span>{nationalID}</span>
       <Stacked>

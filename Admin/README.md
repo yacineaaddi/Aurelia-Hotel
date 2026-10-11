@@ -31,27 +31,15 @@ A full-stack hotel management dashboard where hotel staff can manage cabins, boo
 - Context API
 - Portals
 
-## 📁 Folder Structure
+## 🗄️ Technical Architecture
 
-```
-
-admin/
-├── src/
-│   ├── context/
-│   ├── features/
-│   ├── hooks/
-│   ├── pages/
-│   ├── services/
-│   ├── styles/
-│   ├── ui/
-│   ├── utils/
-│   └── ...
-├── node_modules/
-├── public/
-├── README.md
-└── ...
-
-```
+- Hotel staff sign in through Supabase Authentication
+- Protected routes restrict access to authenticated users
+- React components use React Query and the Supabase client to fetch and modify hotel data
+- Supabase PostgreSQL stores cabins, bookings, guests, and hotel settings
+- Supabase Storage stores cabin images
+- React Query manages cached server data and refreshes relevant queries after mutations
+- Recharts visualizes booking and hotel performance data
 
 ## 🛠️ Tech Stack
 
@@ -81,6 +69,28 @@ admin/
 **Deployment**
 
 - Vercel
+
+## 📁 Folder Structure
+
+```
+
+admin/
+├── src/
+│   ├── context/
+│   ├── features/
+│   ├── hooks/
+│   ├── pages/
+│   ├── services/
+│   ├── styles/
+│   ├── ui/
+│   ├── utils/
+│   └── ...
+├── node_modules/
+├── public/
+├── README.md
+└── ...
+
+```
 
 ## ⚙️ Installation
 

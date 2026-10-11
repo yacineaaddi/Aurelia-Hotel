@@ -6,7 +6,7 @@ function Guests() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">All guests</Heading>
+        <Heading type="h1">All guests</Heading>
       </Row>
       <Row>
         <GuestTable />

@@ -29,28 +29,15 @@ A full-stack hotel reservation platform where guests can browse cabins and make/
 - Custom Hooks
 - Context API
 
-## 📁 Folder Structure
+## 🗄️ Technical Architecture
 
-```
-
-customer/
-├── next/
-├── app/
-│   ├── _lib/
-│   ├── _styles/
-│   ├── about/
-│   ├── account/
-│   ├── api/
-│   ├── cabins/
-│   ├── components/
-│   ├── login/
-│   └── ...
-├── node_modules/
-├── public/
-├── README.md
-└── ...
-
-```
+- Guests browse available cabins and view their details
+- The data service retrieves cabin information and hotel settings from Supabase
+- Guests select their reservation dates using the date picker
+- NextAuth.js manages authentication and user sessions
+- Server Actions handle reservation operations and call the data service
+- Supabase stores and retrieves booking and guest data
+- Next.js renders the updated pages and reservation information
 
 ## 🛠️ Tech Stack
 
@@ -77,6 +64,29 @@ customer/
 **Deployment**
 
 - Vercel
+
+## 📁 Folder Structure
+
+```
+
+customer/
+├── next/
+├── app/
+│   ├── _lib/
+│   ├── _styles/
+│   ├── about/
+│   ├── account/
+│   ├── api/
+│   ├── cabins/
+│   ├── components/
+│   ├── login/
+│   └── ...
+├── node_modules/
+├── public/
+├── README.md
+└── ...
+
+```
 
 ## ⚙️ Installation
 
