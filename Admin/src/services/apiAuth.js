@@ -28,7 +28,21 @@ export async function signup({ fullName, email, password }) {
     },
   });
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    console.error("Function error:", error);
+
+    // Read the actual response body from the Edge Function
+    if (error.context) {
+      try {
+        const response = await error.context.json();
+        console.error("Server response:", response);
+      } catch {
+        console.error("Could not read the error response.");
+      }
+    }
+
+    return;
+  }
 
   return data;
 }
