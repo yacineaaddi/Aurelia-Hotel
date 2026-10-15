@@ -22,12 +22,8 @@ export default function ReservationCabinSelector({
   function handleBreakfast(e) {
     const value = e.target.value === "true";
 
-    console.log(value);
-
     setWithBreakfast(value);
   }
-
-  console.log(withBreakfast);
 
   async function handleCabinChange(e) {
     const newCabinName = e.target.value;

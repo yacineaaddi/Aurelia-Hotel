@@ -1,20 +1,27 @@
 import { getCountries } from "@/app/_lib/data-service";
+import CountrySelectClient from "./CountrySelectClient";
 
-async function SelectCountry({ name, id, className }) {
+async function SelectCountry({
+  name,
+  id,
+  className,
+  defaultCountry,
+  onChange,
+}) {
   const countries = await getCountries();
 
   return (
-    <select name={name} id={id} className={className}>
-      <option value="">Select country...</option>
-      {countries.map((c) => (
-        <option
-          key={c.names.common}
-          value={`${c.names.common}%${c.flag.emoji}`}
-        >
-          <span className="flex justify-between">{c.names.common}</span>
-        </option>
-      ))}
-    </select>
+    <CountrySelectClient
+      name={name}
+      id={id}
+      className={className}
+      onChange={onChange}
+      defaultCountry={defaultCountry}
+      options={countries.map((c) => ({
+        name: c.names.common,
+        value: `${c.names.common}%${c.flag.emoji}`,
+      }))}
+    />
   );
 }
 

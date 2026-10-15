@@ -7,18 +7,23 @@ import { getBookings } from "./data-service";
 import { redirect } from "next/navigation";
 
 export async function updateGuest(formData) {
+  console.log("formData", formData);
+
   const session = await auth();
 
   if (!session) throw new Error("You must be signed in");
 
   const nationalID = formData.get("nationalID");
 
+  const fullName = formData.get("fullName");
+
   let [nationality] = formData.get("nationality").split("%");
 
-  if (!/^[a-zA-Z0-9]{6,12}$/.test(nationalID))
-    throw new Error("Please provide a valid national ID");
+  /*if (!/^[a-zA-Z0-9]{6,12}$/.test(nationalID))
+    throw new Error("Please provide a valid national ID");*/
 
-  const updateData = { nationality, nationalID };
+  const updateData = { nationality, nationalID, fullName };
+
   const { data, error } = await supabase
     .from("guests")
     .update(updateData)
@@ -27,7 +32,12 @@ export async function updateGuest(formData) {
     .single();
 
   if (error) {
-    console.error(error);
+    if (error.code === 23503) {
+      throw new Error(
+        "You cannot change your National ID because it is linked to an existing booking",
+      );
+    }
+
     throw new Error("Guest could not be updated");
   }
 
@@ -68,7 +78,6 @@ export async function createBooking(bookingData, formData) {
 }
 
 export async function deleteBooking(bookingId) {
-  console.log("bookingId", bookingId);
   const session = await auth();
 
   if (!session) throw new Error("You must be signed in");
@@ -77,7 +86,6 @@ export async function deleteBooking(bookingId) {
   const guestBookingIds = guestBookings.filter(
     (booking) => booking.id === bookingId,
   );
-  console.log("guestBookingIds", guestBookingIds);
 
   if (!guestBookingIds.some((booking) => bookingId === booking.id))
     throw new ErrorEvent("You are not allowed to delete this booking");
@@ -94,7 +102,6 @@ export async function deleteBooking(bookingId) {
 }
 
 export async function updateBooking(formData) {
-  console.log("formData", formData);
   /*
   const bookingId = Number(formData.get("bookingId"));
 
