@@ -13,7 +13,7 @@ function ReservationForm({ cabin, user }) {
   const startDate = range.from;
   const endDate = range.to;
 
-  const numNights = differenceInDays(startDate, endDate);
+  const numNights = differenceInDays(endDate, startDate);
 
   const cabinPrice = numNights * (regularPrice - discount);
 
@@ -22,7 +22,7 @@ function ReservationForm({ cabin, user }) {
     endDate,
     numNights,
     cabinPrice,
-    cabinId: cabin.id,
+    cabinName: cabin.name,
   };
 
   const creatBookingwithData = createBooking.bind(null, bookingData);

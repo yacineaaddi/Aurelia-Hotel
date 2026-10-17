@@ -44,28 +44,6 @@ export default async function Page({ params }) {
       >
         <input type="hidden" value={bookingId} name="bookingId" />
 
-        <div className="space-y-2">
-          <label htmlFor="numGuests">How many guests?</label>
-
-          <select
-            name="numGuests"
-            id="numGuests"
-            defaultValue={numGuests}
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
-            required
-          >
-            <option value="">Select number of guests...</option>
-
-            {Array.from({ length: cabin.maxCapacity }, (_, i) => i + 1).map(
-              (x) => (
-                <option value={x} key={x}>
-                  {x} {x === 1 ? "guest" : "guests"}
-                </option>
-              ),
-            )}
-          </select>
-        </div>
-
         <ReservationCabinSelector
           cabins={cabinsNames}
           cabinName={cabinName}
@@ -75,6 +53,7 @@ export default async function Page({ params }) {
           startDate={startDate}
           endDate={endDate}
           hasBreakfast={hasBreakfast}
+          numGuests={numGuests}
         />
 
         <div className="space-y-2">

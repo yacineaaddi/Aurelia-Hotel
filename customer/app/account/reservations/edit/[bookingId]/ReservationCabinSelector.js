@@ -1,7 +1,7 @@
 "use client";
 import { useReservation } from "@/app/components/ReservationContext";
 import { useState } from "react";
-import DateSelector from "@/app/components/DateSelector";
+import EditDateSelector from "@/app/components/EditDateSelector";
 
 export default function ReservationCabinSelector({
   cabins,
@@ -12,6 +12,7 @@ export default function ReservationCabinSelector({
   startDate,
   endDate,
   hasBreakfast,
+  numGuests,
 }) {
   const { range, resetRange } = useReservation();
   const [withBreakfast, setWithBreakfast] = useState(hasBreakfast);
@@ -61,6 +62,29 @@ export default function ReservationCabinSelector({
         </select>
       </div>
       <div className="space-y-2">
+        <label htmlFor="numGuests">How many guests?</label>
+
+        <select
+          name="numGuests"
+          id="numGuests"
+          defaultValue={numGuests}
+          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+          required
+        >
+          <option value="">Select number of guests...</option>
+
+          {Array.from(
+            { length: currentCabin.maxCapacity },
+            (_, i) => i + 1,
+          ).map((x) => (
+            <option value={x} key={x}>
+              {x} {x === 1 ? "guest" : "guests"}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="space-y-2">
         <label htmlFor="hasBreakfast">Do you have breakfast?</label>
 
         <select
@@ -76,10 +100,9 @@ export default function ReservationCabinSelector({
         </select>
       </div>
 
-      <input type="hidden" value={range.from} name="range-from" />
-      <input type="hidden" value={range.to} name="range-to" />
-
-      <DateSelector
+      <EditDateSelector
+        selectedCabin={selectedCabin}
+        originalCabinName={cabinName}
         settings={settings}
         bookedDates={currentBookedDates}
         cabin={currentCabin}

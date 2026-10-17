@@ -4,6 +4,7 @@ import Spinner from "@/app/components/Spinner";
 import { getCabin } from "@/app/_lib/data-service";
 import { getCabins } from "@/app/_lib/data-service";
 import Reservation from "@/app/components/Reservation";
+import { unstable_noStore as noStore } from "next/cache";
 import ReservationReminder from "@/app/components/ReservationReminder";
 
 export async function generateMetadata({ params }) {
@@ -13,13 +14,14 @@ export async function generateMetadata({ params }) {
 
 export async function generateStaticParams() {
   const cabins = await getCabins();
-
   const ids = cabins.map((cabin) => ({ cabinId: String(cabin.id) }));
 
   return ids;
 }
 
 export default async function Page({ params }) {
+  noStore();
+
   const cabin = await getCabin(params.cabinId);
 
   return (
