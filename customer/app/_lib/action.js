@@ -69,6 +69,8 @@ export async function createBooking(bookingData, formData) {
     status: "unconfirmed",
   };
 
+  console.log(newBooking);
+
   const { error } = await supabase.from("bookings").insert([newBooking]);
 
   if (error) {
@@ -110,6 +112,8 @@ export async function deleteBooking(bookingId) {
 
 export async function updateBooking(formData) {
   const bookingId = Number(formData.get("bookingId"));
+  const startDate = formData.get("range-from");
+  const endDate = formData.get("range-to");
 
   const session = await auth();
 
@@ -121,20 +125,16 @@ export async function updateBooking(formData) {
   if (!guestBookingIds.includes(bookingId))
     throw new Error("You are not allowed to update this booking");
 
-  console.log("formData", formData);
-
   const updateData = {
     numGuests: Number(formData.get("numGuests")),
     observations: formData.get("observations").slice(0, 1000),
     hasBreakfast: formData.get("hasBreakfast"),
-    startDate: formData.get("range-from"),
-    endDate: formData.get("range-to"),
+    startDate: new Date(startDate).toISOString(),
+    endDate: new Date(endDate).toISOString(),
     cabinName: formData.get("cabinName"),
   };
 
   console.log("updateData", updateData);
-
-  return null;
 
   const { error } = await supabase
     .from("bookings")
