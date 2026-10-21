@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import TextExpander from "./TextExpander";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
+import TextExpander from "./TextExpander";
+import Image from "next/image";
+import React from "react";
 
 export default function Cabin({ cabin }) {
   const { id, name, maxCapacity, regularPrice, discount, image, description } =
@@ -21,7 +21,7 @@ export default function Cabin({ cabin }) {
       </div>
       <div>
         <h3 className="text-accent-100 font-black text-7xl mb-5 translate-x-[-254px] bg-primary-950 p-6 pb-1 w-[150%]">
-          Cabin {name}
+          Room {name}
         </h3>
 
         <p className="text-lg text-primary-300 mb-10">

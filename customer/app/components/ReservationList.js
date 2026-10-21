@@ -1,8 +1,8 @@
 "use client";
 
-import { useTransition } from "react";
 import ReservationCard from "./ReservationCard";
 import { deleteBooking } from "../_lib/action";
+import { useTransition } from "react";
 
 function ReservationList({ bookings }) {
   const [isPending, startTransition] = useTransition();

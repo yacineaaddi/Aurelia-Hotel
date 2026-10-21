@@ -6,17 +6,19 @@ export default async function Layout({ children }) {
   const nationalID = session.user.nationalID;
 
   return (
-    <>
+    <div className="w-10/12 mx-auto my-14">
       {!nationalID && (
         <div className="mx-auto text-center bg-red-500 py-2 mb-6 text-base">
           Please update your National ID
         </div>
       )}
-      <div className="grid grid-cols-[16rem_1fr] h-full gap-12">
+      <div className="flex flex-col h-full gap-16">
         <SideNavigation />
 
-        <div className="flex-1 px-8 py-1">{children}</div>
+        <div className="w-[100%] xl:w-[80%] px-8 py-1 self-center">
+          {children}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

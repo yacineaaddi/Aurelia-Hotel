@@ -1,10 +1,10 @@
 import { auth } from "../_lib/auth";
 
-export const metadata = { title: "Account" };
+export const metadata = { title: "Aurelia Hotel | Account" };
 
 export default async function Page() {
   const session = await auth();
-  console.log("Session", session);
+
   const firstName = session.user.name.split(" ").at(0);
 
   return (

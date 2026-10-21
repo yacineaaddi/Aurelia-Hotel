@@ -1,10 +1,9 @@
-import { auth } from "@/app/_lib/auth";
-import { getGuest } from "@/app/_lib/data-service";
-import SelectCountry from "@/app/components/SelectCountry";
 import UpdateProfileForm from "@/app/components/UpdateProfileForm";
 import { getCountries } from "@/app/_lib/data-service";
+import { getGuest } from "@/app/_lib/data-service";
+import { auth } from "@/app/_lib/auth";
 
-export const metadata = { title: "Update profile" };
+export const metadata = { title: "Aurelia Hotel | Profile" };
 
 export default async function Page() {
   const session = await auth();
@@ -12,12 +11,12 @@ export default async function Page() {
   const countries = await getCountries();
 
   return (
-    <div>
-      <h2 className="font-semibold text-2xl text-accent-400 mb-4">
+    <div className="flex flex-col gap-6">
+      <h2 className="font-semibold text-2xl text-accent-400 self-center">
         Update your guest profile
       </h2>
 
-      <p className="text-lg mb-8 text-primary-200">
+      <p className="text-lg mb-8 text-primary-200 self-center">
         Providing the following information will make your check-in process
         faster and smoother. See you soon!
       </p>

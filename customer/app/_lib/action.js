@@ -1,10 +1,10 @@
 "use server";
 
-import supabase from "./supabase";
 import { signIn, signOut, auth } from "./auth";
-import { revalidatePath } from "next/cache";
 import { getBookings } from "./data-service";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import supabase from "./supabase";
 
 export async function updateGuest(formData) {
   const session = await auth();
@@ -69,8 +69,6 @@ export async function createBooking(bookingData, formData) {
     status: "unconfirmed",
   };
 
-  console.log(newBooking);
-
   const { error } = await supabase.from("bookings").insert([newBooking]);
 
   if (error) {
@@ -133,8 +131,6 @@ export async function updateBooking(formData) {
     endDate: new Date(endDate).toISOString(),
     cabinName: formData.get("cabinName"),
   };
-
-  console.log("updateData", updateData);
 
   const { error } = await supabase
     .from("bookings")

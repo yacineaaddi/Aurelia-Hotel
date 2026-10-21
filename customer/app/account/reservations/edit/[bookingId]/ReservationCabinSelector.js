@@ -1,7 +1,8 @@
 "use client";
+
 import { useReservation } from "@/app/components/ReservationContext";
-import { useState } from "react";
 import EditDateSelector from "@/app/components/EditDateSelector";
+import { useState } from "react";
 
 export default function ReservationCabinSelector({
   cabins,
@@ -14,7 +15,7 @@ export default function ReservationCabinSelector({
   hasBreakfast,
   numGuests,
 }) {
-  const { range, resetRange } = useReservation();
+  const { resetRange } = useReservation();
   const [withBreakfast, setWithBreakfast] = useState(hasBreakfast);
   const [selectedCabin, setSelectedCabin] = useState(cabinName);
   const [currentBookedDates, setCurrentBookedDates] = useState(bookedDates);

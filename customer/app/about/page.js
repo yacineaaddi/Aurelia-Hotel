@@ -1,85 +1,97 @@
-import Image from "next/image";
-import image1 from "@/public/about-1.jpg";
-import image2 from "@/public/about-2.jpg";
 import { getCabins } from "@/app/_lib/data-service";
+
+import bg1 from "@/public/bg1.jpg";
+import bg2 from "@/public/bg2.jpg";
+import bg3 from "@/public/bg3.jpg";
+import bg4 from "@/public/bg4.jpg";
+import bg5 from "@/public/bg5.jpg";
+import bg6 from "@/public/bg6.jpg";
+import bg7 from "@/public/bg7.jpg";
+import bg8 from "@/public/bg8.jpg";
+
+import image2 from "@/public/about-2.jpg";
+import Image from "next/image";
 
 export const revalidate = 100;
 
-export const metadata = { title: "About" };
+export const metadata = { title: "Aurelia Hotel | About" };
 
 export default async function Page() {
   const cabins = await getCabins();
 
   return (
-    <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
-      <div className="col-span-3">
+    <div className="w-10/12 mx-auto my-14 grid grid-cols-1 md:grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
+      <div className="grid-cols-1 md:col-span-3">
         <h1 className="text-4xl mb-10 text-accent-400 font-medium">
-          Welcome to The Wild Oasis
+          Welcome to Aurelia hotel
         </h1>
 
         <div className="space-y-8">
           <p>
-            Where nature's beauty and comfortable living blend seamlessly.
-            Hidden away in the heart of the Italian Dolomites, this is your
-            paradise away from home. But it's not just about the luxury cabins.
-            It's about the experience of reconnecting with nature and enjoying
-            simple pleasures with family.
+            Aurelia Hotel offers a welcoming retreat where comfort meets
+            contemporary elegance. Designed for guests seeking a relaxing and
+            memorable stay, our hotel combines a refined atmosphere with
+            thoughtful details to make every visit feel special.
           </p>
           <p>
-            Our {cabins.length} luxury cabins provide a cozy base, but the real
-            freedom and peace you'll find in the surrounding mountains. Wander
-            through lush forests, breathe in the fresh air, and watch the stars
-            twinkle above from the warmth of a campfire or your hot tub.
+            With just {cabins.length} carefully designed rooms, Aurelia Hotel
+            offers a more intimate and peaceful experience. Whether you're
+            traveling for business or leisure, each stay is an opportunity to
+            unwind, recharge, and enjoy your time away.
           </p>
           <p>
-            This is where memorable moments are made, surrounded by nature's
-            splendor. It's a place to slow down, relax, and feel the joy of
-            being together in a beautiful setting.
+            Discover a place where every detail matters, from the inviting
+            ambiance to the comfort of your stay. At Aurelia Hotel, we strive to
+            make your reservation effortless and your experience truly
+            unforgettable.
           </p>
         </div>
       </div>
 
-      <div className="col-span-2">
+      <div className="grid-cols-1 md:col-span-2">
         <Image
-          src={image1}
+          src={bg8}
           alt="Family sitting around a fire pit in front of cabin"
+          className="rounded-xl"
         />
       </div>
 
-      <div className="col-span-2">
-        <Image src={image2} alt="Family that manages The Wild Oasis" />
+      <div className="grid-cols-1 md:col-span-2 ">
+        <Image
+          src={bg1}
+          alt="Family that manages The Wild Oasis"
+          className="rounded-xl"
+        />
       </div>
 
-      <div className="col-span-3">
+      <div className="grid-cols-1 md:col-span-3">
         <h1 className="text-4xl mb-10 text-accent-400 font-medium">
-          Managed by our family since 1962
+          Since 1962
         </h1>
 
         <div className="space-y-8">
           <p>
-            Since 1962, The Wild Oasis has been a cherished family-run retreat.
-            Started by our grandparents, this haven has been nurtured with love
-            and care, passing down through our family as a testament to our
-            dedication to creating a warm, welcoming environment.
+            Since 1962, Aurelia Hotel has welcomed guests with a tradition of
+            hospitality, comfort, and timeless elegance. Built on a legacy of
+            care and dedication, our hotel brings together the charm of its
+            heritage and the comforts of a memorable stay.
           </p>
           <p>
-            Over the years, we've maintained the essence of The Wild Oasis,
-            blending the timeless beauty of the mountains with the personal
-            touch only a family business can offer. Here, you're not just a
-            guest; you're part of our extended family. So join us at The Wild
-            Oasis soon, where tradition meets tranquility, and every visit is
-            like coming home.
+            More than a place to stay, Aurelia Hotel is a legacy passed down
+            through generations. From your arrival to your departure, we invite
+            you to become part of our story and experience hospitality that has
+            stood the test of time.
           </p>
-
-          <div>
-            <a
-              href="/cabins"
-              className="inline-block mt-4 bg-accent-500 px-8 py-5 text-primary-800 text-lg font-semibold hover:bg-accent-600 transition-all"
-            >
-              Explore our luxury cabins
-            </a>
-          </div>
         </div>
+      </div>
+
+      <div className="col-span-1 md:col-span-5 flex justify-center">
+        <a
+          href="/cabins"
+          className="inline-block text-base bg-accent-500 px-8 py-5 text-primary-800 rounded-full font-semibold hover:bg-accent-600 transition-all duration-300"
+        >
+          Explore our luxury cabins
+        </a>
       </div>
     </div>
   );

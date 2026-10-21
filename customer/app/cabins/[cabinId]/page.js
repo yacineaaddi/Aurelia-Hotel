@@ -1,11 +1,11 @@
-import { Suspense } from "react";
-import Cabin from "@/app/components/Cabin";
-import Spinner from "@/app/components/Spinner";
-import { getCabin } from "@/app/_lib/data-service";
-import { getCabins } from "@/app/_lib/data-service";
-import Reservation from "@/app/components/Reservation";
-import { unstable_noStore as noStore } from "next/cache";
 import ReservationReminder from "@/app/components/ReservationReminder";
+import { unstable_noStore as noStore } from "next/cache";
+import Reservation from "@/app/components/Reservation";
+import { getCabins } from "@/app/_lib/data-service";
+import { getCabin } from "@/app/_lib/data-service";
+import Spinner from "@/app/components/Spinner";
+import Cabin from "@/app/components/Cabin";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   const { name } = await getCabin(params.cabinId);

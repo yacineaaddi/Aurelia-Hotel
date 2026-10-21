@@ -1,5 +1,5 @@
-import { getCountries } from "@/app/_lib/data-service";
 import CountrySelectClient from "./CountrySelectClient";
+import { getCountries } from "@/app/_lib/data-service";
 
 async function SelectCountry({
   name,

@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 function CabinCard({ cabin }) {
-  const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
+  const { name, maxCapacity, regularPrice, discount, image } = cabin;
 
   return (
-    <div className="flex border-primary-800 border">
-      <div className="flex-1 relative ">
+    <div className="flex flex-col md:flex-row border border-primary-800 rounded-xl overflow-hidden">
+      <div className="relative w-full h-56 md:h-auto md:w-2/5 md:min-h-64 shrink-0">
         <Image
           src={image}
           fill
@@ -15,10 +15,10 @@ function CabinCard({ cabin }) {
           className="object-cover border-r border-primary-800"
         />
       </div>
-      <div className="flex-grow">
-        <div className="pt-5 pb-4 px-7 bg-primary-950">
+      <div className="flex flex-col flex-1 min-w-0">
+        <div className="flex-1 pt-5 pb-4 px-7 bg-primary-950">
           <h3 className="text-accent-500 font-semibold text-2xl mb-3">
-            Cabin {name}
+            Room {name}
           </h3>
 
           <div className="flex gap-3 items-center mb-2">
@@ -28,7 +28,7 @@ function CabinCard({ cabin }) {
             </p>
           </div>
 
-          <p className="flex gap-3 justify-end items-baseline">
+          <p className="flex flex-wrap gap-2 justify-end items-baseline">
             {discount > 0 ? (
               <>
                 <span className="text-3xl font-[350]">

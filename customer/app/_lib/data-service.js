@@ -1,6 +1,6 @@
 import { eachDayOfInterval } from "date-fns";
-import supabase from "./supabase";
 import { notFound } from "next/navigation";
+import supabase from "./supabase";
 
 export async function getCabin(name) {
   const { data, error } = await supabase
@@ -94,12 +94,19 @@ export async function getBookedDatesByCabinName(cabinName) {
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
 
+  /*// Getting all bookings
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("*")
+    .eq("cabinName", cabinName)
+    .or(`startDate.gte.${today},status.eq.checked-in`);*/
+
   // Getting all bookings
   const { data, error } = await supabase
     .from("bookings")
     .select("*")
     .eq("cabinName", cabinName)
-    .or(`startDate.gte.${today},status.eq.checked-in`);
+    .or(`startDate.gte.${today}`);
 
   if (error) {
     console.error(error);
@@ -115,6 +122,8 @@ export async function getBookedDatesByCabinName(cabinName) {
       });
     })
     .flat();
+
+  console.log("bookedDates", bookedDates);
 
   return bookedDates;
 }
