@@ -123,8 +123,6 @@ export async function getBookedDatesByCabinName(cabinName) {
     })
     .flat();
 
-  console.log("bookedDates", bookedDates);
-
   return bookedDates;
 }
 

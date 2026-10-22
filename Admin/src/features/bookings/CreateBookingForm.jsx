@@ -48,9 +48,6 @@ function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
   const hasBreakfast = watch("hasBreakfast");
   const NationalId = watch("nationalID", "");
 
-  console.log("hasBreakfast", typeof hasBreakfast, hasBreakfast);
-  console.log("isPaid", typeof watch("isPaid"), watch("isPaid"));
-
   useEffect(() => {
     if (!startDate || !endDate) return;
 

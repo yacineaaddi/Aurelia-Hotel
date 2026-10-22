@@ -1,15 +1,7 @@
 import { getCabins } from "@/app/_lib/data-service";
 
 import bg1 from "@/public/bg1.jpg";
-import bg2 from "@/public/bg2.jpg";
-import bg3 from "@/public/bg3.jpg";
-import bg4 from "@/public/bg4.jpg";
-import bg5 from "@/public/bg5.jpg";
-import bg6 from "@/public/bg6.jpg";
-import bg7 from "@/public/bg7.jpg";
 import bg8 from "@/public/bg8.jpg";
-
-import image2 from "@/public/about-2.jpg";
 import Image from "next/image";
 
 export const revalidate = 100;

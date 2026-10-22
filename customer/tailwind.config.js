@@ -39,6 +39,10 @@ module.exports = {
           950: "#382814",
         },
       },
+      fontFamily: {
+        glida: ["var(--font-gilda)", "serif"],
+        sans: ["var(--font-dm-sans)", "sans-serif"],
+      },
     },
   },
   plugins: [],

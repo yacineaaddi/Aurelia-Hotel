@@ -6,12 +6,11 @@ import Image from "next/image";
 import React from "react";
 
 export default function Cabin({ cabin }) {
-  const { id, name, maxCapacity, regularPrice, discount, image, description } =
-    cabin;
+  const { name, maxCapacity, image, description } = cabin;
 
   return (
-    <div className="grid grid-cols-[3fr_4fr] gap-20 border border-primary-800 py-3 px-10 mb-24">
-      <div className="relative scale-[1.15] -translate-x-3">
+    <div className="grid grid-cols-[4fr_4fr] gap-20 border border-primary-800 py-3 px-10 mb-24">
+      <div className="relative scale-[1.18] -translate-x-3">
         <Image
           src={image}
           fill
@@ -20,13 +19,15 @@ export default function Cabin({ cabin }) {
         />
       </div>
       <div>
-        <h3 className="text-accent-100 font-black text-7xl mb-5 translate-x-[-254px] bg-primary-950 p-6 pb-1 w-[150%]">
+        <h3 className="text-accent-500 font-black text-5xl mb-5 translate-x-[-160px] bg-primary-950 p-4 w-fit ">
           Room {name}
         </h3>
 
-        <p className="text-lg text-primary-300 mb-10">
-          <TextExpander>{description}</TextExpander>
-        </p>
+        {description && (
+          <p className="text-lg text-primary-300 mb-10">
+            <TextExpander>{description}</TextExpander>
+          </p>
+        )}
 
         <ul className="flex flex-col gap-4 mb-7">
           <li className="flex gap-3 items-center">
@@ -39,7 +40,7 @@ export default function Cabin({ cabin }) {
             <MapPinIcon className="h-5 w-5 text-primary-600" />
             <span className="text-lg">
               Located in the heart of the{" "}
-              <span className="font-bold">Dolomites</span> (Italy)
+              <span className="font-bold">Singapore</span>
             </span>
           </li>
           <li className="flex gap-3 items-center">

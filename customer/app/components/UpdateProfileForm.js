@@ -34,7 +34,7 @@ export default function UpdateProfileForm({ guest, countries }) {
   return (
     <form
       action={updateGuest}
-      className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col"
+      className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col rounded-xl"
     >
       <div className="space-y-2">
         <label>Full name</label>
@@ -42,7 +42,7 @@ export default function UpdateProfileForm({ guest, countries }) {
           name="fullName"
           defaultValue={fullName}
           onChange={handleChange}
-          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
+          className="rounded-2xl px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
         />
       </div>
 
@@ -53,7 +53,7 @@ export default function UpdateProfileForm({ guest, countries }) {
           name="email"
           defaultValue={email}
           onChange={handleChange}
-          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
+          className="rounded-2xl px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
         />
       </div>
 
@@ -64,7 +64,7 @@ export default function UpdateProfileForm({ guest, countries }) {
         <CountrySelectClient
           name="nationality"
           id="nationality"
-          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+          className="rounded-2xl px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm"
           defaultCountry={nationality}
           options={countries}
           onChange={handleChange}
@@ -78,7 +78,7 @@ export default function UpdateProfileForm({ guest, countries }) {
           defaultValue={nationalID || ""}
           name="nationalID"
           onChange={handleChange}
-          className={`px-5 py-3 w-full shadow-sm rounded-sm ${
+          className={`rounded-2xl px-5 py-3 w-full shadow-sm ${
             nationalID
               ? "cursor-not-allowed bg-gray-600 text-gray-400"
               : "bg-white text-gray-900"

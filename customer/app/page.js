@@ -1,32 +1,34 @@
-import background from "@/public/background.jpg";
+import bg8 from "@/public/bg8.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import bg3 from "@/public/bg3.jpg";
 
 export default function Page() {
   return (
     <main className="flex min-h-[calc(80dvh)] items-center justify-center">
       <Image
-        src={bg3}
+        src={bg8}
         fill
         priority
         sizes="100vw"
         quality={80}
         placeholder="blur"
         className="object-cover"
-        alt="Mountains and forests with two cabins"
+        alt="Aurelia Hotel"
       />
 
       {/* Optional overlay for text legibility on small screens */}
-      <div className="absolute inset-0 bg-primary-950/10" />
+      <div className="absolute inset-0 bg-primary-950/60" />
 
-      <div className="relative text-center">
-        <h1 className="mb-6 text-4xl font-normal tracking-tight text-primary-50 sm:text-6xl md:mb-10 lg:text-8xl">
-          Welcome to paradise
+      <div className="w-10/12 mx-auto flex flex-col gap-9 relative items-center justify-center">
+        <h1 className="text-6xl font-medium  text-primary-50 sm:text-7xl lg:text-7xl font-glida text-wrap text-center leading-12">
+          Where the city <span className="text-accent-500">meets serenity</span>
         </h1>
+        <p className="w-9/12 text-xl font-medium lg:text-xl text-wrap text-center leading-12">
+          Wake with the most iconic view, with thoughtful service at every turn
+        </p>
         <Link
           href="/cabins"
-          className="inline-block text-base px-6 py-4 font-semibold transition bg-white bg-opacity-35 hover:bg-opacity-50 backdrop-blur-md md:px-12 md:py-6 md:text-lg rounded-full text-white duration-300"
+          className="w-fit inline-block text-base px-6 py-4 font-semibold transition bg-white bg-opacity-35 hover:bg-opacity-50 backdrop-blur-md md:px-12 md:py-6 md:text-lg rounded-full text-white duration-300"
         >
           Explore luxury rooms
         </Link>

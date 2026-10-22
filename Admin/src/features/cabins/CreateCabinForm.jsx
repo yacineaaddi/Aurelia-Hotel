@@ -39,16 +39,16 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           },
         },
       );
-    else
-      createCabin(
-        { ...data, image: image },
-        {
-          onSuccess: () => {
-            reset();
-            onCloseModal?.();
-          },
+    else console.log(data);
+    createCabin(
+      { ...data, image: image },
+      {
+        onSuccess: () => {
+          reset();
+          onCloseModal?.();
         },
-      );
+      },
+    );
   }
 
   function onError(error) {
@@ -91,8 +91,12 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           type="number"
           id="discount"
           {...register("discount", {
+            setValueAs: (value) => (value === "" ? 0 : Number(value)),
+
             validate: (value) =>
-              CabinPrice > value || "Discount should be less than Cabin price",
+              Number(value) === 0 ||
+              value < Number(CabinPrice) ||
+              "Discount should be less than Cabin price",
           })}
         />
       </FormRow>
@@ -102,7 +106,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           type="number"
           id="description"
           disabled={isPending}
-          {...register("description", { required: "This field is required" })}
+          {...register("description")}
         />
       </FormRow>
 

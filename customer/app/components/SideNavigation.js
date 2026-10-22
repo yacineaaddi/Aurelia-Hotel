@@ -44,10 +44,6 @@ function SideNavigation() {
             </Link>
           </li>
         ))}
-
-        <li>
-          <SignOutButton />
-        </li>
       </ul>
     </nav>
   );

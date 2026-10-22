@@ -61,7 +61,11 @@ export async function createEditCabin(newCabin, id) {
   }
   // B - Edit
   else {
-    query = query.update({ ...newCabin, image: imagePath }).eq("id", id);
+    const { name, ...editedCabinValues } = newCabin;
+    console.log(editedCabinValues);
+    query = query
+      .update({ ...editedCabinValues, image: imagePath })
+      .eq("id", id);
   }
 
   const { data, error } = await query.select().single();

@@ -1,5 +1,6 @@
 "use client";
 
+import SignOutButton from "./SignOutButton";
 import Image from "next/image";
 import { useRef } from "react";
 import Link from "next/link";
@@ -18,7 +19,7 @@ export default function Navigation({ session }) {
   return (
     <>
       <nav className="z-10 text-xl">
-        <ul className="hidden md:flex gap-16 items-center">
+        <ul className="hidden md:flex gap-16 items-center justify-center">
           <li>
             <Link
               href="/cabins"
@@ -54,10 +55,15 @@ export default function Navigation({ session }) {
                 href="/account"
                 className="hover:text-accent-400 transition-colors"
               >
-                Guest area
+                Sign in
               </Link>
             )}
           </li>
+          {session?.user && (
+            <li>
+              <SignOutButton />
+            </li>
+          )}
         </ul>
         <div onClick={openMenu} className="md:hidden cursor-pointer">
           <Image height="28" width="28" src="/menu-white.png" alt="" />
