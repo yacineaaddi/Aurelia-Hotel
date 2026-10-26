@@ -27,11 +27,11 @@ const StyledSidebar = styled.aside`
 export default function Sidebar({ onClick, isOpen, setIsOpen }) {
   return (
     <StyledSidebar $isOpen={isOpen}>
-      <Logo />
+      <Logo onClick={onClick} />
       <MainNav isOpen={isOpen} setIsOpen={setIsOpen} />
-      <MenuButton>
+      {/*<MenuButton>
         <IoMdClose onClick={onClick} />
-      </MenuButton>
+      </MenuButton>*/}
     </StyledSidebar>
   );
 }

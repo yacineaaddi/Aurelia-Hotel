@@ -7,6 +7,7 @@ const Img = styled.img`
   object-fit: cover;
   object-position: center;
   transform: scale(1.5) translateX(-7px);
+  border-radius: 1rem;
 `;
 
 export default Img;

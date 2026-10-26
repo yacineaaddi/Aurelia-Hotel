@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
@@ -38,15 +39,22 @@ const ContainerBox = styled.div`
 
 function AppLayout() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   function handleClick(e) {
     e.preventDefault();
     setIsOpen((open) => !open);
   }
 
+  function handleMenu(e) {
+    e.preventDefault();
+    setIsOpen((open) => (open ? false : open));
+    navigate("/dashboard");
+  }
+
   return (
     <StyledAppLayout>
-      <Sidebar onClick={handleClick} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Sidebar onClick={handleMenu} isOpen={isOpen} setIsOpen={setIsOpen} />
       <ContainerBox>
         <Header onClick={handleClick} isOpen={isOpen} setIsOpen={setIsOpen} />
         <Main>

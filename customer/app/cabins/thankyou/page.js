@@ -4,7 +4,7 @@ export const metadata = { title: "Aurelia Hotel | Reservations" };
 
 export default function Page() {
   return (
-    <div className="text-center space-y-6 mt-4">
+    <div className="text-center space-y-6 my-14">
       <h1 className="text-3xl font-semibold">
         Thank you for your reservation!
       </h1>

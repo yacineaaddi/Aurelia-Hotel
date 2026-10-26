@@ -1,19 +1,26 @@
 "use client";
 
 import SignOutButton from "./SignOutButton";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useRef } from "react";
 import Link from "next/link";
 
 export default function Navigation({ session }) {
   const sideMenuRef = useRef();
+  const router = useRouter();
 
   const openMenu = () => {
     sideMenuRef.current.style.transform = "translateX(0)";
   };
 
   const closeMenu = () => {
-    sideMenuRef.current.style.transform = "translateX(40rem)";
+    sideMenuRef.current.style.transform = "translateX(100%)";
+  };
+
+  const handleMenu = () => {
+    closeMenu();
+    router.push("/");
   };
 
   return (
@@ -72,16 +79,18 @@ export default function Navigation({ session }) {
 
       <div
         ref={sideMenuRef}
-        className="fixed top-0 right-0 z-50 h-dvh w-[100%] max-w-lg bg-white text-gray-800 shadow-2xl translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+        className={`fixed inset-0 z-50 translate-x-[100%] h-dvh w-screen bg-white text-gray-800 shadow-2xl transition-transform duration-300 ease-in-out md:hidden`}
       >
         {/* Sidebar header */}
         <div className="flex items-center justify-between border-b px-6 py-5">
-          <Image
-            src="/logo-light.png"
-            height="60"
-            width="60"
-            alt="Aurelia Hotel"
-          />
+          <div onClick={handleMenu}>
+            <Image
+              src="/logo-light.png"
+              height="60"
+              width="60"
+              alt="Aurelia Hotel"
+            />
+          </div>
 
           <button onClick={closeMenu} aria-label="Close menu">
             <Image

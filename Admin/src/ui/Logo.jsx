@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const StyledLogo = styled.div`
   text-align: center;
+  cursor: pointer;
 `;
 
 const Img = styled.img`
@@ -10,13 +11,13 @@ const Img = styled.img`
   width: ${(props) => props.width || "13rem"};
 `;
 
-function Logo({ width, height }) {
+function Logo({ width, height, onClick }) {
   const { isDarkMode } = useDarkMode();
 
   const src = isDarkMode ? "/logo-dark.png" : "/logo-light.png";
 
   return (
-    <StyledLogo>
+    <StyledLogo onClick={onClick}>
       <Img src={src} alt="Logo" width={width} height={height} />
     </StyledLogo>
   );

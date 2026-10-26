@@ -23,7 +23,7 @@ export async function getCabin(cabinName) {
     console.error(error.message);
     throw new Error("Cabin not found");
   }
-  console.log(data);
+
   return data;
 }
 
@@ -62,7 +62,7 @@ export async function createEditCabin(newCabin, id) {
   // B - Edit
   else {
     const { name, ...editedCabinValues } = newCabin;
-    console.log(editedCabinValues);
+
     query = query
       .update({ ...editedCabinValues, image: imagePath })
       .eq("id", id);

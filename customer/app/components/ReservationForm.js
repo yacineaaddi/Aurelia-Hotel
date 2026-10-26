@@ -4,8 +4,10 @@ import { useReservation } from "./ReservationContext";
 import { createBooking } from "../_lib/action";
 import { differenceInDays } from "date-fns";
 import SubmitButton from "./SubmitButton";
+import { useGuestsContext } from "./GuestsContext";
 
 function ReservationForm({ cabin, user }) {
+  const { guests, resetGuests } = useGuestsContext();
   const { range, resetRange } = useReservation();
 
   const { maxCapacity, regularPrice, discount } = cabin;
@@ -47,6 +49,7 @@ function ReservationForm({ cabin, user }) {
         action={async (formData) => {
           await creatBookingwithData(formData);
           resetRange();
+          resetGuests();
         }}
         className="bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col"
       >
@@ -55,6 +58,7 @@ function ReservationForm({ cabin, user }) {
           <select
             name="numGuests"
             id="numGuests"
+            defaultValue={guests || 1}
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
             required
           >

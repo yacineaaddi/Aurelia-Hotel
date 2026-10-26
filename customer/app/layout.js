@@ -1,10 +1,9 @@
 import { ReservationProvider } from "./components/ReservationContext";
-import { Josefin_Sans, Gilda_Display, DM_Sans } from "next/font/google";
+import { GuestsProvider } from "./components/GuestsContext";
+import { Gilda_Display, DM_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Header from "./components/Header";
 import "@/app/_styles/globals.css";
-
-const josefin = Josefin_Sans({ subsets: ["latin"], display: "swap" });
 
 const gilda = Gilda_Display({
   subsets: ["latin"],
@@ -28,7 +27,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-clip">
       <body
         className={`${gilda.variable} ${dmSans.variable} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col relative overflow-x-hidden`}
       >
@@ -36,7 +35,9 @@ export default function RootLayout({ children }) {
         <Header />
         <div className="">
           <main className="">
-            <ReservationProvider>{children}</ReservationProvider>
+            <ReservationProvider>
+              <GuestsProvider>{children}</GuestsProvider>
+            </ReservationProvider>
           </main>
         </div>
       </body>

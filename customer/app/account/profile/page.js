@@ -8,6 +8,8 @@ export const metadata = { title: "Aurelia Hotel | Profile" };
 export default async function Page() {
   const session = await auth();
   const guest = await getGuest(session.user.email);
+  console.log("session", session);
+  console.log("guest", guest);
   const countries = await getCountries();
 
   return (

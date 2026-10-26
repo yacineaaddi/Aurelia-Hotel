@@ -2,6 +2,7 @@ import Logout from "../features/authentication/Logout";
 import { HiOutlineUser } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
+import { IoClose } from "react-icons/io5";
 import { LuMenu } from "react-icons/lu";
 import styled from "styled-components";
 import ButtonIcon from "./ButtonIcon";
@@ -49,8 +50,8 @@ export default function HeaderMenu({ onClick, isOpen, setIsOpen }) {
         <Logout />
       </li>
       <li>
-        <StyledIcon>
-          <LuMenu onClick={onClick} />
+        <StyledIcon onClick={onClick}>
+          {isOpen ? <IoClose /> : <LuMenu />}
         </StyledIcon>
       </li>
     </StyledHeaderMenu>

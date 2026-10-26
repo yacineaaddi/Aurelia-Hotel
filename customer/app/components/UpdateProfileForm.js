@@ -8,17 +8,17 @@ import React from "react";
 
 export default function UpdateProfileForm({ guest, countries }) {
   const [formData, setFormData] = useState({
-    fullName: guest.fullName ?? "",
-    email: guest.email ?? "",
-    nationalID: guest.nationalID ?? "",
-    nationality: guest.nationality ?? "",
+    fullName: guest?.fullName ?? "",
+    email: guest?.email ?? "",
+    nationalID: guest?.nationalID ?? "",
+    nationality: guest?.nationality ?? "",
   });
 
   const hasChanges =
-    formData.fullName !== (guest.fullName ?? "") ||
-    formData.nationality !== (guest.nationality ?? "") ||
-    formData.email !== (guest.email ?? "") ||
-    formData.nationalID !== (guest.nationalID ?? "");
+    formData.fullName !== (guest?.fullName ?? "") ||
+    formData.nationality !== (guest?.nationality ?? "") ||
+    formData.email !== (guest?.email ?? "") ||
+    formData.nationalID !== (guest?.nationalID ?? "");
 
   function handleChange(e) {
     const { name, value } = e.target;

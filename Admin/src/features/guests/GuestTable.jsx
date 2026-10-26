@@ -1,14 +1,14 @@
 import { guestsPerPage } from "../../utils/constants";
-import Pagination from "../../ui/Pagination";
 import Spinner from "../../ui/Spinner";
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
 import useGuests from "./useGuests";
+import Error from "../../ui/Error";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
 import GuestRow from "./GuestRow";
-import Error from "../../ui/Error";
+
 import { useState } from "react";
 
 function GuestTable() {

@@ -7,6 +7,7 @@ import {
   isPast,
   isSameDay,
 } from "date-fns";
+import { useEffect } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 
@@ -30,6 +31,12 @@ function DateSelector({ settings, bookedDates, cabin, hasBreakfast }) {
     }
     setRange(newRange);
   }
+
+  useEffect(() => {
+    if (isAlreadyBooked(range, bookedDates)) {
+      resetRange();
+    }
+  }, [range, setRange, resetRange]);
 
   const { regularPrice, discount } = cabin;
 
@@ -56,7 +63,7 @@ function DateSelector({ settings, bookedDates, cabin, hasBreakfast }) {
         selected={range}
         fromMonth={new Date()}
         fromDate={new Date()}
-        toYear={new Date().getFullYear() + 1}
+        toYear={new Date().getFullYear() + 2}
         captionLayout="dropdown"
         numberOfMonths={2}
         disabled={(curDate) =>

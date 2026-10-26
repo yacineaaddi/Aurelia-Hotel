@@ -5,7 +5,7 @@ export const metadata = { title: "login" };
 
 export default function Page() {
   return (
-    <div className="w-10/12 mx-auto flex flex-col gap-10 mt-16 items-center">
+    <div className="w-10/12 mx-auto flex flex-col gap-10 my-20 items-center">
       <Image
         src="/logo-light.png"
         height="240"

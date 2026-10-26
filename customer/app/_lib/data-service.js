@@ -180,3 +180,35 @@ export async function createBooking(newBooking) {
 
   return data;
 }
+
+export async function getAvailableCabins(startDate, endDate, numGuests) {
+  // 1. Get cabins that can accommodate the guests
+  const { data: cabins, error: cabinsError } = await supabase
+    .from("cabins")
+    .select("*")
+    .gte("maxCapacity", numGuests);
+
+  if (cabinsError) {
+    console.error(cabinsError);
+    throw new Error("Cabins could not be loaded");
+  }
+
+  // 2. Get bookings that overlap the requested dates
+  const { data: bookings, error: bookingsError } = await supabase
+    .from("bookings")
+    .select("cabinName")
+    .lt("startDate", endDate)
+    .gt("endDate", startDate);
+
+  if (bookingsError) {
+    console.error(bookingsError);
+    throw new Error("Bookings could not be loaded");
+  }
+
+  // 3. Exclude cabins that have overlapping bookings
+  const bookedCabinNames = new Set(
+    bookings.map((booking) => booking.cabinName),
+  );
+
+  return cabins.filter((cabin) => !bookedCabinNames.has(cabin.name));
+}
