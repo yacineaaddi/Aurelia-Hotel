@@ -1,5 +1,6 @@
 "use client";
 
+import useResponsiveValue from "../customHook/useResponsiveValue";
 import { useReservation } from "./ReservationContext";
 import {
   isWithinInterval,
@@ -35,6 +36,8 @@ function DateSelector({
   originalCabinName,
 }) {
   const { range, setRange, resetRange } = useReservation();
+
+  const value = useResponsiveValue(1, 2);
 
   const isOriginalCabin = selectedCabin === originalCabinName;
 
@@ -75,9 +78,9 @@ function DateSelector({
   const { minBookingLength, maxBookingLength } = settings;
 
   return (
-    <div className="flex flex-col justify-between border-2">
+    <div className="flex flex-col justify-between border rounded-2xl py-2">
       <DayPicker
-        className="pt-12 place-self-center"
+        className="p-8 place-self-center"
         mode="range"
         min={minBookingLength}
         max={maxBookingLength}
@@ -87,7 +90,7 @@ function DateSelector({
         fromDate={new Date()}
         toYear={new Date().getFullYear() + 1}
         captionLayout="dropdown"
-        numberOfMonths={2}
+        numberOfMonths={value}
         disabled={(curDate) =>
           isPast(curDate) ||
           availableDates.some((date) => isSameDay(date, curDate))
@@ -98,45 +101,55 @@ function DateSelector({
 
       <input type="hidden" value={effectiveRange.to} name="range-to" />
 
-      <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
-        <div className="flex items-baseline gap-6">
-          <p className="flex gap-2 items-baseline">
-            {discount > 0 ? (
-              <>
-                <span className="text-2xl">${regularPrice - discount}</span>
-                <span className="line-through font-semibold text-primary-700">
-                  ${regularPrice}
-                </span>
-              </>
-            ) : (
-              <span className="text-2xl">${regularPrice}</span>
-            )}
-            <span className="">/night</span>
-          </p>
-          {numNights ? (
+      <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 px-4 md:px-8 py-4 md:py-3 bg-accent-500 text-primary-800 min-h-[72px] rounded-2xl m-4">
+        {/* Price per night */}
+        <p className="flex items-baseline gap-2">
+          {discount > 0 ? (
             <>
-              <p className="bg-accent-600 px-3 py-2 text-2xl">
-                <span>&times;</span> <span>{numNights}</span>
-              </p>
-              {hasBreakfast && (
-                <p>
-                  <span className="text-lg font-md ">BreakfastPrice</span>{" "}
-                  <span className="text-2xl font-font-md">
-                    ${breakfastPriceperNight}
-                  </span>
-                </p>
-              )}
-              <p>
-                <span className="text-lg font-bold uppercase">Total</span>{" "}
-                <span className="text-2xl font-semibold">${totalPrice}</span>
-              </p>
+              <span className="text-2xl font-semibold">
+                ${regularPrice - discount}
+              </span>
+              <span className="line-through font-semibold text-primary-700">
+                ${regularPrice}
+              </span>
             </>
-          ) : null}
-        </div>
+          ) : (
+            <span className="text-2xl font-semibold">${regularPrice}</span>
+          )}
+          <span>/night</span>
+        </p>
 
+        {numNights ? (
+          <>
+            {/* Number of nights */}
+            <p className="bg-accent-600 px-3 py-2 text-xl md:text-2xl rounded-xl">
+              <span>&times;</span> <span>{numNights}</span>
+            </p>
+
+            {/* Breakfast */}
+            {hasBreakfast && (
+              <p className="flex items-baseline gap-2">
+                <span className="text-base md:text-lg font-medium">
+                  Breakfast/night
+                </span>
+                <span className="text-xl md:text-2xl font-medium">
+                  ${breakfastPriceperNight}
+                </span>
+              </p>
+            )}
+
+            {/* Total */}
+            <p className="flex items-baseline gap-2">
+              <span className="text-base md:text-lg font-bold uppercase">
+                Total
+              </span>
+              <span className="text-2xl font-semibold">${totalPrice}</span>
+            </p>
+          </>
+        ) : null}
         {range.from || range.to ? (
           <button
-            className="border border-primary-800 py-2 px-4 text-sm font-semibold"
+            className="border bg-primary-800 border-primary-800 py-2 px-5 text-sm font-semibold text-accent-500 transition-colors rounded-xl"
             onClick={() => resetRange()}
           >
             Clear

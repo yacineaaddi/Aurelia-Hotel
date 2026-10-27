@@ -1,9 +1,9 @@
-import ReservationReminder from "@/app/components/ReservationReminder";
 import { unstable_noStore as noStore } from "next/cache";
 import Reservation from "@/app/components/Reservation";
 import { getCabins } from "@/app/_lib/data-service";
 import { getCabin } from "@/app/_lib/data-service";
 import Spinner from "@/app/components/Spinner";
+import Footer from "@/app/components/Footer";
 import Cabin from "@/app/components/Cabin";
 import { Suspense } from "react";
 
@@ -25,20 +25,23 @@ export default async function Page({ params }) {
   const cabin = await getCabin(params.cabinId);
 
   return (
-    <div className="w-10/12 mx-auto my-14">
-      <div className="max-w-6xl mx-auto mt-8">
-        <Cabin cabin={cabin} />
-      </div>
+    <>
+      <div className="w-10/12 mx-auto my-14 ">
+        <div className="max-w-6xl mx-auto mt-8">
+          <Cabin cabin={cabin} />
+        </div>
 
-      <div>
-        <h2 className="text-5xl font-semibold text-center mb-10 text-accent-400">
-          Reserve today. Pay on arrival.
-        </h2>
-        <Suspense fallback={<Spinner />}>
-          <Reservation cabin={cabin} />
-          <ReservationReminder />
-        </Suspense>
+        <div className="space-y-14">
+          <h2 className="text-2xl md:text-4xl xl:text-5xl font-semibold text-center mb-10 text-accent-400 font-glida">
+            Reserve today. Pay on arrival
+          </h2>
+          <Suspense fallback={<Spinner />}>
+            <Reservation cabin={cabin} />
+            {/*<ReservationReminder />*/}
+          </Suspense>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }

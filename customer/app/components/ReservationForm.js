@@ -1,10 +1,10 @@
 "use client";
 
 import { useReservation } from "./ReservationContext";
+import { useGuestsContext } from "./GuestsContext";
 import { createBooking } from "../_lib/action";
 import { differenceInDays } from "date-fns";
 import SubmitButton from "./SubmitButton";
-import { useGuestsContext } from "./GuestsContext";
 
 function ReservationForm({ cabin, user }) {
   const { guests, resetGuests } = useGuestsContext();
@@ -30,8 +30,8 @@ function ReservationForm({ cabin, user }) {
   const creatBookingwithData = createBooking.bind(null, bookingData);
 
   return (
-    <div className="scale-[1.01]">
-      <div className="bg-primary-800 text-primary-300 px-16 py-2 flex justify-between items-center">
+    <div className="scale-[1.01] rounded-xl overflow-hidden">
+      <div className="bg-primary-800 text-primary-300 px-8 py-4 flex justify-between items-center">
         <p>Logged in as</p>
 
         <div className="flex gap-4 items-center">
@@ -51,15 +51,15 @@ function ReservationForm({ cabin, user }) {
           resetRange();
           resetGuests();
         }}
-        className="bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col"
+        className="bg-primary-900 py-10 px-8 text-lg flex gap-5 flex-col"
       >
-        <div className="space-y-2">
+        <div className="space-y-5">
           <label htmlFor="numGuests">How many guests?</label>
           <select
             name="numGuests"
             id="numGuests"
             defaultValue={guests || 1}
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-xl"
             required
           >
             <option value="" key="">
@@ -73,14 +73,14 @@ function ReservationForm({ cabin, user }) {
           </select>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-5">
           <label htmlFor="observations">
             Anything we should know about your stay?
           </label>
           <textarea
             name="observations"
             id="observations"
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-xl"
             placeholder="Any pets, allergies, special requirements, etc.?"
           />
         </div>

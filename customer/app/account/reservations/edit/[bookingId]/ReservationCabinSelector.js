@@ -44,7 +44,7 @@ export default function ReservationCabinSelector({
 
   return (
     <>
-      <div className="space-y-2">
+      <div className="space-y-4">
         <label htmlFor="cabinName">Change hotel room</label>
 
         <select
@@ -52,7 +52,7 @@ export default function ReservationCabinSelector({
           id="cabinName"
           value={selectedCabin}
           onChange={handleCabinChange}
-          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-xl"
           required
         >
           {cabins.map((name) => (
@@ -62,14 +62,14 @@ export default function ReservationCabinSelector({
           ))}
         </select>
       </div>
-      <div className="space-y-2">
+      <div className="space-y-4">
         <label htmlFor="numGuests">How many guests?</label>
 
         <select
           name="numGuests"
           id="numGuests"
           defaultValue={numGuests}
-          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-xl"
           required
         >
           <option value="">Select number of guests...</option>
@@ -85,7 +85,7 @@ export default function ReservationCabinSelector({
         </select>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-4">
         <label htmlFor="hasBreakfast">Do you have breakfast?</label>
 
         <select
@@ -93,7 +93,7 @@ export default function ReservationCabinSelector({
           id="hasBreakfast"
           value={withBreakfast}
           onChange={handleBreakfast}
-          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-xl"
           required
         >
           <option value="true">true</option>

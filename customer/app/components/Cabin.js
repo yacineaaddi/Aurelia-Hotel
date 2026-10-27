@@ -1,7 +1,6 @@
 "use client";
 
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
-import TextExpander from "./TextExpander";
 import Image from "next/image";
 import React from "react";
 
@@ -9,24 +8,14 @@ export default function Cabin({ cabin }) {
   const { name, maxCapacity, image, description } = cabin;
 
   return (
-    <div className="grid grid-cols-[4fr_4fr] gap-20 border border-primary-800 py-3 px-10 mb-24">
-      <div className="relative scale-[1.18] -translate-x-3">
-        <Image
-          src={image}
-          fill
-          alt={`Cabin ${name}`}
-          className="object-cover"
-        />
-      </div>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 border border-primary-800 py-8 px-10 mb-10 lg:mb-16 rounded-2xl">
       <div>
-        <h3 className="text-accent-500 font-black text-5xl mb-5 translate-x-[-160px] bg-primary-950 p-4 w-fit ">
+        <h3 className="text-accent-500 font-black text-4xl mb-5  bg-primary-950 md:bg-none w-fit rounded-2xl font-glida">
           Room {name}
         </h3>
 
         {description && (
-          <p className="text-lg text-primary-300 mb-10">
-            <TextExpander>{description}</TextExpander>
-          </p>
+          <p className="text-lg text-primary-300 mb-10">{description}</p>
         )}
 
         <ul className="flex flex-col gap-4 mb-7">
@@ -50,7 +39,15 @@ export default function Cabin({ cabin }) {
             </span>
           </li>
         </ul>
-      </div>{" "}
+      </div>
+      <div className="relative w-full aspect-[4/3] md:aspect-[5/4] ">
+        <Image
+          src={image}
+          fill
+          alt={`Cabin ${name}`}
+          className="object-cover rounded-2xl"
+        />
+      </div>
     </div>
   );
 }

@@ -3,11 +3,11 @@ import React from "react";
 
 export default function DiscoverMore() {
   return (
-    <div className="my-12 lg:my-20">
+    <div className="my-28 lg:my-20">
       <div className="my-12 h-px bg-primary-800 lg:my-16" />
-      <div className="text-center space-y-2 md:space-y-8">
+      <div className="text-center space-y-6 md:space-y-8 px-5 ">
         <p className="font-[var(--font-gilda)] text-2xl leading-relaxed sm:text-3xl">
-          Your next memorable stay begins here.
+          Your next memorable stay begins here
         </p>
         <Link
           href="/cabins"
