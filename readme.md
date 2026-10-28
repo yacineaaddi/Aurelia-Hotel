@@ -2,23 +2,23 @@
 
 A full-stack hotel reservation platform composed of two separate React applications:
 
-- Hotel Admin Dashboard : hotel staff can manage cabins, bookings, guests, and hotel settings
+- Hotel Management Dashboard : hotel staff can manage cabins, bookings, guests, and hotel settings
 
-- Hotel reservation platform : guests can browse cabins and make/manage reservations
+- Hotel Booking Platform : guests can browse cabins and make/manage reservations
 
 ## 🔗 Links
 
-- Hotel Admin Dashboard :
+- Hotel Management Dashboard :
 
-- Hotel reservation platform :
+- Hotel Booking Platform :
 
 ## 📸 Screenshots
 
-![Alt Text](assets/admin.jpg)
+![Alt Text](assets/aurelia.gif)
 
 ## ✨ Features
 
-**Customer**
+**Booking**
 
 - Create, edit, and cancel reservations
 - View cabin details and pricing
@@ -27,7 +27,7 @@ A full-stack hotel reservation platform composed of two separate React applicati
 - Breakfast option
 - Browse cabins
 
-**Admin**
+**Dashboard**
 
 - Protected routes & authentication
 - Dashboard & booking statistics
@@ -51,7 +51,7 @@ A full-stack hotel reservation platform composed of two separate React applicati
 
 ## 🗄️ Technical Architecture
 
-**Customer**
+**Booking**
 
 - Guests browse available cabins and view their details
 - The data service retrieves cabin information and hotel settings from Supabase
@@ -61,7 +61,7 @@ A full-stack hotel reservation platform composed of two separate React applicati
 - Supabase stores and retrieves booking and guest data
 - Next.js renders the updated pages and reservation information
 
-**Admin**
+**Dashboard**
 
 - Hotel staff sign in through Supabase Authentication
 - Protected routes restrict access to authenticated users
@@ -108,8 +108,8 @@ A full-stack hotel reservation platform composed of two separate React applicati
 ```
 
 Aurelia-hotel/
-│ ├── customer/
-│ └── admin/
+│ ├── admin/
+│ └── customer/
 ├── LICENSE
 ├── README.md
 └── .gitignore

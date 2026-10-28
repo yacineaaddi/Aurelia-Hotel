@@ -1,4 +1,4 @@
-# 📦 Hotel Admin Dashboard
+# 📦 Hotel Management Dashboard
 
 A full-stack hotel management dashboard where hotel staff can manage cabins, bookings, guests, and hotel settings
 

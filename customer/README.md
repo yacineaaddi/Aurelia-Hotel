@@ -1,4 +1,4 @@
-# 📦 Hotel reservation platform
+# 📦 Hotel Booking Platform
 
 A full-stack hotel reservation platform where guests can browse cabins and make/manage reservations
 
@@ -6,7 +6,7 @@ A full-stack hotel reservation platform where guests can browse cabins and make/
 
 ## 📸 Screenshots
 
-![Alt Text](assets/screenshot.png)
+![Alt Text](assets/customer.jpg)
 
 ## ✨ Features
 
