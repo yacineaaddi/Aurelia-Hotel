@@ -11,15 +11,13 @@ export default function Page({ searchParams }) {
 
   return (
     <>
-      <div className="w-10/12 mx-auto mt-14 mb-24 flex flex-col gap-8">
-        <h1 className="text-4xl text-accent-400 font-medium font-glida">
-          Our Luxury Rooms
-        </h1>
-        <p className="text-primary-200 text-lg">
+      <div className="Rooms">
+        <h1 className="Rooms-heading">Our Luxury Rooms</h1>
+        <p className="Rooms-text">
           Experience comfort and luxury in the heart of Singapore. Discover
           vibrant city life, stunning skyline views, all just moments away.
         </p>
-        <div className="flex justify-center flex-wrap gap-2 mb-2">
+        <div className="Rooms-filter">
           <Filter />
         </div>
         <Suspense fallback={<Spinner />} key={filter}>

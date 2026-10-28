@@ -9,7 +9,7 @@ export default async function Page() {
   const numberofguests = Math.max(...cabinMaxCapacity);
 
   return (
-    <main className="flex min-h-[calc(80dvh)] items-center justify-center">
+    <main className="homepage">
       <Image
         src={bg8}
         fill
@@ -21,14 +21,13 @@ export default async function Page() {
         alt="Aurelia Hotel"
       />
 
-      {/* Optional overlay for text legibility on small screens */}
-      <div className="absolute inset-0 bg-primary-950/60" />
+      <div className="homepage-overlay" />
 
-      <div className="w-10/12 my-14 mx-auto flex flex-col gap-7 lg:gap-8 relative items-center justify-center">
-        <h1 className="text-4xl font-medium  text-primary-50 sm:text-5xl lg:text-6xl font-glida text-wrap text-center leading-12">
+      <div className="homepage-container flex-style">
+        <h1 className="homepage-header">
           Where the city <span className="text-accent-500">meets serenity</span>
         </h1>
-        <p className="w-9/12 text-md sm:text-lg font-medium lg:text-xl text-wrap text-center leading-12">
+        <p className="homepage-text">
           Wake with the most iconic view, with thoughtful service at every turn
         </p>
 

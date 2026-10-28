@@ -28,9 +28,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="overflow-x-clip">
-      <body
-        className={`${gilda.variable} ${dmSans.variable} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col relative overflow-x-hidden`}
-      >
+      <body className={`${gilda.variable} ${dmSans.variable} body-style`}>
         <Toaster position="top-center" />
         <Header />
         <div className="">

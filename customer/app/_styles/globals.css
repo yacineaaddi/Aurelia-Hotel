@@ -43,3 +43,280 @@
   --rdp-background-color: theme("colors.accent.600") !important;
   margin: 0 !important;
 }
+
+@layer utilities {
+  /*Pagination style*/
+
+  .Pagination {
+    @apply mt-10 flex items-center justify-center gap-4;
+  }
+  .Pagination-button {
+    @apply text-primary-800 rounded-xl px-4 py-2 disabled:opacity-40 bg-accent-600;
+  }
+  /*Body style*/
+
+  .body-style {
+    @apply antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col relative overflow-x-hidden;
+  }
+
+  /*Sign out button style*/
+
+  .signOutButton {
+    @apply h-7 w-7 text-accent-400 transition-colors;
+  }
+
+  /*Custom styles*/
+
+  .flex-style {
+    @apply flex flex-col items-center justify-center;
+  }
+
+  /*Loading styles*/
+
+  .loading-style {
+    @apply grid items-center justify-center;
+  }
+  .loading-text {
+    @apply text-xl text-primary-200;
+  }
+
+  /*Error styles*/
+
+  .error-heading {
+    @apply flex flex-col items-center justify-center;
+  }
+  .error-message {
+    @apply text-3xl font-semibold;
+  }
+  .error-button {
+    @apply inline-block bg-accent-500 text-primary-800 px-6 py-3 text-lg;
+  }
+
+  /*Home page*/
+
+  .homepage {
+    @apply flex min-h-[calc(80dvh)] items-center justify-center;
+  }
+  .homepage-overlay {
+    @apply absolute inset-0 bg-primary-950/60;
+  }
+  .homepage-container {
+    @apply w-10/12 my-14 mx-auto gap-7 lg:gap-8 relative;
+  }
+  .homepage-header {
+    @apply text-4xl font-medium  text-primary-50 sm:text-5xl lg:text-6xl font-glida text-wrap text-center;
+  }
+  .homepage-text {
+    @apply w-9/12 sm:text-lg font-medium lg:text-xl text-wrap text-center;
+  }
+  .homepage-reservation {
+    @apply grid grid-cols-1 gap-4 rounded-2xl bg-primary-100 px-8 py-5 shadow-md md:grid-cols-4 md:items-end md:gap-5 md:p-6;
+  }
+  .homepage-reservation-box {
+    @apply flex flex-col gap-2;
+  }
+  .homepage-input {
+    @apply rounded-2xl w-full border border-primary-300 bg-primary-50 px-3 py-3 text-sm text-primary-900 outline-none transition focus:border-accent-500 focus:ring-1 focus:ring-accent-500;
+  }
+  .homepage-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-primary-800;
+  }
+
+  /*Terms and conditions*/
+
+  .Terms {
+    @apply w-10/12 mx-auto mt-14 mb-24 flex flex-col gap-8;
+  }
+  .Terms-heading {
+    @apply text-4xl text-accent-400 font-medium font-glida;
+  }
+  .Terms-container {
+    @apply space-y-10 sm:space-y-12;
+  }
+  .Terms-section {
+    @apply scroll-mt-28 border-b border-primary-800 pb-10 sm:pb-12;
+  }
+  .Terms-section-heading {
+    @apply font-[var(--font-gilda)] text-2xl leading-snug text-accent-400 sm:text-3xl;
+  }
+  .Terms-section-paragraphe {
+    @apply text-sm leading-8 text-primary-100/75 sm:text-base;
+  }
+  .Terms-contact-section {
+    @apply font-[var(--font-gilda)] text-2xl text-accent-400 sm:text-3xl;
+  }
+  .Terms-contact-paragraphe {
+    @apply mt-5 text-sm leading-8 text-primary-100/75 sm:text-base;
+  }
+  .Terms-contact-link {
+    @apply mt-6 inline-flex items-center gap-3 border-b border-accent-400 pb-2 text-sm text-accent-400 transition-colors hover:text-primary-100;
+  }
+
+  /*Privacy and policy*/
+
+  .policy {
+    @apply w-10/12 mx-auto mt-14 mb-24 flex flex-col gap-8;
+  }
+  .policy-heading {
+    @apply text-4xl text-accent-400 font-medium font-glida;
+  }
+  .policy-container {
+    @apply space-y-10 sm:space-y-12;
+  }
+  .policy-section {
+    @apply scroll-mt-28 border-b border-primary-800 pb-10 sm:pb-12;
+  }
+  .policy-section-heading {
+    @apply font-[var(--font-gilda)] text-2xl leading-snug text-accent-400 sm:text-3xl;
+  }
+  .policy-section-paragraphe {
+    @apply text-sm leading-8 text-primary-100/75 sm:text-base;
+  }
+  .policy-section-bullets {
+    @apply mt-5 space-y-3 pl-5 text-sm leading-7 text-primary-100/70 sm:text-base;
+  }
+  .policy-bullets-list {
+    @apply list-disc marker:text-accent-400;
+  }
+  .policy-section-note {
+    @apply mt-5 border-l-2 border-accent-400/50 pl-4 text-sm leading-7 text-primary-100/55;
+  }
+  .policy-contact-section {
+    @apply font-[var(--font-gilda)] text-2xl text-accent-400 sm:text-3xl;
+  }
+  .policy-contact-paragraphe {
+    @apply mt-5 text-sm leading-8 text-primary-100/75 sm:text-base;
+  }
+  .policy-contact-link {
+    @apply mt-6 inline-flex items-center gap-3 border-b border-accent-400 pb-2 text-sm text-accent-400 transition-colors hover:text-primary-100;
+  }
+
+  /*Login page*/
+
+  .loginpage {
+    @apply w-10/12 mx-auto flex flex-col gap-10 my-14 items-center;
+  }
+  .loginpage-header {
+    @apply text-2xl font-semibold text-center;
+  }
+
+  /*Terms and conditions*/
+
+  .Rooms {
+    @apply w-10/12 mx-auto mt-14 mb-24 flex flex-col gap-8;
+  }
+  .Rooms-heading {
+    @apply text-4xl text-accent-400 font-medium font-glida;
+  }
+  .Rooms-text {
+    @apply text-primary-200 text-lg;
+  }
+  .Rooms-filter {
+    @apply flex justify-center flex-wrap gap-2 mb-2;
+  }
+  .Rooms-empty {
+    @apply text-2xl md:text-3xl lg:text-4xl text-accent-400 font-medium font-glida text-center;
+  }
+  .Rooms-container {
+    @apply grid sm:grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-14;
+  }
+  .Rooms-Card {
+    @apply flex flex-col md:flex-row border border-primary-800 rounded-xl overflow-hidden;
+  }
+  .Rooms-image {
+    @apply relative w-full h-56 md:h-auto md:w-2/5 md:min-h-64 shrink-0;
+  }
+  .Rooms-imageStyle {
+    @apply object-cover border-r border-primary-800;
+  }
+  .Rooms-info {
+    @apply flex flex-col flex-1 min-w-0;
+  }
+  .Rooms-infoBox {
+    @apply flex-1 pt-5 pb-4 px-7 bg-primary-950;
+  }
+  .Rooms-name {
+    @apply text-accent-500 font-semibold text-2xl mb-3;
+  }
+  .Rooms-guests {
+    @apply flex gap-3 items-center mb-2;
+  }
+  .Rooms-guests-icon {
+    @apply h-5 w-5 text-primary-600;
+  }
+  .Rooms-guests-text {
+    @apply text-lg text-primary-200;
+  }
+  .Rooms-price {
+    @apply flex flex-wrap gap-2 justify-end items-baseline;
+  }
+  .Rooms-withDisount {
+    @apply text-3xl font-[350];
+  }
+  .Rooms-discount {
+    @apply line-through font-semibold text-primary-600;
+  }
+  .Rooms-details {
+    @apply bg-primary-950 border-t border-t-primary-800 text-right;
+  }
+  .Rooms-details-Link {
+    @apply border-l border-primary-800 py-4 px-6 inline-block hover:bg-accent-600 transition-all hover:text-primary-900;
+  }
+
+  /*Pagination style*/
+
+  .Footer {
+    @apply mt-auto bg-primary-950 text-primary-100 border-t border-primary-800;
+  }
+  .Footer-main {
+    @apply mx-auto max-w-7xl px-6 py-14 sm:px-10 lg:px-12 lg:py-20 text-center sm:text-left;
+  }
+  .Footer-main-box {
+    @apply grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10;
+  }
+  .Footer-logo {
+    @apply flex flex-col items-center sm:items-start;
+  }
+  .Footer-hotelName {
+    @apply font-[var(--font-gilda)] text-3xl tracking-wide;
+  }
+  .Footer-slogan {
+    @apply mt-1 block text-xs uppercase tracking-[0.3em] text-accent-400;
+  }
+  .Footer-description {
+    @apply mt-6 max-w-sm text-sm leading-7 text-primary-100/70;
+  }
+  .Footer-title {
+    @apply font-[var(--font-gilda)] text-xl text-accent-400;
+  }
+  .Footer-links {
+    @apply text-sm text-primary-100/70 transition-colors duration-200 hover:text-accent-400;
+  }
+  .Footer-contact {
+    @apply mt-6 text-sm leading-7 text-primary-100/70;
+  }
+  .Footer-contact-link {
+    @apply mt-5 inline-flex items-center gap-2 border-b border-accent-400/50 pb-1 text-sm text-accent-400 transition-colors hover:border-accent-400 hover:text-primary-100;
+  }
+  .Footer-arrow {
+    @apply transition-transform duration-200 group-hover:translate-x-1;
+  }
+  .Footer-subline {
+    @apply border-t border-primary-800/80;
+  }
+  .Footer-copyright {
+    @apply mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-6 text-center sm:px-10 md:flex-row md:text-left lg:px-12;
+  }
+  .Footer-copyright-text {
+    @apply text-xs text-primary-100/50;
+  }
+  .Footer-box {
+    @apply flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-primary-100/50;
+  }
+  .Footer-box-link {
+    @apply transition-colors hover:text-accent-400;
+  }
+  .Footer-backToTop {
+    @apply text-xs uppercase tracking-[0.2em] text-primary-100/50 transition-colors hover:text-accent-400;
+  }
+}

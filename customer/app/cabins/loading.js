@@ -3,9 +3,9 @@ import React from "react";
 
 export default function loading() {
   return (
-    <div className="grid items-center justify-center">
+    <div className="loading-style">
       <Spinner />
-      <p className="text-xl text-primary-200">Loading rooms...</p>
+      <p className="loading-text">Loading rooms...</p>
     </div>
   );
 }

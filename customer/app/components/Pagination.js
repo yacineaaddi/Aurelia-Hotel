@@ -23,11 +23,11 @@ export default function Pagination({ currentPage, totalPages, filter }) {
   if (totalPages <= 1) return null;
 
   return (
-    <div className="mt-10 flex items-center justify-center gap-4">
+    <div className="Pagination">
       <button
         disabled={currentPage === 1}
         onClick={() => goToPage(currentPage - 1)}
-        className="text-primary-800 rounded-xl px-4 py-2 disabled:opacity-40 bg-accent-600"
+        className="Pagination-button"
       >
         Previous
       </button>
@@ -39,7 +39,7 @@ export default function Pagination({ currentPage, totalPages, filter }) {
       <button
         disabled={currentPage === totalPages}
         onClick={() => goToPage(currentPage + 1)}
-        className="text-primary-800 rounded-xl px-4 py-2 disabled:opacity-40 bg-accent-600"
+        className="Pagination-button"
       >
         Next
       </button>

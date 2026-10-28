@@ -23,40 +23,28 @@ export default function Footer() {
   }
 
   return (
-    <footer className="mt-auto bg-primary-950 text-primary-100 border-t border-primary-800">
-      {/* Main footer */}
-      <div className="mx-auto max-w-7xl px-6 py-14 sm:px-10 lg:px-12 lg:py-20 text-center sm:text-left">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-          {/* Brand */}
-          <div className="flex flex-col items-center sm:items-start">
+    <footer className="Footer">
+      <div className="Footer-main">
+        <div className="Footer-main-box">
+          <div className="Footer-logo">
             <Link href="/" className="inline-block">
-              <span className="font-[var(--font-gilda)] text-3xl tracking-wide">
-                Aurelia
-              </span>
-              <span className="mt-1 block text-xs uppercase tracking-[0.3em] text-accent-400">
-                Hotel & Retreat
-              </span>
+              <span className="Footer-hotelName">Aurelia</span>
+              <span className="Footer-slogan">Hotel & Retreat</span>
             </Link>
 
-            <p className="mt-6 max-w-sm text-sm leading-7 text-primary-100/70">
+            <p className="Footer-description">
               A place to slow down, find comfort, and make every stay a
               memorable experience.
             </p>
           </div>
 
-          {/* Explore */}
           <div>
-            <h3 className="font-[var(--font-gilda)] text-xl text-accent-400">
-              Explore
-            </h3>
+            <h3 className="Footer-title">Explore</h3>
 
             <ul className="mt-6 space-y-4">
               {exploreLinks.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-primary-100/70 transition-colors duration-200 hover:text-accent-400"
-                  >
+                  <Link href={link.href} className="Footer-links">
                     {link.label}
                   </Link>
                 </li>
@@ -64,19 +52,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Guest services */}
           <div>
-            <h3 className="font-[var(--font-gilda)] text-xl text-accent-400">
-              Guest Services
-            </h3>
+            <h3 className="Footer-title">Guest Services</h3>
 
             <ul className="mt-6 space-y-4">
               {guestLinks.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-primary-100/70 transition-colors duration-200 hover:text-accent-400"
-                  >
+                  <Link href={link.href} className="Footer-links">
                     {link.label}
                   </Link>
                 </li>
@@ -84,57 +66,38 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h3 className="font-[var(--font-gilda)] text-xl text-accent-400">
-              Get in Touch
-            </h3>
+            <h3 className="Footer-title">Get in Touch</h3>
 
-            <p className="mt-6 text-sm leading-7 text-primary-100/70">
+            <p className="Footer-contact">
               Have a question or need help planning your stay? We would be
               delighted to hear from you.
             </p>
 
-            <Link
-              href="/contact"
-              className="group mt-5 inline-flex items-center gap-2 border-b border-accent-400/50 pb-1 text-sm text-accent-400 transition-colors hover:border-accent-400 hover:text-primary-100"
-            >
+            <Link href="/contact" className="Footer-contact-link">
               Contact our team
-              <span className="transition-transform duration-200 group-hover:translate-x-1">
-                →
-              </span>
+              <span className="Footer-arrow">→</span>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-primary-800/80">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-6 text-center sm:px-10 md:flex-row md:text-left lg:px-12">
-          <p className="text-xs text-primary-100/50">
+      <div className="Footer-subline">
+        <div className="Footer-copyright">
+          <p className="Footer-copyright-text">
             © {currentYear} Aurelia Hotel. All rights reserved.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-primary-100/50">
-            <Link
-              href="/privacyPolicy"
-              className="transition-colors hover:text-accent-400"
-            >
+          <div className="Footer-box">
+            <Link href="/privacyPolicy" className="Footer-box-link">
               Privacy Policy
             </Link>
-            <Link
-              href="/termsAndConditions"
-              className="transition-colors hover:text-accent-400"
-            >
+            <Link href="/termsAndConditions" className="Footer-box-link">
               Terms & Conditions
             </Link>
           </div>
 
-          <Link
-            onClick={HandleScroll}
-            href="/"
-            className="text-xs uppercase tracking-[0.2em] text-primary-100/50 transition-colors hover:text-accent-400"
-          >
+          <Link onClick={HandleScroll} href="/" className="Footer-backToTop">
             Back to top ↑
           </Link>
         </div>
